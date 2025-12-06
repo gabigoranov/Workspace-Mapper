@@ -19,7 +19,7 @@
         SystemDecorations="None">
 
     <Design.DataContext>
-        <vm:MainWindowViewModel/>
+        <vm:MainWindowViewModel d:IsDesignTimeCreatable="True"/>
     </Design.DataContext>
 
     <StackPanel>
@@ -37,7 +37,9 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"
                         Foreground="#fefefe"
-                        CornerRadius="10"/>
+                        CornerRadius="10"
+                        
+                        Command="{Binding CreateWorkflowAsync}"/>
             </Grid>
         </Border>
     </StackPanel>
