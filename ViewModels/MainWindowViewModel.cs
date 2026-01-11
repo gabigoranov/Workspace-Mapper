@@ -9,19 +9,21 @@ namespace WorkflowManager.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    private readonly IWorkflowService  _workflowService;
-    public ReactiveCommand<Unit, Unit> CreateWorkflowCommand { get; }
-
-    public MainWindowViewModel(IWorkflowService workflowService)
+    private ViewModelBase _currentViewModel;
+    public ViewModelBase CurrentViewModel
     {
-        _workflowService = workflowService;
-
-        CreateWorkflowCommand = ReactiveCommand.CreateFromTask(CreateWorkflowAsync);
+        get => _currentViewModel;
+        set => this.RaiseAndSetIfChanged(ref _currentViewModel, value);
     }
 
-    private async Task CreateWorkflowAsync()
+    private readonly HomeViewModel _homeViewModel;
+
+    public MainWindowViewModel(HomeViewModel homeViewModel)
     {
-        Debug.WriteLine("testing");
-        await Task.CompletedTask;
+        _homeViewModel = homeViewModel;
+
+        CurrentViewModel = _homeViewModel; // initial
     }
+
+    public void GoHome() => CurrentViewModel = _homeViewModel;
 }

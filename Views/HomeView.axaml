@@ -1,0 +1,15 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:WorkflowManager.ViewModels"
+             x:Class="WorkflowManager.Views.HomeView"
+             x:DataType="viewModels:HomeViewModel">
+
+    <Button Grid.Column="1"
+            Content="Create"
+            Command="{Binding CreateWorkflowCommand}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Foreground="#fefefe"
+            CornerRadius="10"/>
+
+</UserControl>

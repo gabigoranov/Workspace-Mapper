@@ -19,6 +19,7 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<IRepository, Repository>();
         collection.AddTransient<IWorkflowService, WorkflowService>();
         collection.AddTransient<MainWindowViewModel>();
+        collection.AddTransient<HomeViewModel>();
         
 
     }

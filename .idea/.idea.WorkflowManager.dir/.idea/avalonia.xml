@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="App.axaml" value="WorkflowManager.csproj" />
+        <entry key="Views/HomeView.axaml" value="WorkflowManager.csproj" />
         <entry key="Views/MainWindow.axaml" value="WorkflowManager.csproj" />
       </map>
     </option>

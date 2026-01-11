@@ -17,31 +17,27 @@
         ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="0"
         SystemDecorations="None">
-
+    
     <Design.DataContext>
         <vm:MainWindowViewModel d:IsDesignTimeCreatable="True"/>
     </Design.DataContext>
 
-    <StackPanel>
-        <Border Margin="5" CornerRadius="10" Background="CornflowerBlue" PointerPressed="DragWindow" Padding="5">
-            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
-                <!-- Title TextBlock -->
-                <TextBlock Text="Workflow Manager"
-                           FontSize="24"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Left"/>
+    <!-- SINGLE ROOT -->
+    <Grid RowDefinitions="Auto,*">
+        
+        <StackPanel>
+            <Border Margin="5" CornerRadius="10" Background="CornflowerBlue" PointerPressed="DragWindow" Padding="5">
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto">
+                    <TextBlock Text="Workflow Manager"
+                               FontSize="24"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+        
+        <!-- PAGE CONTENT -->
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
 
-                <!-- Button on the right -->
-                <Button Grid.Column="1"
-                        Content="Create"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Right"
-                        Foreground="#fefefe"
-                        CornerRadius="10"
-                        
-                        Command="{Binding CreateWorkflowCommand}"/>
-            </Grid>
-        </Border>
-    </StackPanel>
-
+    </Grid>
 </Window>
