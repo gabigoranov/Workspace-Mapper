@@ -28,7 +28,7 @@
                             Spacing="10">
 
                     <Button Content="Create"
-                            Command="{Binding CreateWorkflowCommand}"
+                            Command="{Binding GoCreateWorkflowCommand}"
                             CornerRadius="8"/>
 
                     <Button Content="Edit"

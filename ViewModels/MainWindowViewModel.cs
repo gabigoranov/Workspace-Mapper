@@ -1,32 +1,32 @@
 ﻿using System.Diagnostics;
 using System.Reactive;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
 using WorkflowManager.Models;
+using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
 
 namespace WorkflowManager.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public class MainWindowViewModel : ViewModelBase
 {
-    private ViewModelBase _currentViewModel;
-    public ViewModelBase CurrentViewModel
+    private ViewModelBase? _currentViewModel;
+
+    public ViewModelBase? CurrentViewModel
     {
         get => _currentViewModel;
         set => this.RaiseAndSetIfChanged(ref _currentViewModel, value);
     }
 
-    private readonly HomeViewModel _homeViewModel;
-    private readonly CreateWorkflowViewModel _createWorkflowViewModel;
+    public SidebarViewModel Sidebar { get; }
 
-    public MainWindowViewModel(HomeViewModel homeViewModel, CreateWorkflowViewModel createWorkflowViewModel)
+    public MainWindowViewModel(
+        INavigationService navigation,
+        SidebarViewModel sidebar)
     {
-        _homeViewModel = homeViewModel;
-        _createWorkflowViewModel = createWorkflowViewModel;
+        Sidebar = sidebar;
 
-        CurrentViewModel = _homeViewModel; // initial
+        navigation.Navigated += vm => CurrentViewModel = vm;
     }
-
-    public void GoHome() => CurrentViewModel = _homeViewModel;
-    public void GoCreateWorkflow() => CurrentViewModel = _createWorkflowViewModel;
 }

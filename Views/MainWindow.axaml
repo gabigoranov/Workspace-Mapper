@@ -3,44 +3,92 @@
         xmlns:vm="using:WorkflowManager.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400"
+        mc:Ignorable="d"
         x:Class="WorkflowManager.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="WorkflowManager"
-        Width="600" Height="400" Padding="4"
+        Width="900"
+        Height="550"
         Background="#1e1e1e"
         Foreground="#fefefe"
+        FontSize="16"
         CanResize="False"
-        FontSize="18"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="0"
         SystemDecorations="None">
-    
-    <Design.DataContext>    
+
+    <Design.DataContext>
         <vm:MainWindowViewModel d:IsDesignTimeCreatable="True"/>
     </Design.DataContext>
 
-    <!-- SINGLE ROOT -->
+    <!-- ROOT LAYOUT -->
     <Grid RowDefinitions="Auto,*">
-        
-        <StackPanel>
-            <Border Margin="5" CornerRadius="10" Background="CornflowerBlue" PointerPressed="DragWindow" Padding="5">
-                <Grid ColumnDefinitions="*,Auto, Auto" RowDefinitions="Auto">
-                    <TextBlock Text="Workflow Manager"
-                               FontSize="24"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left"/>
-                    
-                    <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Click="MinimizeWindow">Min</Button>
-                    <Button Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Click="CloseWindow">Close</Button>
-                </Grid>
+
+        <!-- TITLE BAR -->
+        <Border Background="CornflowerBlue"
+                CornerRadius="10"
+                Margin="6"
+                Padding="8"
+                PointerPressed="DragWindow">
+
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock Text="Workflow Manager"
+                           FontSize="22"
+                           VerticalAlignment="Center"/>
+
+                <Button Grid.Column="1"
+                        Content="Min"
+                        Margin="6,0"
+                        Click="MinimizeWindow"/>
+
+                <Button Grid.Column="2"
+                        Content="Close"
+                        Click="CloseWindow"/>
+            </Grid>
+        </Border>
+
+        <!-- MAIN AREA -->
+        <Grid Grid.Row="1"
+              ColumnDefinitions="220,*"
+              Margin="6">
+
+            <!-- SIDEBAR -->
+            <Border Background="#2a2a2a"
+                    CornerRadius="12"
+                    Padding="12">
+
+                <StackPanel Spacing="10">
+
+                    <TextBlock Text="Navigation"
+                               FontSize="18"
+                               Opacity="0.7"
+                               Margin="0,0,0,8"/>
+
+                    <Button Content="Home"
+                            Height="34"
+                            HorizontalAlignment="Stretch"
+                            CornerRadius="8"
+                            Command="{Binding Sidebar.GoHomeCommand}"/>
+
+                    <Button Content="Create Workflow"
+                            Height="34"
+                            HorizontalAlignment="Stretch"
+                            CornerRadius="8"
+                            Command="{Binding Sidebar.GoCreateWorkflowCommand}"/>
+                </StackPanel>
             </Border>
-        </StackPanel>
-        
-        <!-- PAGE CONTENT -->
-        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}" />
+
+            <!-- PAGE CONTENT -->
+            <Border Grid.Column="1"
+                    Background="#1a1a1a"
+                    CornerRadius="12"
+                    Margin="12,0,0,0"
+                    Padding="12">
+
+                <ContentControl Content="{Binding CurrentViewModel}" />
+            </Border>
+
+        </Grid>
 
     </Grid>
 </Window>

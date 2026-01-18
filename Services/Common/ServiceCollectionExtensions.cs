@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using StudyPlatform.Data.Common;
 using WorkflowManager.Data;
+using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
 using WorkflowManager.ViewModels;
 
@@ -17,9 +18,14 @@ public static class ServiceCollectionExtensions
         }, ServiceLifetime.Singleton);
         
         collection.AddSingleton<IRepository, Repository>();
-        collection.AddTransient<IWorkflowService, WorkflowService>();
-        collection.AddTransient<MainWindowViewModel>();
+        collection.AddSingleton<MainWindowViewModel>();
+        collection.AddSingleton<SidebarViewModel>();
+        
         collection.AddTransient<HomeViewModel>();
         collection.AddTransient<CreateWorkflowViewModel>();
+        
+        collection.AddSingleton<IWorkflowService, WorkflowService>();
+        collection.AddSingleton<INavigationService, NavigationService>();
+        
     }
 }

@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
 using WorkflowManager.Models;
+using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
 using Process = WorkflowManager.Models.Process;
 
@@ -21,33 +23,31 @@ public partial class HomeViewModel : ViewModelBase
         get => _workflows;
         set => this.RaiseAndSetIfChanged(ref _workflows, value);
     }
-    public ReactiveCommand<Unit, Unit> CreateWorkflowCommand { get; }
-    public ReactiveCommand<Unit, Unit> EditWorkflowCommand { get; }
-    public ReactiveCommand<Unit, Unit> DeleteWorkflowCommand { get; }
+    private readonly INavigationService _navigation;
 
-    public HomeViewModel(IWorkflowService workflowService)
+    public HomeViewModel(IWorkflowService workflowService, INavigationService navigation)
     {
         _workflowService = workflowService;
+        _navigation = navigation;
         _workflows = new ObservableCollection<Workflow>(GenerateWorkflows());
         
-        CreateWorkflowCommand = ReactiveCommand.CreateFromTask(CreateWorkflowAsync);
-        EditWorkflowCommand = ReactiveCommand.CreateFromTask(EditWorkflowAsync);
-        DeleteWorkflowCommand = ReactiveCommand.CreateFromTask(DeleteWorkflowASync);
     }
 
-    private async Task CreateWorkflowAsync()
+    [RelayCommand]
+    private void GoCreateWorkflow()
+    {
+        _navigation.Navigate<CreateWorkflowViewModel>();
+    }
+    
+    [RelayCommand]
+    private async Task EditWorkflow()
     {
         Debug.WriteLine("testing");
         await Task.CompletedTask;
     }
     
-    private async Task EditWorkflowAsync()
-    {
-        Debug.WriteLine("testing");
-        await Task.CompletedTask;
-    }
-    
-    private async Task DeleteWorkflowASync()
+    [RelayCommand]
+    private async Task DeleteWorkflow()
     {
         Debug.WriteLine("testing");
         await Task.CompletedTask;

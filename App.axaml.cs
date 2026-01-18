@@ -7,6 +7,7 @@ using System.Linq;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using WorkflowManager.Services.Common;
+using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.ViewModels;
 using WorkflowManager.Views;
 
@@ -30,9 +31,14 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            var main = Services.GetRequiredService<MainWindowViewModel>();
+            var nav = Services.GetRequiredService<INavigationService>();
+
+            nav.Navigate<HomeViewModel>();
+
             desktop.MainWindow = new MainWindow
             {
-                DataContext = Services.GetRequiredService<MainWindowViewModel>()
+                DataContext = main
             };
         }
 
