@@ -11,15 +11,17 @@ public class Process()
     
     [Required]
     [StringLength(30)]
-    public string Title { get; set; } 
-    
+    public string Title { get; set; }
+
     [Required]
-    public string Directory { get; set; }
-    
-    [ForeignKey(nameof(Workflow))]
-    public int? WorkflowId { get; set; }
+    [StringLength(255)]
+    public string Directory { get; set; } 
+
+    public int WorkflowId { get; set; }
     
     public virtual Workflow  Workflow { get; set; }
     
-    public string? Command  { get; set; }
+    [Required]
+    [StringLength(255)]
+    public string Command  { get; set; } 
 }

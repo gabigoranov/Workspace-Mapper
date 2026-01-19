@@ -12,12 +12,11 @@ public class Workflow()
     
     [Required]
     [StringLength(30)]
-    public string Title { get; set; }
-    
+    public string Title { get; set; } 
+
     [Required]
     [StringLength(30)]
-    public string Status { get; set; }
-    
-    [ForeignKey(nameof(Process))]
-    public List<Process> Processes { get; set; }
+    public WorkflowStatus Status { get; set; } 
+
+    public List<Process> Processes { get; set; } =  new List<Process>();
 }

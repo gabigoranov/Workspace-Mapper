@@ -10,6 +10,8 @@ public class WorkflowService(IRepository repository) : IWorkflowService
     public async Task<Models.Workflow> CreateWorkflowAsync(Models.Workflow workflow)
     {
         await repository.AddAsync(workflow);
+        await repository.SaveChangesAsync();
+        
         return workflow;
     }
 }

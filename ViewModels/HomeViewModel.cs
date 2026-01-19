@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
 using WorkflowManager.Models;
@@ -13,30 +14,18 @@ using Process = WorkflowManager.Models.Process;
 
 namespace WorkflowManager.ViewModels;
 
-public partial class HomeViewModel : ViewModelBase
+public partial class HomeViewModel(IWorkflowService workflowService, INavigationService navigation)
+    : ViewModelBase
 {
-    private readonly IWorkflowService  _workflowService;
-    private ObservableCollection<Workflow> _workflows = new();
-
-    public ObservableCollection<Workflow> Workflows
-    {
-        get => _workflows;
-        set => this.RaiseAndSetIfChanged(ref _workflows, value);
-    }
-    private readonly INavigationService _navigation;
-
-    public HomeViewModel(IWorkflowService workflowService, INavigationService navigation)
-    {
-        _workflowService = workflowService;
-        _navigation = navigation;
-        _workflows = new ObservableCollection<Workflow>(GenerateWorkflows());
-        
-    }
+    private readonly IWorkflowService  _workflowService = workflowService;
+    
+    [ObservableProperty]
+    private ObservableCollection<Workflow> _workflows = new(GenerateWorkflows());
 
     [RelayCommand]
     private void GoCreateWorkflow()
     {
-        _navigation.Navigate<CreateWorkflowViewModel>();
+        navigation.Navigate<CreateWorkflowViewModel>();
     }
     
     [RelayCommand]
@@ -63,7 +52,7 @@ public partial class HomeViewModel : ViewModelBase
             {
                 Id = i,
                 Title = $"Workflow {i}",
-                Status = i % 2 == 0 ? "Completed" : "Draft",
+                Status = i % 2 == 0 ? WorkflowStatus.Inactive : WorkflowStatus.Active,
                 Processes = new List<Process>()
             };
 
@@ -76,7 +65,7 @@ public partial class HomeViewModel : ViewModelBase
                     Directory = $@"C:\Workflows\Workflow{i}\Process{j}",
                     WorkflowId = workflow.Id,
                     Workflow = workflow,
-                    Command = j % 2 == 0 ? $"echo Process {j}" : null
+                    Command = j % 2 == 0 ? $"echo Process {j}" : string.Empty
                 };
 
                 workflow.Processes.Add(process);

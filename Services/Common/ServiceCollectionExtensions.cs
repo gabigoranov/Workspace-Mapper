@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using StudyPlatform.Data.Common;
 using WorkflowManager.Data;
@@ -14,7 +16,12 @@ public static class ServiceCollectionExtensions
     {
         collection.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseSqlite("Data Source=WorkflowManager.db");
+            // This gets the folder where the .exe is running
+            var basePath = AppContext.BaseDirectory; 
+            // This points to the DB file in that same folder
+            var dbPath = Path.Combine(basePath, "WorkflowManager.db");
+        
+            options.UseSqlite($"Data Source=D:\\Projects\\WorkflowManager\\WorkflowManager.db");
         }, ServiceLifetime.Singleton);
         
         collection.AddSingleton<IRepository, Repository>();

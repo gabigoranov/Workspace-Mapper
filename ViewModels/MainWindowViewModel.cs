@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Reactive;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
 using WorkflowManager.Models;
@@ -9,15 +10,10 @@ using WorkflowManager.Services.Common.Workflow;
 
 namespace WorkflowManager.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase
+public partial class MainWindowViewModel : ViewModelBase
 {
+    [ObservableProperty]
     private ViewModelBase? _currentViewModel;
-
-    public ViewModelBase? CurrentViewModel
-    {
-        get => _currentViewModel;
-        set => this.RaiseAndSetIfChanged(ref _currentViewModel, value);
-    }
 
     public SidebarViewModel Sidebar { get; }
 

@@ -33,6 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="System.Drawing" />
+    <None Update="WorkflowManager.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
