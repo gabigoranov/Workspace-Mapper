@@ -26,6 +26,10 @@
                 <StackPanel Grid.Column="1"
                             Orientation="Horizontal"
                             Spacing="10">
+                    
+                    <Button Content="Start"
+                            Command="{Binding StartWorkflowCommand}"
+                            CornerRadius="8"/>
 
                     <Button Content="Create"
                             Command="{Binding GoCreateWorkflowCommand}"
@@ -49,28 +53,33 @@
                 Padding="8">
 
             <ScrollViewer>
-                <ItemsControl ItemsSource="{Binding Workflows}"  x:DataType="viewModels:HomeViewModel">
-                    
-                    <ItemsControl.ItemTemplate>
+                <ListBox Grid.Row="1" 
+                         Background="Transparent"
+                         ItemsSource="{Binding Workflows}"
+                         SelectedItem="{Binding SelectedWorkflow}"
+                         SelectionMode="Single">
+    
+                    <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="models:Workflow">
                             <Border Background="#2e2e2e"
                                     CornerRadius="8"
                                     Padding="12"
-                                    Margin="0,0,0,8">
-
+                                    Margin="0,0,0,4">
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <TextBlock Text="{Binding Title}"
-                                               FontSize="18"/>
-
-                                    <TextBlock Grid.Column="1"
-                                               Text="{Binding Status}"
-                                               Opacity="0.7"/>
+                                    <TextBlock Text="{Binding Title}" FontSize="18"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding LastStartup}" Opacity="0.7"/>
                                 </Grid>
                             </Border>
                         </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                    </ListBox.ItemTemplate>
 
-                </ItemsControl>
+                    <ListBox.Styles>
+                        <Style Selector="ListBoxItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Style>
+                    </ListBox.Styles>
+                </ListBox>
             </ScrollViewer>
         </Border>
 

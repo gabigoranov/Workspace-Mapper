@@ -6,6 +6,7 @@ using StudyPlatform.Data.Common;
 using WorkflowManager.Data;
 using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
+using WorkflowManager.Services.Process;
 using WorkflowManager.ViewModels;
 
 namespace WorkflowManager.Services.Common;
@@ -31,7 +32,9 @@ public static class ServiceCollectionExtensions
         collection.AddTransient<HomeViewModel>();
         collection.AddTransient<CreateWorkflowViewModel>();
         
-        collection.AddSingleton<IWorkflowService, WorkflowService>();
+        collection.AddScoped<IProcessService, ProcessService>();
+        collection.AddScoped<IWorkflowService, WorkflowService>();
+        
         collection.AddSingleton<INavigationService, NavigationService>();
         
     }

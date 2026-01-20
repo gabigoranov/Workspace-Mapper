@@ -1,26 +1,36 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Reactive;
+using System.Linq;
 using System.Threading.Tasks;
-using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ReactiveUI;
 using WorkflowManager.Models;
 using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
-using Process = WorkflowManager.Models.Process;
+using WorkflowManager.Services.Process;
 
 namespace WorkflowManager.ViewModels;
 
-public partial class HomeViewModel(IWorkflowService workflowService, INavigationService navigation)
+public partial class HomeViewModel(IWorkflowService workflowService, INavigationService navigation, IProcessService processService)
     : ViewModelBase
 {
-    private readonly IWorkflowService  _workflowService = workflowService;
+    [ObservableProperty]
+    private ObservableCollection<Workflow> _workflows = new(workflowService.GetAllWorkflows());
     
     [ObservableProperty]
-    private ObservableCollection<Workflow> _workflows = new(GenerateWorkflows());
+    private Workflow? _selectedWorkflow;
+
+    [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(StartWorkflowCommand))]
+    private bool _isExecutingWorkflow;
+    
+    // This partial method runs every time SelectedWorkflow changes
+    partial void OnSelectedWorkflowChanged(Workflow? value)
+    {
+        // Tell the commands to re-check the 'CanInteractWithWorkflow' logic
+        StartWorkflowCommand.NotifyCanExecuteChanged();
+        EditWorkflowCommand.NotifyCanExecuteChanged();
+        DeleteWorkflowCommand.NotifyCanExecuteChanged();
+    }
 
     [RelayCommand]
     private void GoCreateWorkflow()
@@ -41,41 +51,43 @@ public partial class HomeViewModel(IWorkflowService workflowService, INavigation
         Debug.WriteLine("testing");
         await Task.CompletedTask;
     }
-    
-    public static List<Workflow> GenerateWorkflows(int workflowCount = 5, int processesPerWorkflow = 3)
+
+    [RelayCommand(CanExecute = nameof(CanInteractWithWorkflow))]
+    private async Task StartWorkflow()
     {
-        var workflows = new List<Workflow>();
+        if (SelectedWorkflow == null || IsExecutingWorkflow)
+            return;
 
-        for (int i = 1; i <= workflowCount; i++)
+        try 
         {
-            var workflow = new Workflow
+            IsExecutingWorkflow = true;
+        
+            foreach (var step in SelectedWorkflow.Processes)
             {
-                Id = i,
-                Title = $"Workflow {i}",
-                Status = i % 2 == 0 ? WorkflowStatus.Inactive : WorkflowStatus.Active,
-                Processes = new List<Process>()
-            };
-
-            for (int j = 1; j <= processesPerWorkflow; j++)
-            {
-                var process = new Process
-                {
-                    Id = (i - 1) * processesPerWorkflow + j,
-                    Title = $"Process {j} of Workflow {i}",
-                    Directory = $@"C:\Workflows\Workflow{i}\Process{j}",
-                    WorkflowId = workflow.Id,
-                    Workflow = workflow,
-                    Command = j % 2 == 0 ? $"echo Process {j}" : string.Empty
-                };
-
-                workflow.Processes.Add(process);
+                // Call your new service here
+                await processService.ExecuteProcessAsync(step);
+            
+                // TODO: implement some sort of warning in case of process failure.
             }
 
-            workflows.Add(workflow);
-        }
+            var updated = await workflowService.UpdateWorkflowLastStartupAsync(SelectedWorkflow.Id);
 
-        return workflows;
+            // Find the index of the old item
+            var index = Workflows.IndexOf(Workflows.First(w => w.Id == updated.Id));
+        
+            if (index != -1)
+            {
+                // Replacing the item at the index triggers the CollectionChanged event
+                Workflows[index] = updated; 
+            }
+        }
+        finally 
+        {
+            IsExecutingWorkflow = false;
+            SelectedWorkflow = null; // unselect right after startup
+        }
     }
     
-    
+    // This method dictates if the commands are active
+    private bool CanInteractWithWorkflow() => SelectedWorkflow != null;
 }

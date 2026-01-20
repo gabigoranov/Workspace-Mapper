@@ -42,7 +42,7 @@ public partial class CreateWorkflowViewModel(IWorkflowService workflowService, I
         ValidateAllProperties();
         if (HasErrors) return;
         
-        Workflow workflow = new Workflow{Title = WorkflowTitle, Status = WorkflowStatus.Inactive, Processes = WorkflowProcesses.ToList()};
+        Workflow workflow = new Workflow{Title = WorkflowTitle, Processes = WorkflowProcesses.ToList()};
         await workflowService.CreateWorkflowAsync(workflow);
         navigation.Navigate<HomeViewModel>();
     }
