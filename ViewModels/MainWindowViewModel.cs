@@ -19,7 +19,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel(
         INavigationService navigation,
-        SidebarViewModel sidebar)
+        SidebarViewModel sidebar) 
     {
         Sidebar = sidebar;
 

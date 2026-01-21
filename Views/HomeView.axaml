@@ -4,7 +4,7 @@
              xmlns:models="clr-namespace:WorkflowManager.Models"
              x:Class="WorkflowManager.Views.HomeView"
              x:DataType="viewModels:HomeViewModel">
-
+    
     <Grid RowDefinitions="Auto,*"
           Margin="12">
 
@@ -27,21 +27,47 @@
                             Orientation="Horizontal"
                             Spacing="10">
                     
-                    <Button Content="Start"
-                            Command="{Binding StartWorkflowCommand}"
-                            CornerRadius="8"/>
+                    <Button Command="{Binding StartWorkflowCommand}"
+                            CornerRadius="8">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="Start"/>
+                            <PathIcon Width="15"
+                                      Height="15"
+                                      Data="{DynamicResource PlayRegular}"
+                                      Foreground="{Binding $parent[Button].Foreground}"/>
+                        </StackPanel>
+                    </Button>
 
-                    <Button Content="Create"
-                            Command="{Binding GoCreateWorkflowCommand}"
-                            CornerRadius="8"/>
+                    <Button Command="{Binding GoCreateWorkflowCommand}"
+                            CornerRadius="8">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="Create"/>
+                            <PathIcon Width="15"
+                                      Height="15"
+                                      Data="{DynamicResource AddRegular}"/>
+                        </StackPanel>
+                    </Button>
 
-                    <Button Content="Edit"
-                            Command="{Binding EditWorkflowCommand}"
-                            CornerRadius="8"/>
+                    <Button Command="{Binding EditWorkflowCommand}"
+                            CornerRadius="8">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="Edit"/>
+                            <PathIcon Width="15"
+                                      Height="15"
+                                      Data="{DynamicResource DocumentEditRegular}"
+                                      Foreground="{Binding $parent[Button].Foreground}"/>
+                        </StackPanel>
+                    </Button>
 
-                    <Button Content="Delete"
+                    <Button
                             Command="{Binding DeleteWorkflowCommand}"
-                            CornerRadius="8"/>
+                            CornerRadius="8"
+                            VerticalAlignment="Stretch">
+                        <PathIcon Width="15"
+                                  Height="15"
+                                  Data="{DynamicResource DeleteRegular}"
+                                  Foreground="{Binding $parent[Button].Foreground}"/>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Border>
@@ -53,8 +79,8 @@
                 Padding="8">
 
             <ScrollViewer>
-                <ListBox Grid.Row="1" 
-                         Background="Transparent"
+                <ListBox
+                    Background="Transparent"
                          ItemsSource="{Binding Workflows}"
                          SelectedItem="{Binding SelectedWorkflow}"
                          SelectionMode="Single">

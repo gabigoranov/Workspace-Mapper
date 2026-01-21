@@ -17,6 +17,26 @@ public class WorkflowService(IRepository repository) : IWorkflowService
         return workflow;
     }
 
+    public async Task DeleteWorkflowAsync(int workflowId)
+    {
+        await repository.DeleteAsync<Models.Workflow>(workflowId);  
+        await repository.SaveChangesAsync();
+    }
+
+    public async Task<Models.Workflow> UpdateWorkflowAsync(int workflowId, Models.Workflow model)
+    {
+        var workflow = await repository.GetByIdAsync<Models.Workflow>(workflowId);
+        if (workflow == null)
+            throw new KeyNotFoundException("Workflow not found");
+
+        workflow.Title = model.Title;
+        workflow.Processes = model.Processes;
+
+        await repository.SaveChangesAsync();
+        return workflow;
+    }
+
+
     public List<Models.Workflow> GetAllWorkflows()
     {
         return repository.AllReadonly<Models.Workflow>().Include(w => w.Processes).ToList();

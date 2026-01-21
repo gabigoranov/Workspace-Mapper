@@ -38,18 +38,29 @@ public partial class HomeViewModel(IWorkflowService workflowService, INavigation
         navigation.Navigate<CreateWorkflowViewModel>();
     }
     
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanInteractWithWorkflow))]
     private async Task EditWorkflow()
     {
         Debug.WriteLine("testing");
         await Task.CompletedTask;
     }
     
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanInteractWithWorkflow))]
     private async Task DeleteWorkflow()
     {
-        Debug.WriteLine("testing");
-        await Task.CompletedTask;
+        if (SelectedWorkflow == null)
+            return;
+
+        try
+        {
+            await workflowService.DeleteWorkflowAsync(SelectedWorkflow.Id);
+            Workflows.Remove(SelectedWorkflow);
+        }
+        finally 
+        {
+            IsExecutingWorkflow = false;
+            SelectedWorkflow = null; 
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanInteractWithWorkflow))]

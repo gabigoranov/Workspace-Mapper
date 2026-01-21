@@ -17,10 +17,6 @@
         ExtendClientAreaTitleBarHeightHint="0"
         SystemDecorations="None">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel d:IsDesignTimeCreatable="True"/>
-    </Design.DataContext>
-
     <!-- ROOT LAYOUT -->
     <Grid RowDefinitions="Auto,*">
 
@@ -37,13 +33,19 @@
                            VerticalAlignment="Center"/>
 
                 <Button Grid.Column="1"
-                        Content="Min"
                         Margin="6,0"
-                        Click="MinimizeWindow"/>
+                        Click="MinimizeWindow">
+                    <PathIcon Width="25"
+                              Height="25"
+                              Data="{DynamicResource ArrowMinimizeRegular}"/>
+                </Button>
 
                 <Button Grid.Column="2"
-                        Content="Close"
-                        Click="CloseWindow"/>
+                        Click="CloseWindow">
+                    <PathIcon Width="25"
+                              Height="25"
+                              Data="{DynamicResource DismissRegular}"/>
+                </Button>
             </Grid>
         </Border>
 
@@ -64,17 +66,18 @@
                                Opacity="0.7"
                                Margin="0,0,0,8"/>
 
-                    <Button Content="Home"
-                            Height="34"
+                    <Button Height="34"
                             HorizontalAlignment="Stretch"
                             CornerRadius="8"
-                            Command="{Binding Sidebar.GoHomeCommand}"/>
-
-                    <Button Content="Create Workflow"
-                            Height="34"
-                            HorizontalAlignment="Stretch"
-                            CornerRadius="8"
-                            Command="{Binding Sidebar.GoCreateWorkflowCommand}"/>
+                            Command="{Binding Sidebar.GoHomeCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <PathIcon Width="15"
+                                      Height="15"
+                                      Data="{DynamicResource HomeRegular}"
+                                      Foreground="{Binding $parent[Button].Foreground}"/>
+                            <TextBlock Text="Home"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </Border>
 
