@@ -10,7 +10,7 @@
 
         <!-- ACTION BANNER -->
         <Border Grid.Row="0"
-                Background="#2a2a2a"
+                Background="{DynamicResource CardBackground}"
                 CornerRadius="12"
                 Padding="12"
                 Margin="0,0,0,12">
@@ -74,7 +74,7 @@
 
         <!-- WORKFLOW LIST -->
         <Border Grid.Row="1"
-                Background="#1a1a1a"
+                Background="{DynamicResource CardBackground}"
                 CornerRadius="12"
                 Padding="8">
 
@@ -87,7 +87,7 @@
     
                     <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="models:Workflow">
-                            <Border Background="#2e2e2e"
+                            <Border Background="{DynamicResource CardBackground}"
                                     CornerRadius="8"
                                     Padding="12"
                                     Margin="0,0,0,4">

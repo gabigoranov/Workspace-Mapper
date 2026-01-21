@@ -8,8 +8,8 @@
         x:DataType="vm:MainWindowViewModel"
         Width="900"
         Height="550"
-        Background="#1e1e1e"
-        Foreground="#fefefe"
+        Background="{DynamicResource AppBackground}"
+        Foreground="{DynamicResource PrimaryText}"
         FontSize="16"
         CanResize="False"
         ExtendClientAreaToDecorationsHint="True"
@@ -21,7 +21,7 @@
     <Grid RowDefinitions="Auto,*">
 
         <!-- TITLE BAR -->
-        <Border Background="CornflowerBlue"
+        <Border Background="{DynamicResource AccentColor}"
                 CornerRadius="10"
                 Margin="6"
                 Padding="8"
@@ -30,13 +30,16 @@
             <Grid ColumnDefinitions="*,Auto,Auto">
                 <TextBlock Text="Workflow Manager"
                            FontSize="22"
-                           VerticalAlignment="Center"/>
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource AppBackground}"/>
 
                 <Button Grid.Column="1"
                         Margin="6,0"
-                        Click="MinimizeWindow">
+                        Click="MinimizeWindow"
+                        >
                     <PathIcon Width="25"
                               Height="25"
+                              Foreground="{DynamicResource AppBackground}"
                               Data="{DynamicResource ArrowMinimizeRegular}"/>
                 </Button>
 
@@ -44,6 +47,7 @@
                         Click="CloseWindow">
                     <PathIcon Width="25"
                               Height="25"
+                              Foreground="{DynamicResource AppBackground}"
                               Data="{DynamicResource DismissRegular}"/>
                 </Button>
             </Grid>
@@ -55,7 +59,7 @@
               Margin="6">
 
             <!-- SIDEBAR -->
-            <Border Background="#2a2a2a"
+            <Border Background="{DynamicResource CardBackground}"
                     CornerRadius="12"
                     Padding="12">
 
@@ -69,7 +73,8 @@
                     <Button Height="34"
                             HorizontalAlignment="Stretch"
                             CornerRadius="8"
-                            Command="{Binding Sidebar.GoHomeCommand}">
+                            Command="{Binding Sidebar.GoHomeCommand}"
+                            Foreground="{DynamicResource PrimaryText}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <PathIcon Width="15"
                                       Height="15"
@@ -83,10 +88,10 @@
 
             <!-- PAGE CONTENT -->
             <Border Grid.Column="1"
-                    Background="#1a1a1a"
+                    Background="{DynamicResource AppBackground}"
                     CornerRadius="12"
                     Margin="12,0,0,0"
-                    Padding="12">
+                    Padding="6">
 
                 <ContentControl Content="{Binding CurrentViewModel}" />
             </Border>

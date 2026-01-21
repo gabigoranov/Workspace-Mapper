@@ -5,6 +5,29 @@
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+    
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="AppBackground" Color="#1e1e1e"/>
+                    <SolidColorBrush x:Key="CardBackground" Color="#2a2a2a"/>
+                    <SolidColorBrush x:Key="PrimaryText" Color="#fefefe"/>
+                    <SolidColorBrush x:Key="SecondaryText" Color="#999999"/>
+                    <SolidColorBrush x:Key="AccentColor" Color="CornflowerBlue"/>
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="AppBackground" Color="#f5f5f5"/>
+                    <SolidColorBrush x:Key="CardBackground" Color="#ffffff"/>
+                    <SolidColorBrush x:Key="PrimaryText" Color="#1a1a1a"/>
+                    <SolidColorBrush x:Key="SecondaryText" Color="#666666"/>
+                    <SolidColorBrush x:Key="AccentColor" Color="#8ab8ff"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+             
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
