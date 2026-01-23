@@ -7,6 +7,7 @@ using WorkflowManager.Data;
 using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
 using WorkflowManager.Services.Process;
+using WorkflowManager.Services.WorkflowState;
 using WorkflowManager.ViewModels;
 
 namespace WorkflowManager.Services.Common;
@@ -28,9 +29,11 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<IRepository, Repository>();
         collection.AddSingleton<MainWindowViewModel>();
         collection.AddSingleton<SidebarViewModel>();
+        collection.AddSingleton<IWorkflowStateService, WorkflowStateService>();
         
         collection.AddTransient<HomeViewModel>();
         collection.AddTransient<CreateWorkflowViewModel>();
+        collection.AddTransient<UpdateWorkflowViewModel>();
         
         collection.AddScoped<IProcessService, ProcessService>();
         collection.AddScoped<IWorkflowService, WorkflowService>();

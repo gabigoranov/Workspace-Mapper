@@ -8,17 +8,18 @@ using WorkflowManager.Models;
 using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
 using WorkflowManager.Services.Process;
+using WorkflowManager.Services.WorkflowState;
 
 namespace WorkflowManager.ViewModels;
 
-public partial class HomeViewModel(IWorkflowService workflowService, INavigationService navigation, IProcessService processService)
+public partial class HomeViewModel(IWorkflowService workflowService, INavigationService navigation, IProcessService processService, IWorkflowStateService workflowState)
     : ViewModelBase
 {
     [ObservableProperty]
     private ObservableCollection<Workflow> _workflows = new(workflowService.GetAllWorkflows());
     
     [ObservableProperty]
-    private Workflow? _selectedWorkflow;
+    private Workflow? _selectedWorkflow = workflowState.SelectedWorkflow;
 
     [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(StartWorkflowCommand))]
     private bool _isExecutingWorkflow;
@@ -39,10 +40,10 @@ public partial class HomeViewModel(IWorkflowService workflowService, INavigation
     }
     
     [RelayCommand(CanExecute = nameof(CanInteractWithWorkflow))]
-    private async Task EditWorkflow()
+    private void EditWorkflow()
     {
-        Debug.WriteLine("testing");
-        await Task.CompletedTask;
+        workflowState.SelectedWorkflow = SelectedWorkflow;
+        navigation.Navigate<UpdateWorkflowViewModel>();
     }
     
     [RelayCommand(CanExecute = nameof(CanInteractWithWorkflow))]

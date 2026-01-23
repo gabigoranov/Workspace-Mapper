@@ -45,3 +45,6 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [D:/Projects/WorkflowManager/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Projects/WorkflowManager/Views/UpdateWorkflowView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

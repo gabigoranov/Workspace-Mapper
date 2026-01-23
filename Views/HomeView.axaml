@@ -4,7 +4,6 @@
              xmlns:models="clr-namespace:WorkflowManager.Models"
              x:Class="WorkflowManager.Views.HomeView"
              x:DataType="viewModels:HomeViewModel">
-    
     <Grid RowDefinitions="Auto,*"
           Margin="12">
 
@@ -87,10 +86,10 @@
     
                     <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="models:Workflow">
-                            <Border Background="{DynamicResource CardBackground}"
-                                    CornerRadius="8"
-                                    Padding="12"
-                                    Margin="0,0,0,4">
+                            <Border
+                                CornerRadius="8"
+                                Padding="12"
+                                Margin="0,0,0,0">
                                 <Grid ColumnDefinitions="*,Auto">
                                     <TextBlock Text="{Binding Title}" FontSize="18"/>
                                     <TextBlock Grid.Column="1" Text="{Binding LastStartup}" Opacity="0.7"/>
@@ -100,9 +99,18 @@
                     </ListBox.ItemTemplate>
 
                     <ListBox.Styles>
-                        <Style Selector="ListBoxItem">
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="Background" Value="Transparent"/>
+                        <Style Selector="ListBoxItem:pointerover">
+                            <Setter Property="Background" Value="{DynamicResource CardBackground}" />
+                        </Style>
+
+                        <Style Selector="ListBoxItem:selected">
+                            <Setter Property="Background" Value="{DynamicResource AccentColor}" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Padding" Value="2"/>
+                        </Style>
+
+                        <Style Selector="ListBoxItem:selected:pointerover">
+                            <Setter Property="Background" Value="{DynamicResource AccentColor}" />
                         </Style>
                     </ListBox.Styles>
                 </ListBox>
