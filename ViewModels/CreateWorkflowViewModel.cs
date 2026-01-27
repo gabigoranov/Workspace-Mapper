@@ -1,18 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WorkflowManager.Models;
 using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
+using WorkflowManager.Services.Dialog;
 using Process = WorkflowManager.Models.Process;
-
 namespace WorkflowManager.ViewModels;
 
-public partial class CreateWorkflowViewModel(IWorkflowService workflowService, INavigationService navigation): ViewModelBase
+public partial class CreateWorkflowViewModel(IWorkflowService workflowService, INavigationService navigation, IDialogService dialogService): ViewModelBase
 {
     [ObservableProperty]
     [Required(ErrorMessage = "Workflow name is required")]
@@ -46,6 +49,15 @@ public partial class CreateWorkflowViewModel(IWorkflowService workflowService, I
         await workflowService.CreateWorkflowAsync(workflow);
         navigation.Navigate<HomeViewModel>();
     }
+
+    [RelayCommand]
+    private async Task ChooseProcessDirectory()
+    {
+        var result = await dialogService.SelectFolderAsync();
+        if (!string.IsNullOrEmpty(result))
+            ProcessDirectory = result;
+    }
+
     
     [RelayCommand]
     private void AddProcess()

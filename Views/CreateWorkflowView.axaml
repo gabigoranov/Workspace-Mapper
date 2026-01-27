@@ -39,6 +39,10 @@
                     <StackPanel Spacing="10">
                         <TextBox Text="{Binding ProcessTitle}" Watermark="Process Name (e.g. Sync Files)" />
                         <TextBox Text="{Binding ProcessDirectory}" Watermark="Directory Path" />
+                        <Button Content="Choose Folder"
+                                Command="{Binding ChooseProcessDirectoryCommand}"
+                                CommandParameter="{Binding .}" />
+
                         <TextBox Text="{Binding ProcessCommand}" Watermark="Command / Script" />
                         
                         <Button Content="Add Process" 

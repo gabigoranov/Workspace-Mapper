@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using WorkflowManager.Models;
 using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
+using WorkflowManager.Services.Dialog;
 using WorkflowManager.Services.WorkflowState;
 using Process = WorkflowManager.Models.Process;
 
@@ -16,7 +17,8 @@ namespace WorkflowManager.ViewModels;
 public partial class UpdateWorkflowViewModel(
     IWorkflowService workflowService,
     INavigationService navigation,
-    IWorkflowStateService workflowStateService) : ViewModelBase
+    IWorkflowStateService workflowStateService,
+    IDialogService dialogService) : ViewModelBase
 {
     private readonly int _workflowId = workflowStateService.SelectedWorkflow?.Id ?? throw new InvalidOperationException("No workflow selected for editing.");
 
@@ -41,6 +43,14 @@ public partial class UpdateWorkflowViewModel(
     [MaxLength(255, ErrorMessage = "Process command must be at most 255 characters")]
     private string _processCommand = string.Empty;
 
+    [RelayCommand]
+    private async Task ChooseProcessDirectory()
+    {
+        var result = await dialogService.SelectFolderAsync();
+        if (!string.IsNullOrEmpty(result))
+            ProcessDirectory = result;
+    }
+    
     [RelayCommand]
     private async Task UpdateWorkflow()
     {
