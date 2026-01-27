@@ -24,7 +24,7 @@ public partial class MainWindow : Window
     
     private void CloseWindow(object? sender, RoutedEventArgs e)
     {
-        Environment.Exit(0);
+        Hide();
     }
 
 }

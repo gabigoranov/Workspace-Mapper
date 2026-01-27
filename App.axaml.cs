@@ -5,6 +5,7 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using WorkflowManager.Services.Common;
 using WorkflowManager.Services.Common.Navigation;
@@ -55,6 +56,21 @@ public partial class App : Application
         foreach (var plugin in dataValidationPluginsToRemove)
         {
             BindingPlugins.DataValidators.Remove(plugin);
+        }
+    }
+
+    private void ExitApplication(object? sender, EventArgs eventArgs)
+    {
+        Environment.Exit(0);
+    }
+
+    private void ShowApplication(object? sender, EventArgs eventArgs)
+    {
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            var window = desktop.MainWindow!;
+            window.Show();
+            window.Activate();
         }
     }
 }

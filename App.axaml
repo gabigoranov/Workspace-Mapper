@@ -14,7 +14,7 @@
                     <SolidColorBrush x:Key="CardBackground" Color="#2a2a2a"/>
                     <SolidColorBrush x:Key="PrimaryText" Color="#fefefe"/>
                     <SolidColorBrush x:Key="SecondaryText" Color="#999999"/>
-                    <SolidColorBrush x:Key="AccentColor" Color="CornflowerBlue"/>
+                    <SolidColorBrush x:Key="AccentColor" Color="#cfcfcf"/>
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Light">
@@ -22,11 +22,25 @@
                     <SolidColorBrush x:Key="CardBackground" Color="#ffffff"/>
                     <SolidColorBrush x:Key="PrimaryText" Color="#1a1a1a"/>
                     <SolidColorBrush x:Key="SecondaryText" Color="#666666"/>
-                    <SolidColorBrush x:Key="AccentColor" Color="#8ab8ff"/>
+                    <SolidColorBrush x:Key="AccentColor" Color="#5c5c5c"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Application.Resources>
+             
+    <TrayIcon.Icons>
+        <TrayIcons>
+            <TrayIcon Icon="/Assets/app-icon.png" 
+                      ToolTipText="Workflow Manager"
+                      Clicked="ShowApplication">
+                <TrayIcon.Menu>
+                    <NativeMenu>
+                        <NativeMenuItem Header="Exit" Click="ExitApplication"/>
+                    </NativeMenu>
+                </TrayIcon.Menu>
+            </TrayIcon>
+        </TrayIcons>
+    </TrayIcon.Icons>
              
     <Application.DataTemplates>
         <local:ViewLocator/>

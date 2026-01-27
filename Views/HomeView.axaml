@@ -5,14 +5,14 @@
              x:Class="WorkflowManager.Views.HomeView"
              x:DataType="viewModels:HomeViewModel">
     <Grid RowDefinitions="Auto,*"
-          Margin="12">
+          Margin="0">
 
         <!-- ACTION BANNER -->
         <Border Grid.Row="0"
                 Background="{DynamicResource CardBackground}"
-                CornerRadius="12"
+                CornerRadius="12, 12, 0, 0"
                 Padding="12"
-                Margin="0,0,0,12">
+                Margin="0,0,0, 0">
 
             <Grid ColumnDefinitions="*,Auto">
                 
@@ -27,7 +27,7 @@
                             Spacing="10">
                     
                     <Button Command="{Binding StartWorkflowCommand}"
-                            CornerRadius="8">
+                            CornerRadius="8 ">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <TextBlock Text="Start"/>
                             <PathIcon Width="15"
@@ -74,7 +74,7 @@
         <!-- WORKFLOW LIST -->
         <Border Grid.Row="1"
                 Background="{DynamicResource CardBackground}"
-                CornerRadius="12"
+                CornerRadius="0, 0, 12, 12"
                 Padding="8">
 
             <ScrollViewer>
