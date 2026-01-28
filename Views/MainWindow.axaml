@@ -62,29 +62,40 @@
             <!-- SIDEBAR -->
             <Border Background="{DynamicResource CardBackground}"
                     CornerRadius="12"
-                    Padding="12">
+                    Padding="12"
+                    VerticalAlignment="Stretch">
 
-                <StackPanel Spacing="10">
+                <Grid RowDefinitions="Auto,*">
+                    <!-- Top content -->
+                    <StackPanel Spacing="10" Grid.Row="0">
+                        <TextBlock Text="Navigation"
+                                   FontSize="18"
+                                   Opacity="0.7"
+                                   Margin="0,0,0,8"/>
 
-                    <TextBlock Text="Navigation"
-                               FontSize="18"
-                               Opacity="0.7"
-                               Margin="0,0,0,8"/>
+                        <Button Height="34"
+                                HorizontalAlignment="Stretch"
+                                CornerRadius="8"
+                                Command="{Binding Sidebar.GoHomeCommand}"
+                                Foreground="{DynamicResource PrimaryText}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <PathIcon Width="15"
+                                          Height="15"
+                                          Data="{DynamicResource HomeRegular}"
+                                          Foreground="{Binding $parent[Button].Foreground}"/>
+                                <TextBlock Text="Home"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
 
-                    <Button Height="34"
-                            HorizontalAlignment="Stretch"
-                            CornerRadius="8"
-                            Command="{Binding Sidebar.GoHomeCommand}"
-                            Foreground="{DynamicResource PrimaryText}">
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <PathIcon Width="15"
-                                      Height="15"
-                                      Data="{DynamicResource HomeRegular}"
-                                      Foreground="{Binding $parent[Button].Foreground}"/>
-                            <TextBlock Text="Home"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
+                    <!-- Bottom content -->
+                    <CheckBox Grid.Row="1"
+                              VerticalAlignment="Bottom"
+                              HorizontalAlignment="Left"
+                              Content="Run on startup"
+                              IsChecked="{Binding IsStartupApp, Mode=TwoWay}"
+                              IsThreeState="False"/>
+                </Grid>
             </Border>
 
             <!-- PAGE CONTENT -->

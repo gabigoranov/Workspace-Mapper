@@ -9,6 +9,7 @@ using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
 using WorkflowManager.Services.Dialog;
 using WorkflowManager.Services.Process;
+using WorkflowManager.Services.Startup;
 using WorkflowManager.Services.WorkflowState;
 using WorkflowManager.ViewModels;
 
@@ -16,6 +17,24 @@ namespace WorkflowManager.Services.Common;
 
 public static class ServiceCollectionExtensions
 {
+    public static IStartupService GetOsDependentStartupService()
+    {
+        if (OperatingSystem.IsWindows())
+        {
+            return new WindowsStartupService();
+        }
+        else if (OperatingSystem.IsLinux())
+        {
+            return new LinuxStartupService();
+        }
+        else if(OperatingSystem.IsMacOS())
+        {
+            return new MacStartupService();
+        }
+        
+        throw new ArgumentException("Operating System not supported");
+    }
+    
     public static void AddCommonServices(this IServiceCollection collection)
     {
         collection.AddDbContext<ApplicationDbContext>(options =>
@@ -32,6 +51,8 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<MainWindowViewModel>();
         collection.AddSingleton<SidebarViewModel>();
         collection.AddSingleton<IWorkflowStateService, WorkflowStateService>();
+        collection.AddSingleton<IStartupService>(sp =>
+            GetOsDependentStartupService());
         
         collection.AddTransient<HomeViewModel>();
         collection.AddTransient<CreateWorkflowViewModel>();

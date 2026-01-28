@@ -9,6 +9,7 @@
         <entry key="Views/CreateWorkflowView.axaml" value="WorkflowManager.csproj" />
         <entry key="Views/HomeView.axaml" value="WorkflowManager.csproj" />
         <entry key="Views/MainWindow.axaml" value="WorkflowManager.csproj" />
+        <entry key="Views/UpdateWorkflowView.axaml" value="WorkflowManager.csproj" />
         <entry key="icons.axaml" value="WorkflowManager.csproj" />
       </map>
     </option>

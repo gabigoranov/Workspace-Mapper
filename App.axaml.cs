@@ -4,7 +4,9 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
+using System.Threading.Tasks;
 using Avalonia.Markup.Xaml;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using WorkflowManager.Services.Common;
@@ -64,13 +66,27 @@ public partial class App : Application
         Environment.Exit(0);
     }
 
-    private void ShowApplication(object? sender, EventArgs eventArgs)
+    private async void ShowApplication(object? sender, EventArgs e)
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        while (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop
+               || desktop.MainWindow is null)
         {
-            var window = desktop.MainWindow!;
+            await Task.Delay(50); // small delay to avoid blocking
+        }
+        
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime loadedDesktop)
+        {
+            var window = loadedDesktop.MainWindow!;
+
             window.Show();
-            window.Activate();
+
+            // Schedule activation after layout is complete
+            Dispatcher.UIThread.Post(() =>
+            {
+                window.Activate();
+            });
+
         }
     }
+
 }
