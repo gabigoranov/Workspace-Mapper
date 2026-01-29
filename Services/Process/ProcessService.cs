@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using StudyPlatform.Data.Common;
 
 namespace WorkflowManager.Services.Process;
 
-public class ProcessService : IProcessService
+public class ProcessService(IRepository repository) : IProcessService
 {
     public async Task ExecuteProcessAsync(Models.Process workflowProcess)
     {
@@ -48,5 +50,19 @@ public class ProcessService : IProcessService
             }
         });
         
+    }
+
+    public async Task<Models.Process> EditProcessAsync(int id, Models.Process workflowProcess)
+    {
+        var process = await repository.GetByIdAsync<Models.Process>(id);
+        if (process == null)
+            throw new KeyNotFoundException("Workflow not found");
+
+        process.Title = workflowProcess.Title;
+        process.Directory = workflowProcess.Directory;
+        process.Command = workflowProcess.Command;
+
+        await repository.SaveChangesAsync();
+        return process;
     }
 }

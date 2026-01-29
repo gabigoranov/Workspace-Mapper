@@ -9,6 +9,7 @@ using WorkflowManager.Models;
 using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
 using WorkflowManager.Services.Dialog;
+using WorkflowManager.Services.Process;
 using WorkflowManager.Services.WorkflowState;
 using Process = WorkflowManager.Models.Process;
 
@@ -16,6 +17,7 @@ namespace WorkflowManager.ViewModels;
 
 public partial class UpdateWorkflowViewModel(
     IWorkflowService workflowService,
+    IProcessService processService,
     INavigationService navigation,
     IWorkflowStateService workflowStateService,
     IDialogService dialogService) : ViewModelBase
@@ -42,6 +44,14 @@ public partial class UpdateWorkflowViewModel(
     [ObservableProperty]
     [MaxLength(255, ErrorMessage = "Process command must be at most 255 characters")]
     private string _processCommand = string.Empty;
+
+    [ObservableProperty] 
+    [NotifyPropertyChangedFor(nameof(WorkflowProcesses))]
+    private Process? _editingProcess;
+    
+    [ObservableProperty] 
+    [NotifyCanExecuteChangedFor(nameof(EditProcessCommand))]
+    private bool _isEditingProcess = false;
 
     [RelayCommand]
     private async Task ChooseProcessDirectory()
@@ -89,5 +99,28 @@ public partial class UpdateWorkflowViewModel(
         ClearErrors(nameof(ProcessTitle));
         ClearErrors(nameof(ProcessDirectory));
         ClearErrors(nameof(ProcessCommand));
+    }
+
+    [RelayCommand]
+    private void StartEditProcess(Process process)
+    {
+        EditingProcess = process;
+        IsEditingProcess = true;
+
+        ProcessTitle = process.Title;
+        ProcessDirectory = process.Directory;
+        ProcessCommand = process.Command;
+    }
+
+    [RelayCommand(CanExecute = nameof(IsEditingProcess))]
+    private void EditProcess()
+    {
+        // Apply form fields to selected process.
+        EditingProcess!.Title = ProcessTitle;
+        EditingProcess.Directory = ProcessDirectory;
+        EditingProcess.Command = ProcessCommand;
+        
+        EditingProcess = null;
+        IsEditingProcess = false;
     }
 }

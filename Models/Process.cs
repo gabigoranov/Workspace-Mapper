@@ -1,27 +1,31 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace WorkflowManager.Models;
 
-public class Process()
+public partial class Process : ObservableValidator
 {
     [Key] 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-    
+
     [Required]
     [StringLength(30)]
-    public string Title { get; set; }
+    [ObservableProperty] 
+    private string _title = string.Empty;
 
     [Required]
     [StringLength(255)]
-    public string Directory { get; set; } 
+    [ObservableProperty]
+    private string _directory = string.Empty;
 
     public int WorkflowId { get; set; }
-    
-    public virtual Workflow  Workflow { get; set; }
-    
+
+    public virtual Workflow Workflow { get; set; }
+
     [Required]
     [StringLength(255)]
-    public string Command  { get; set; } 
+    [ObservableProperty]
+    private string _command = string.Empty;
 }
