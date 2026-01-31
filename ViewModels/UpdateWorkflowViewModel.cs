@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -34,31 +35,21 @@ public partial class UpdateWorkflowViewModel(
         new(workflowStateService.SelectedWorkflow!.Processes);
 
     [ObservableProperty]
-    [MaxLength(30, ErrorMessage = "Process name must be at most 30 characters")]
-    private string _processTitle = string.Empty;
-
-    [ObservableProperty]
-    [MaxLength(255, ErrorMessage = "Process directory must be at most 255 characters")]
-    private string _processDirectory = string.Empty;
-
-    [ObservableProperty]
-    [MaxLength(255, ErrorMessage = "Process command must be at most 255 characters")]
-    private string _processCommand = string.Empty;
+    private ProcessViewModel _currentProcessVm = new();
 
     [ObservableProperty] 
     [NotifyPropertyChangedFor(nameof(WorkflowProcesses))]
     private Process? _editingProcess;
     
-    [ObservableProperty] 
-    [NotifyCanExecuteChangedFor(nameof(EditProcessCommand))]
-    private bool _isEditingProcess = false;
+    
+    private readonly List<Process> _deletedProcesses = new();
 
     [RelayCommand]
     private async Task ChooseProcessDirectory()
     {
         var result = await dialogService.SelectFolderAsync();
         if (!string.IsNullOrEmpty(result))
-            ProcessDirectory = result;
+            CurrentProcessVm.Directory = result;
     }
     
     [RelayCommand]
@@ -67,6 +58,14 @@ public partial class UpdateWorkflowViewModel(
         ValidateAllProperties();
         if (HasErrors) return;
 
+        // First, delete removed processes
+        foreach (var deleted in _deletedProcesses)
+        {
+            await processService.DeleteProcessAsync(deleted.Id);
+        }
+        _deletedProcesses.Clear();
+
+        // Then update workflow with remaining processes
         Workflow updatedWorkflow = new()
         {
             Id = _workflowId,
@@ -79,48 +78,49 @@ public partial class UpdateWorkflowViewModel(
         navigation.Navigate<HomeViewModel>();
     }
 
-    [RelayCommand]
-    private void AddProcess()
-    {
-        ValidateAllProperties();
-        if (HasErrors) return;
-
-        WorkflowProcesses.Add(new Process
-        {
-            Title = ProcessTitle,
-            Directory = ProcessDirectory,
-            Command = ProcessCommand
-        });
-
-        ProcessTitle = string.Empty;
-        ProcessDirectory = string.Empty;
-        ProcessCommand = string.Empty;
-
-        ClearErrors(nameof(ProcessTitle));
-        ClearErrors(nameof(ProcessDirectory));
-        ClearErrors(nameof(ProcessCommand));
-    }
 
     [RelayCommand]
     private void StartEditProcess(Process process)
     {
         EditingProcess = process;
-        IsEditingProcess = true;
+        CurrentProcessVm.IsEditing = true;
 
-        ProcessTitle = process.Title;
-        ProcessDirectory = process.Directory;
-        ProcessCommand = process.Command;
+        CurrentProcessVm = new ProcessViewModel(process);
     }
 
-    [RelayCommand(CanExecute = nameof(IsEditingProcess))]
-    private void EditProcess()
+    [RelayCommand]
+    private void AddOrEditProcess()
     {
-        // Apply form fields to selected process.
-        EditingProcess!.Title = ProcessTitle;
-        EditingProcess.Directory = ProcessDirectory;
-        EditingProcess.Command = ProcessCommand;
-        
-        EditingProcess = null;
-        IsEditingProcess = false;
+        if (!CurrentProcessVm.Validate()) return;
+
+        if (CurrentProcessVm.IsEditing && EditingProcess != null)
+        {
+            CurrentProcessVm.ApplyToProcess(EditingProcess);
+            EditingProcess = null;
+            CurrentProcessVm.IsEditing = false;
+        }
+        else
+        {
+            WorkflowProcesses.Add(CurrentProcessVm.ToProcess());
+        }
+
+        CurrentProcessVm = new ProcessViewModel();
     }
+
+    [RelayCommand]
+    private void DeleteProcess(Process process)
+    {
+        if (EditingProcess?.Id == process.Id)
+        {
+            EditingProcess = null;
+            CurrentProcessVm.IsEditing = false;
+        }
+
+        WorkflowProcesses.Remove(process);
+    
+        // Only track if it has an ID (i.e., exists in DB)
+        if (process.Id != 0)
+            _deletedProcesses.Add(process);
+    }
+
 }

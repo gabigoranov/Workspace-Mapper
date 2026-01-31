@@ -24,20 +24,13 @@ public partial class CreateWorkflowViewModel(IWorkflowService workflowService, I
     
     [ObservableProperty]
     private ObservableCollection<Process> _workflowProcesses = [];
+    
+    [ObservableProperty]
+    private ProcessViewModel _currentProcessVm = new();
 
-    // Fill out as many processes to be added by filling out one sub form at a time before adding the process to the collection
-    
-    [ObservableProperty]
-    [MaxLength(30, ErrorMessage = "Process name must be st most 30 characters")]
-    private string _processTitle  = string.Empty;
-    
-    [ObservableProperty]
-    [MaxLength(255, ErrorMessage = "Process name must be 255 characters")]
-    private string _processDirectory  = string.Empty;
-    
-    [ObservableProperty]
-    [MaxLength(255, ErrorMessage = "Process name must be 255 characters")]
-    private string _processCommand  = string.Empty;
+    [ObservableProperty] 
+    [NotifyPropertyChangedFor(nameof(WorkflowProcesses))]
+    private Process? _editingProcess;
     
     [RelayCommand]
     private async Task CreateWorkflow()
@@ -55,31 +48,47 @@ public partial class CreateWorkflowViewModel(IWorkflowService workflowService, I
     {
         var result = await dialogService.SelectFolderAsync();
         if (!string.IsNullOrEmpty(result))
-            ProcessDirectory = result;
+            CurrentProcessVm.Directory = result;
     }
-
+    
     
     [RelayCommand]
-    private void AddProcess()
+    private void StartEditProcess(Process process)
     {
-        // Validate only the Process fields
-        ValidateAllProperties();
-        if (HasErrors) return;
+        EditingProcess = process;
+        CurrentProcessVm.IsEditing = true;
 
-        WorkflowProcesses.Add(new Process { 
-            Title = ProcessTitle, 
-            Directory = ProcessDirectory, 
-            Command = ProcessCommand 
-        });
+        CurrentProcessVm = new ProcessViewModel(process);
+    }
 
-        // Clear the sub-form for the next process
-        ProcessTitle = string.Empty;
-        ProcessDirectory = string.Empty;
-        ProcessCommand = string.Empty;
-    
-        // Clear validation errors for the next entry
-        ClearErrors(nameof(ProcessTitle));
-        ClearErrors(nameof(ProcessDirectory));
-        ClearErrors(nameof(ProcessCommand));
+    [RelayCommand]
+    private void AddOrEditProcess()
+    {
+        if (!CurrentProcessVm.Validate()) return;
+
+        if (CurrentProcessVm.IsEditing && EditingProcess != null)
+        {
+            CurrentProcessVm.ApplyToProcess(EditingProcess);
+            EditingProcess = null;
+            CurrentProcessVm.IsEditing = false;
+        }
+        else
+        {
+            WorkflowProcesses.Add(CurrentProcessVm.ToProcess());
+        }
+
+        CurrentProcessVm = new ProcessViewModel();
+    }
+
+    [RelayCommand]
+    private void DeleteProcess(Process process)
+    {
+        if (EditingProcess?.Id == process.Id)
+        {
+            EditingProcess = null;
+            CurrentProcessVm.IsEditing = false;
+        }
+
+        WorkflowProcesses.Remove(process);
     }
 }

@@ -31,32 +31,40 @@
             </StackPanel>
 
             <StackPanel Spacing="8">
-                <TextBlock Text="Add New Process"
-                           FontWeight="Bold"
+                <TextBlock Text="Add New Process" 
+                           FontWeight="Bold" 
                            Foreground="{DynamicResource AccentColor}"/>
-                <Border Padding="15"
-                        BorderBrush="{DynamicResource AccentColor}"
-                        BorderThickness="1"
+                <Border Padding="15" 
+                        BorderBrush="{DynamicResource AccentColor}" 
+                        BorderThickness="1" 
                         CornerRadius="4"
                         Background="{DynamicResource CardBackground}">
                     <StackPanel Spacing="10">
-                        <TextBox Text="{Binding ProcessTitle}" Watermark="Process Name (e.g. Sync Files)"/>
-                        <TextBox Text="{Binding ProcessDirectory}" Watermark="Directory Path"/>
+                        <TextBox Text="{Binding CurrentProcessVm.Title}" Watermark="Process Name (e.g. Sync Files)" />
+                        <TextBox Text="{Binding CurrentProcessVm.Directory}" Watermark="Directory Path" />
                         <Button Content="Choose Folder"
                                 Command="{Binding ChooseProcessDirectoryCommand}"
                                 CommandParameter="{Binding .}" />
                         
-                        <TextBox Text="{Binding ProcessCommand}" Watermark="Command / Script"/>
+                        <Button Content="Choose File"
+                                Command="{Binding ChooseProcessDirectoryCommand}"
+                                CommandParameter="{Binding .}" />
+                        
+                        <Button Content="Choose Website"
+                                Command="{Binding ChooseProcessDirectoryCommand}"
+                                CommandParameter="{Binding .}" />
 
-                        <Button IsVisible="{Binding !IsEditingProcess}" 
+                        <TextBox Text="{Binding CurrentProcessVm.Command}" Watermark="Command / Script" />
+                        
+                        <Button IsVisible="{Binding !CurrentProcessVm.IsEditing}" 
                                 Content="Add Process"
-                                Command="{Binding AddProcessCommand}"
+                                Command="{Binding AddOrEditProcessCommand}"
                                 HorizontalAlignment="Right"
                                 HotKey="Enter"/>
                         
-                        <Button IsVisible="{Binding IsEditingProcess}" 
+                        <Button IsVisible="{Binding CurrentProcessVm.IsEditing}" 
                                 Content="Edit Process"
-                                Command="{Binding EditProcessCommand}"
+                                Command="{Binding AddOrEditProcessCommand}"
                                 HorizontalAlignment="Right"
                                 HotKey="Enter"/>
                     </StackPanel>
@@ -77,11 +85,11 @@
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" /> <!-- Text takes remaining space -->
-                                        <ColumnDefinition Width="Auto" /> <!-- Button takes its own width -->
+                                        <ColumnDefinition Width="Auto" /> <!-- Buttons take their own width -->
                                     </Grid.ColumnDefinitions>
 
                                     <!-- Texts -->
-                                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                                    <StackPanel Grid.Column="0" Orientation="Vertical" Spacing="2">
                                         <TextBlock Text="{Binding Title}"
                                                    FontWeight="SemiBold"
                                                    Foreground="{DynamicResource PrimaryText}"/>
@@ -90,21 +98,35 @@
                                                    Foreground="{DynamicResource SecondaryText}"/>
                                     </StackPanel>
 
-                                    <!-- Button -->
-                                    <Button Grid.Column="1"
-                                            x:CompileBindings="False"
-                                            Command="{Binding DataContext.StartEditProcessCommand,
-                      RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding .}"
-                                            CornerRadius="8">
-                                        <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <TextBlock Text="Edit"/>
+                                    <!-- Buttons -->
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                        <!-- Edit Button -->
+                                        <Button x:CompileBindings="False"
+                                                Command="{Binding DataContext.StartEditProcessCommand,
+                          RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="8">
+                                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                                <TextBlock Text="Edit"/>
+                                                <PathIcon Width="15"
+                                                          Height="15"
+                                                          Data="{DynamicResource DocumentEditRegular}"
+                                                          Foreground="{Binding $parent[Button].Foreground}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <!-- Delete Button -->
+                                        <Button x:CompileBindings="False"
+                                                Command="{Binding DataContext.DeleteProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="8"
+                                                VerticalAlignment="Stretch">
                                             <PathIcon Width="15"
                                                       Height="15"
-                                                      Data="{DynamicResource DocumentEditRegular}"
+                                                      Data="{DynamicResource DeleteRegular}"
                                                       Foreground="{Binding $parent[Button].Foreground}"/>
-                                        </StackPanel>
-                                    </Button>
+                                        </Button>
+                                    </StackPanel>
                                 </Grid>
                             </Border>
                         </DataTemplate>

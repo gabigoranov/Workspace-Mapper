@@ -65,4 +65,10 @@ public class ProcessService(IRepository repository) : IProcessService
         await repository.SaveChangesAsync();
         return process;
     }
+
+    public async Task DeleteProcessAsync(int id)
+    {
+        await repository.ExecuteDeleteAsync<Models.Process>(x => x.Id == id);
+        await repository.SaveChangesAsync();
+    }
 }
