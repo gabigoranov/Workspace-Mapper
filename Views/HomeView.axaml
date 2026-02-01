@@ -73,7 +73,7 @@
 
         <!-- WORKFLOW LIST -->
         <Border Grid.Row="1"
-                Background="{DynamicResource CardBackground}"
+                Background="{DynamicResource AppBackground}"
                 CornerRadius="0, 0, 12, 12"
                 Padding="8">
 

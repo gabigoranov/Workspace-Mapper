@@ -15,32 +15,20 @@ public partial class MainWindowViewModel : ViewModelBase
 {
     [ObservableProperty]
     private ViewModelBase? _currentViewModel;
-    private readonly IStartupService _startup;
 
-    [ObservableProperty]
-    private bool _isStartupApp;
+
     
     public SidebarViewModel Sidebar { get; }
     
 
     public MainWindowViewModel(
         INavigationService navigation,
-        SidebarViewModel sidebar,
-        IStartupService  startup) 
+        SidebarViewModel sidebar) 
     {
         Sidebar = sidebar;
-        _startup = startup; 
-        _isStartupApp = startup.IsEnabled();
-
         navigation.Navigated += vm => CurrentViewModel = vm;
     }
 
     
-    partial void OnIsStartupAppChanged(bool value)
-    {
-        if (value)
-            _startup.Enable();
-        else
-            _startup.Disable();
-    }
+
 }

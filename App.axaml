@@ -10,19 +10,24 @@
             <ResourceDictionary.ThemeDictionaries>
     
                 <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="AppBackground" Color="#1e1e1e"/>
-                    <SolidColorBrush x:Key="CardBackground" Color="#2a2a2a"/>
-                    <SolidColorBrush x:Key="PrimaryText" Color="#fefefe"/>
-                    <SolidColorBrush x:Key="SecondaryText" Color="#999999"/>
-                    <SolidColorBrush x:Key="AccentColor" Color="#cfcfcf"/>
+                    <SolidColorBrush x:Key="AppBackground" Color="#0f172a"/>
+                    <SolidColorBrush x:Key="AccentColorLight" Color="#f1f5f9"/>
+                    <SolidColorBrush x:Key="CardBackground" Color="#1e293b"/>
+                    <SolidColorBrush x:Key="PrimaryText" Color="#e6ebef"/>
+                    <SolidColorBrush x:Key="SecondaryText" Color="#94a3b8"/>
+                    <SolidColorBrush x:Key="Border" Color="#e2e8f0"/>
+                    <SolidColorBrush x:Key="AccentColor" Color="#3b82f6"/>
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="AppBackground" Color="#f5f5f5"/>
+                    <SolidColorBrush x:Key="AppBackground" Color="#fbfcfd"/>
+                    <SolidColorBrush x:Key="AppBackgroundLight" Color="#f8fafc"/>
                     <SolidColorBrush x:Key="CardBackground" Color="#ffffff"/>
-                    <SolidColorBrush x:Key="PrimaryText" Color="#1a1a1a"/>
-                    <SolidColorBrush x:Key="SecondaryText" Color="#666666"/>
-                    <SolidColorBrush x:Key="AccentColor" Color="#5c5c5c"/>
+                    <SolidColorBrush x:Key="PrimaryText" Color="#0f172a"/>
+                    <SolidColorBrush x:Key="SecondaryText" Color="#94a3bf"/>
+                    <SolidColorBrush x:Key="Border" Color="#e2e8f0"/>
+                    <SolidColorBrush x:Key="AccentColor" Color="#2563eb"/>
+                    <SolidColorBrush x:Key="AccentColorLight" Color="#f1f5f9"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
@@ -48,6 +53,7 @@
   
     <Application.Styles>
         <FluentTheme />
+        
         <StyleInclude Source="avares://WorkflowManager/Icons.axaml"></StyleInclude>
     </Application.Styles>
 </Application>

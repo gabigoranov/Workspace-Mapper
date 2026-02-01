@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         x:Class="WorkflowManager.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Width="900"
-        Height="550"
+        Width="1280"
+        Height="800"
         Background="{DynamicResource AppBackground}"
         Foreground="{DynamicResource PrimaryText}"
         FontSize="16"
@@ -16,98 +16,56 @@
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome"
         ExtendClientAreaTitleBarHeightHint="0"
-        SystemDecorations="None">
+        SystemDecorations="None"
+        RequestedThemeVariant="Light"
+        xmlns:views="using:WorkflowManager.Views">
 
     <!-- ROOT LAYOUT -->
-    <Grid RowDefinitions="Auto,*">
+    <Grid ColumnDefinitions="300,*">
 
-        <!-- TITLE BAR -->
-        <Border Background="{DynamicResource AccentColor}"
-                CornerRadius="10"
-                Margin="6"
-                Padding="8"
-                PointerPressed="DragWindow">
+        <!-- SIDEBAR -->
+        <views:Sidebar
+            DataContext="{Binding Sidebar}"
+            IsStartupApp="{Binding IsStartupApp}"/>
 
-            <Grid ColumnDefinitions="*,Auto,Auto">
-                <TextBlock Text="Workflow Manager"
-                           FontSize="22"
-                           VerticalAlignment="Center"
-                           Foreground="{DynamicResource AppBackground}"/>
+        <!-- PAGE CONTENT -->   
+        <Grid Grid.Column="1" RowDefinitions="100, *">
+            <Border Background="{DynamicResource AccentColor}"
+                    PointerPressed="DragWindow">
 
-                <Button Grid.Column="1"
-                        Margin="6,0"
-                        Click="MinimizeWindow"
-                        >
-                    <PathIcon Width="25"
-                              Height="25"
-                              Foreground="{DynamicResource AppBackground}"
-                              Data="{DynamicResource ArrowMinimizeRegular}"/>
-                </Button>
+                <Grid ColumnDefinitions="*,Auto,Auto">
+                    <TextBlock Text="Workflow Manager"
+                               FontSize="22"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource AppBackground}"/>
 
-                <Button Grid.Column="2"
-                        Click="CloseWindow">
-                    <PathIcon Width="25"
-                              Height="25"
-                              Foreground="{DynamicResource AppBackground}"
-                              Data="{DynamicResource DismissRegular}"/>
-                </Button>
-            </Grid>
-        </Border>
+                    <Button Grid.Column="1"
+                            Margin="6,0"
+                            Click="MinimizeWindow"
+                    >
+                        <PathIcon Width="25"
+                                  Height="25"
+                                  Foreground="{DynamicResource AppBackground}"
+                                  Data="{DynamicResource ArrowMinimizeRegular}"/>
+                    </Button>
 
-        <!-- MAIN AREA -->
-        <Grid Grid.Row="1"
-              ColumnDefinitions="220,*"
-              Margin="6">
-
-            <!-- SIDEBAR -->
-            <Border Background="{DynamicResource CardBackground}"
-                    CornerRadius="12"
-                    Padding="12"
-                    VerticalAlignment="Stretch">
-
-                <Grid RowDefinitions="Auto,*">
-                    <!-- Top content -->
-                    <StackPanel Spacing="10" Grid.Row="0">
-                        <TextBlock Text="Navigation"
-                                   FontSize="18"
-                                   Opacity="0.7"
-                                   Margin="0,0,0,8"/>
-
-                        <Button Height="34"
-                                HorizontalAlignment="Stretch"
-                                CornerRadius="8"
-                                Command="{Binding Sidebar.GoHomeCommand}"
-                                Foreground="{DynamicResource PrimaryText}">
-                            <StackPanel Orientation="Horizontal" Spacing="8">
-                                <PathIcon Width="15"
-                                          Height="15"
-                                          Data="{DynamicResource HomeRegular}"
-                                          Foreground="{Binding $parent[Button].Foreground}"/>
-                                <TextBlock Text="Home"/>
-                            </StackPanel>
-                        </Button>
-                    </StackPanel>
-
-                    <!-- Bottom content -->
-                    <CheckBox Grid.Row="1"
-                              VerticalAlignment="Bottom"
-                              HorizontalAlignment="Left"
-                              Content="Run on startup"
-                              IsChecked="{Binding IsStartupApp, Mode=TwoWay}"
-                              IsThreeState="False"/>
+                    <Button Grid.Column="2"
+                            Click="CloseWindow">
+                        <PathIcon Width="25"
+                                  Height="25"
+                                  Foreground="{DynamicResource AppBackground}"
+                                  Data="{DynamicResource DismissRegular}"/>
+                    </Button>
                 </Grid>
             </Border>
-
-            <!-- PAGE CONTENT -->
-            <Border Grid.Column="1"
+            
+            <Border Grid.Row="1"
                     Background="{DynamicResource AppBackground}"
                     CornerRadius="12"
                     Padding="6, 0, 0, 0">
 
                 <ContentControl Content="{Binding CurrentViewModel}" />
             </Border>
-
         </Grid>
-
     </Grid>
 </Window>
