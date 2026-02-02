@@ -28,8 +28,7 @@
         <!-- PAGE CONTENT -->   
         <Border Grid.Column="1"
                 Background="{DynamicResource Color.Background}"
-                CornerRadius="12"
-                Padding="6, 0, 0, 0">
+                CornerRadius="{DynamicResource Border.Radius.Sm}">
 
             <ContentControl Content="{Binding CurrentViewModel}" />
         </Border>

@@ -1,0 +1,63 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Border thicknesses -->
+    <x:Double x:Key="Border.Thin">1</x:Double>
+    <x:Double x:Key="Border.Medium">2</x:Double>
+    <x:Double x:Key="Border.Thick">4</x:Double>
+    
+    <!-- Asymmetric borders -->
+    <Thickness x:Key="Border.Thin.Left">1,0,0,1</Thickness>
+    <Thickness x:Key="Border.Thin.Right">0,1,1,0</Thickness>
+    <Thickness x:Key="Border.Thin.Top">1,1,0,0</Thickness>
+    <Thickness x:Key="Border.Thin.Bottom">0,0,1,1</Thickness>
+    <Thickness x:Key="Border.Thin.All">1,1,1,1</Thickness>
+
+    <Thickness x:Key="Border.Medium.Left">2,0,0,2</Thickness>
+    <Thickness x:Key="Border.Medium.Right">0,2,2,0</Thickness>
+    <Thickness x:Key="Border.Medium.Top">2,2,0,0</Thickness>
+    <Thickness x:Key="Border.Medium.Bottom">0,0,2,2</Thickness>
+    <Thickness x:Key="Border.Medium.All">2,2,2,2</Thickness>
+
+    <Thickness x:Key="Border.Thick.Left">4,0,0,4</Thickness>
+    <Thickness x:Key="Border.Thick.Right">0,4,4,0</Thickness>
+    <Thickness x:Key="Border.Thick.Top">4,4,0,0</Thickness>
+    <Thickness x:Key="Border.Thick.Bottom">0,0,4,4</Thickness>
+    <Thickness x:Key="Border.Thick.All">4,4,4,4</Thickness>
+
+    <!-- Rounded corners -->
+    <CornerRadius x:Key="Border.Radius.Sm">14</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Md">16</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Lg">18</CornerRadius>
+    
+    <!-- Asymmetric corners for Sm -->
+    <CornerRadius x:Key="Border.Radius.Sm.TopLeft">14,0,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Sm.TopRight">0,14,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Sm.BottomRight">0,0,14,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Sm.BottomLeft">0,0,0,14</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Sm.Top">14,14,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Sm.Right">0,14,14,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Sm.Bottom">0,0,14,14</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Sm.Left">14,0,0,14</CornerRadius>
+
+    <!-- Asymmetric corners for Md -->
+    <CornerRadius x:Key="Border.Radius.Md.TopLeft">16,0,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Md.TopRight">0,16,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Md.BottomRight">0,0,16,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Md.BottomLeft">0,0,0,16</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Md.Top">16,16,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Md.Right">0,16,16,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Md.Bottom">0,0,16,16</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Md.Left">16,0,0,16</CornerRadius>
+
+    <!-- Asymmetric corners for Lg -->
+    <CornerRadius x:Key="Border.Radius.Lg.TopLeft">18,0,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Lg.TopRight">0,18,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Lg.BottomRight">0,0,18,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Lg.BottomLeft">0,0,0,18</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Lg.Top">18,18,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Lg.Right">0,18,18,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Lg.Bottom">0,0,18,18</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Lg.Left">18,0,0,18</CornerRadius>
+</ResourceDictionary>

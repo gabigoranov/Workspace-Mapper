@@ -5,6 +5,16 @@
       <map>
         <entry key="App.axaml" value="WorkflowManager.csproj" />
         <entry key="Icons.axaml" value="WorkflowManager.csproj" />
+        <entry key="Styles/Controls.axaml" value="WorkflowManager.csproj" />
+        <entry key="Styles/Themes/Dark.axaml" value="WorkflowManager.csproj" />
+        <entry key="Styles/Themes/Light.axaml" value="WorkflowManager.csproj" />
+        <entry key="Styles/Tokens/Border.axaml" value="WorkflowManager.csproj" />
+        <entry key="Styles/Tokens/Colors.axaml" value="WorkflowManager.csproj" />
+        <entry key="Styles/Tokens/Elevation.axaml" value="WorkflowManager.csproj" />
+        <entry key="Styles/Tokens/Radius.axaml" value="WorkflowManager.csproj" />
+        <entry key="Styles/Tokens/Spacing.axaml" value="WorkflowManager.csproj" />
+        <entry key="Styles/Tokens/Typography.axaml" value="WorkflowManager.csproj" />
+        <entry key="Views/AppIcon.axaml" value="WorkflowManager.csproj" />
         <entry key="Views/CreateWorkflow.axaml" value="WorkflowManager.csproj" />
         <entry key="Views/CreateWorkflowView.axaml" value="WorkflowManager.csproj" />
         <entry key="Views/HomeView.axaml" value="WorkflowManager.csproj" />

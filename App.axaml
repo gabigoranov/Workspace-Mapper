@@ -12,9 +12,8 @@
                 <ResourceInclude Source="avares://WorkflowManager/Styles/Themes/Light.axaml"/>
 
                 <!-- Non-theme tokens -->
-                <!--<ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Spacing.axaml"/>
-                <ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Typography.axaml"/>
-                <ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Radius.axaml"/>-->
+                <ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Border.axaml"/>
+                <ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Spacing.axaml"/>
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -41,6 +40,7 @@
     <Application.Styles>
         <FluentTheme />
         
+        <StyleInclude Source="avares://WorkflowManager/Styles/Controls.axaml"/>
         <StyleInclude Source="avares://WorkflowManager/Icons.axaml"></StyleInclude>
     </Application.Styles>
 </Application>

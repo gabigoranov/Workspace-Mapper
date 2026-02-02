@@ -10,8 +10,8 @@
         <Style Selector="Button.SidebarItem">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="{DynamicResource Color.Text.Primary}" />
-            <Setter Property="CornerRadius" Value="16"/>
-            <Setter Property="Padding" Value="14,16"/>
+            <Setter Property="CornerRadius" Value="{DynamicResource Border.Radius.Md}"/>
+            <Setter Property="Padding" Value="{DynamicResource Spacing.All.Lg}"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
         </Style>
 
@@ -22,28 +22,27 @@
     
     <Border
         Background="{DynamicResource Color.Card}"
-        CornerRadius="16, 0, 0, 16"
-        Padding="16"
+        Padding="{DynamicResource Spacing.All.Lg}"
         BorderBrush="{DynamicResource Color.Border}"
-        BorderThickness="0,0,1,0"
+        BorderThickness="{DynamicResource Border.Thin.Right}"
         VerticalAlignment="Stretch">
 
         <Grid RowDefinitions="Auto,Auto,*,Auto">
 
             <!-- APP HEADER -->
             <StackPanel Orientation="Horizontal"
-                        Spacing="12"
-                        Margin="0,10,0,44">
+                        Spacing="{DynamicResource Spacing.Lg}"
+                        Margin="{DynamicResource Spacing.Bottom.3Xl}">
 
                 <Border Width="50"
                         Height="50"
-                        CornerRadius="14"
+                        CornerRadius="{DynamicResource Border.Radius.Sm}"
                         Background="{DynamicResource Color.Primary}">
                     <PathIcon Data="{DynamicResource AppIcon}"
                               Foreground="{DynamicResource Color.Text.OnAccent}"
                               Width="25"
                               Height="25"
-                              Margin="6, 0, 0, 0"
+                              Margin="{DynamicResource Spacing.Left.Xs}"
                               VerticalAlignment="Center"
                               HorizontalAlignment="Center"/>
                 </Border>
@@ -64,13 +63,13 @@
 
             <!-- NAVIGATION -->
             <StackPanel Grid.Row="1"
-                        Spacing="6">
+                        Spacing="{DynamicResource Spacing.Xs}">
 
                 <!-- Selected item -->
                 <Button Classes="SidebarItem"
                         Background="{DynamicResource Color.Background}"
                         HorizontalAlignment="Stretch"> 
-                    <StackPanel Orientation="Horizontal" Spacing="16">
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Lg}">
                         <PathIcon Data="{DynamicResource HomeRegular}"
                                   Width="18"
                                   Height="18"
@@ -85,7 +84,7 @@
                 <Button Classes="SidebarItem"
                         Command="{Binding GoHomeCommand}"
                         HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal" Spacing="16">
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Lg}">
                         <PathIcon Data="{DynamicResource GridRegular}"
                                   Width="18"
                                   Height="18"/>
@@ -96,7 +95,7 @@
                 <Button Classes="SidebarItem"
                         Command="{Binding GoHomeCommand}"
                         HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal" Spacing="16">
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Lg}">
                         <PathIcon Data="{DynamicResource HistoryRegular}"
                                   Width="18"
                                   Height="18"/>
@@ -104,12 +103,12 @@
                     </StackPanel>
                 </Button>
 
-                <Separator Margin="0,12" Foreground="{DynamicResource Color.Border}" Opacity="0.3"/>
+                <Separator Margin="{DynamicResource Spacing.Bottom.Sm}" Foreground="{DynamicResource Color.Border}" Opacity="0.3"/>
 
                 <Button Classes="SidebarItem"
                         Command="{Binding GoHomeCommand}"
                         HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal" Spacing="16">
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Lg}">
                         <PathIcon Data="{DynamicResource SettingsRegular}"
                                   Width="18"
                                   Height="18"/>

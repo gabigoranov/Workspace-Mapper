@@ -46,13 +46,13 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [D:/Projects/WorkflowManager/Styles/Themes/Light.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[D:/Projects/WorkflowManager/Styles/Tokens/Border.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [D:/Projects/WorkflowManager/Styles/Tokens/Colors.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [D:/Projects/WorkflowManager/Styles/Tokens/Elevation.axaml]
-build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
-
-[D:/Projects/WorkflowManager/Styles/Tokens/Radius.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [D:/Projects/WorkflowManager/Styles/Tokens/Spacing.axaml]

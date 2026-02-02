@@ -5,22 +5,22 @@
              x:DataType="viewModels:UpdateWorkflowViewModel">
 
     <ScrollViewer Background="{DynamicResource Color.Background}">
-        <StackPanel Margin="20" Spacing="20" MaxWidth="600">
+        <StackPanel Margin="{DynamicResource Spacing.All.Xl}" Spacing="{DynamicResource Spacing.Xl}" MaxWidth="600">
             <TextBlock Text="Update Workflow"
                        FontSize="24"
                        FontWeight="SemiBold"
                        Foreground="{DynamicResource Color.Text.Primary}"/>
 
-            <StackPanel Spacing="8">
+            <StackPanel Spacing="{DynamicResource Spacing.Xs}">
                 <TextBlock Text="Workflow Information"
                            FontWeight="Bold"
                            Foreground="{DynamicResource Color.Primary}"/>
-                <Border Padding="15"
+                <Border Padding="{DynamicResource Spacing.All.Lg}"
                         BorderBrush="{DynamicResource Color.Text.Secondary}"
-                        BorderThickness="1"
-                        CornerRadius="4"
+                        BorderThickness="{DynamicResource Border.Thin.All}"
+                        CornerRadius="{DynamicResource Border.Radius.Sm}"
                         Background="{DynamicResource Color.Card}">
-                    <StackPanel Spacing="10">
+                    <StackPanel Spacing="{DynamicResource Spacing.Sm}">
                         <TextBlock Text="Workflow Title"
                                    FontSize="12"
                                    Foreground="{DynamicResource Color.Text.Secondary}"/>
@@ -30,16 +30,16 @@
                 </Border>
             </StackPanel>
 
-            <StackPanel Spacing="8">
+            <StackPanel Spacing="{DynamicResource Spacing.Xs}">
                 <TextBlock Text="Add New Process" 
                            FontWeight="Bold" 
                            Foreground="{DynamicResource Color.Primary}"/>
-                <Border Padding="15" 
+                <Border Padding="{DynamicResource Spacing.All.Lg}" 
                         BorderBrush="{DynamicResource Color.Primary}" 
-                        BorderThickness="1" 
-                        CornerRadius="4"
+                        BorderThickness="{DynamicResource Border.Thin.All}" 
+                        CornerRadius="{DynamicResource Border.Radius.Sm}"
                         Background="{DynamicResource Color.Card}">
-                    <StackPanel Spacing="10">
+                    <StackPanel Spacing="{DynamicResource Spacing.Sm}">
                         <TextBox Text="{Binding CurrentProcessVm.Title}" Watermark="Process Name (e.g. Sync Files)" />
                         <TextBox Text="{Binding CurrentProcessVm.Directory}" Watermark="Directory Path" />
                         <Button Content="Choose Folder"
@@ -71,7 +71,7 @@
                 </Border>
             </StackPanel>
 
-            <StackPanel Spacing="8">
+            <StackPanel Spacing="{DynamicResource Spacing.Xs}">
                 <TextBlock Text="Current Processes Queue"
                            FontWeight="Bold"
                            Foreground="{DynamicResource Color.Text.Primary}"/>
@@ -79,9 +79,9 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border Background="{DynamicResource Color.Card}"
-                                    Margin="0,0,0,5"
-                                    Padding="12"
-                                    CornerRadius="4">
+                                    Margin="{DynamicResource Spacing.Bottom.Xs}"
+                                    Padding="{DynamicResource Spacing.Bottom.Sm}"
+                                    CornerRadius="{DynamicResource Border.Radius.Sm}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" /> <!-- Text takes remaining space -->
@@ -89,7 +89,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <!-- Texts -->
-                                    <StackPanel Grid.Column="0" Orientation="Vertical" Spacing="2">
+                                    <StackPanel Grid.Column="0" Orientation="Vertical" Spacing="{DynamicResource Spacing.Xs}">
                                         <TextBlock Text="{Binding Title}"
                                                    FontWeight="SemiBold"
                                                    Foreground="{DynamicResource Color.Text.Primary}"/>
@@ -99,14 +99,14 @@
                                     </StackPanel>
 
                                     <!-- Buttons -->
-                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}" VerticalAlignment="Center">
                                         <!-- Edit Button -->
                                         <Button x:CompileBindings="False"
                                                 Command="{Binding DataContext.StartEditProcessCommand,
                           RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 CommandParameter="{Binding .}"
-                                                CornerRadius="8">
-                                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                                CornerRadius="{DynamicResource Border.Radius.Md}">
+                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
                                                 <TextBlock Text="Edit"/>
                                                 <PathIcon Width="15"
                                                           Height="15"
@@ -119,7 +119,7 @@
                                         <Button x:CompileBindings="False"
                                                 Command="{Binding DataContext.DeleteProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 CommandParameter="{Binding .}"
-                                                CornerRadius="8"
+                                                CornerRadius="{DynamicResource Border.Radius.Md}"
                                                 VerticalAlignment="Stretch">
                                             <PathIcon Width="15"
                                                       Height="15"
@@ -134,7 +134,7 @@
                 </ItemsControl>
             </StackPanel>
 
-            <Separator Margin="0,10"
+            <Separator Margin="{DynamicResource Spacing.Vertical.Sm}"
                        Background="{DynamicResource Color.Text.Secondary}"
                        Opacity="0.3"/>
 

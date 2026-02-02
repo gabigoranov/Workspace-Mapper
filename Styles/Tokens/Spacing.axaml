@@ -1,10 +1,80 @@
-﻿<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Design.PreviewWith>
-        <Border Padding="20">
-            <!-- Add Controls for Previewer Here -->
-        </Border>
-    </Design.PreviewWith>
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- Add Styles Here -->
-</Styles>
+  <!-- Base spacing units -->
+  <x:Double x:Key="Spacing.Xs">8</x:Double>
+  <x:Double x:Key="Spacing.Sm">12</x:Double>
+  <x:Double x:Key="Spacing.Md">14</x:Double>
+  <x:Double x:Key="Spacing.Lg">16</x:Double>
+  <x:Double x:Key="Spacing.Xl">24</x:Double>
+  <x:Double x:Key="Spacing.2Xl">32</x:Double>
+  <x:Double x:Key="Spacing.3Xl">36</x:Double>
+
+  <!-- Symmetric padding / margin -->
+  <Thickness x:Key="Spacing.All.Xs">8</Thickness>
+  <Thickness x:Key="Spacing.All.Sm">12</Thickness>
+  <Thickness x:Key="Spacing.All.Md">14</Thickness>
+  <Thickness x:Key="Spacing.All.Lg">16</Thickness>
+  <Thickness x:Key="Spacing.All.Xl">24</Thickness>
+  <Thickness x:Key="Spacing.All.2Xl">32</Thickness>
+  <Thickness x:Key="Spacing.All.3Xl">36</Thickness>
+
+  <!-- Horizontal / Vertical -->
+  <Thickness x:Key="Spacing.Horizontal.Xs">8,0</Thickness>
+  <Thickness x:Key="Spacing.Horizontal.Sm">12,0</Thickness>
+  <Thickness x:Key="Spacing.Horizontal.Md">14,0</Thickness>
+  <Thickness x:Key="Spacing.Horizontal.Lg">16,0</Thickness>
+  <Thickness x:Key="Spacing.Horizontal.Xl">24,0</Thickness>
+  <Thickness x:Key="Spacing.Horizontal.2Xl">32,0</Thickness>
+  <Thickness x:Key="Spacing.Horizontal.3Xl">36,0</Thickness>
+
+  <Thickness x:Key="Spacing.Vertical.Xs">0,8</Thickness>
+  <Thickness x:Key="Spacing.Vertical.Sm">0,12</Thickness>
+  <Thickness x:Key="Spacing.Vertical.Md">0,14</Thickness>
+  <Thickness x:Key="Spacing.Vertical.Lg">0,16</Thickness>
+  <Thickness x:Key="Spacing.Vertical.Xl">0,24</Thickness>
+  <Thickness x:Key="Spacing.Vertical.2Xl">0,32</Thickness>
+  <Thickness x:Key="Spacing.Vertical.3Xl">0,36</Thickness>
+
+  <!-- Individual sides -->
+  <Thickness x:Key="Spacing.Left.Xs">8,0,0,0</Thickness>
+  <Thickness x:Key="Spacing.Left.Sm">12,0,0,0</Thickness>
+  <Thickness x:Key="Spacing.Left.Md">14,0,0,0</Thickness>
+  <Thickness x:Key="Spacing.Left.Lg">16,0,0,0</Thickness>
+  <Thickness x:Key="Spacing.Left.Xl">24,0,0,0</Thickness>
+  <Thickness x:Key="Spacing.Left.2Xl">32,0,0,0</Thickness>
+  <Thickness x:Key="Spacing.Left.3Xl">36,0,0,0</Thickness>
+
+  <Thickness x:Key="Spacing.Right.Xs">0,0,8,0</Thickness>
+  <Thickness x:Key="Spacing.Right.Sm">0,0,12,0</Thickness>
+  <Thickness x:Key="Spacing.Right.Md">0,0,14,0</Thickness>
+  <Thickness x:Key="Spacing.Right.Lg">0,0,16,0</Thickness>
+  <Thickness x:Key="Spacing.Right.Xl">0,0,24,0</Thickness>
+  <Thickness x:Key="Spacing.Right.2Xl">0,0,32,0</Thickness>
+  <Thickness x:Key="Spacing.Right.3Xl">0,0,36,0</Thickness>
+
+  <Thickness x:Key="Spacing.Top.Xs">0,8,0,0</Thickness>
+  <Thickness x:Key="Spacing.Top.Sm">0,12,0,0</Thickness>
+  <Thickness x:Key="Spacing.Top.Md">0,14,0,0</Thickness>
+  <Thickness x:Key="Spacing.Top.Lg">0,16,0,0</Thickness>
+  <Thickness x:Key="Spacing.Top.Xl">0,24,0,0</Thickness>
+  <Thickness x:Key="Spacing.Top.2Xl">0,32,0,0</Thickness>
+  <Thickness x:Key="Spacing.Top.3Xl">0,36,0,0</Thickness>
+
+  <Thickness x:Key="Spacing.Bottom.Xs">0,0,0,8</Thickness>
+  <Thickness x:Key="Spacing.Bottom.Sm">0,0,0,12</Thickness>
+  <Thickness x:Key="Spacing.Bottom.Md">0,0,0,14</Thickness>
+  <Thickness x:Key="Spacing.Bottom.Lg">0,0,0,16</Thickness>
+  <Thickness x:Key="Spacing.Bottom.Xl">0,0,0,24</Thickness>
+  <Thickness x:Key="Spacing.Bottom.2Xl">0,0,0,32</Thickness>
+  <Thickness x:Key="Spacing.Bottom.3Xl">0,0,0,36</Thickness>
+  
+  <!-- Combo padding/margin (Horizontal, Vertical) -->
+  <!-- Horizontal = 24, Vertical = 12 -->
+  <Thickness x:Key="Spacing.Combo.Xl.Sm">24,12</Thickness>
+  <Thickness x:Key="Spacing.Combo.Lg.Sm">16,12</Thickness>
+  <Thickness x:Key="Spacing.Combo.Xl.Lg">24,16</Thickness>
+  <Thickness x:Key="Spacing.Combo.Lg.Xs">16,8</Thickness>
+  <Thickness x:Key="Spacing.Combo.2Xl.Sm">32,12</Thickness>
+  <Thickness x:Key="Spacing.Combo.3Xl.Md">36,14</Thickness>
+</ResourceDictionary>

@@ -4,91 +4,54 @@
              xmlns:models="clr-namespace:WorkflowManager.Models"
              x:Class="WorkflowManager.Views.HomeView"
              x:DataType="viewModels:HomeViewModel">
-    <Grid RowDefinitions="Auto,*"
-          Margin="0">
+    <Grid RowDefinitions="Auto,*">
 
         <!-- ACTION BANNER -->
         <Border Grid.Row="0"
                 Background="{DynamicResource Color.Card}"
-                Padding="20, 12"
-                Margin="0,0,0, 0">
-
-            <Grid ColumnDefinitions="*,Auto">
-                
+                BorderThickness="{DynamicResource Border.Thin.Bottom}"
+                BorderBrush="{DynamicResource Color.Border}"
+                Padding="{DynamicResource Spacing.Combo.Xl.Sm}">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="36">
                 <!-- Search bar -->
-                <TextBox Text="{Binding SearchText}" Watermark="Search workflows..." />
+                <Grid ColumnDefinitions="*, Auto" HorizontalAlignment="Stretch" ColumnSpacing="12">
+                    <TextBox Background="{DynamicResource Color.Background.Subtle}"
+                             HorizontalAlignment="Stretch" Text="{Binding SearchText}" Watermark="Search Workflows..."  />
+                    
+                    <Viewbox Grid.Column="1" Width="20" Height="20" VerticalAlignment="Center">
+                        <Path StrokeThickness="{DynamicResource Border.Medium}"
+                              Data="{DynamicResource SearchRegular}"
+                              Stroke="{DynamicResource Color.Text.Secondary}"
+                              Fill="Transparent"/>
+                    </Viewbox>
+                </Grid>
 
 
                 <!-- Create workflow action -->
                 <Button Grid.Column="1" Command="{Binding GoCreateWorkflowCommand}"
-                        CornerRadius="8"
+                        CornerRadius="{DynamicResource Border.Radius.Sm}"
                         Background="{DynamicResource Color.Primary}"
                         Foreground="{DynamicResource Color.Text.OnAccent}"
-                        Padding="12, 8">
-                    <StackPanel Orientation="Horizontal" Spacing="14">
-                        <PathIcon Width="15"
-                                  Height="15"
+                        Padding="{DynamicResource Spacing.Combo.Lg.Sm}">
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Md}">
+                        <Viewbox Width="15" Height="15" VerticalAlignment="Center">
+                            <Path StrokeThickness="{DynamicResource Border.Medium}"
                                   Data="{DynamicResource AddRegular}"
-                                  Foreground="{DynamicResource Color.Text.OnAccent}"/>
+                                  Stroke="{DynamicResource Color.Text.OnAccent}"
+                                  Fill="Transparent"/>
+                        </Viewbox>
                         
                         <TextBlock Text="New Workflow" FontWeight="Bold" FontSize="18"/>
                     </StackPanel>
                 </Button>
-                
-                <!--<StackPanel Grid.Column="1"
-                            Orientation="Horizontal"
-                            Spacing="10">
-                    
-                    <Button Command="{Binding StartWorkflowCommand}"
-                            CornerRadius="8 ">
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <TextBlock Text="Start"/>
-                            <PathIcon Width="15"
-                                      Height="15"
-                                      Data="{DynamicResource PlayRegular}"
-                                      Foreground="{Binding $parent[Button].Foreground}"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button Command="{Binding GoCreateWorkflowCommand}"
-                            CornerRadius="8">
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <TextBlock Text="Create"/>
-                            <PathIcon Width="15"
-                                      Height="15"
-                                      Data="{DynamicResource AddRegular}"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button Command="{Binding EditWorkflowCommand}"
-                            CornerRadius="8">
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <TextBlock Text="Edit"/>
-                            <PathIcon Width="15"
-                                      Height="15"
-                                      Data="{DynamicResource DocumentEditRegular}"
-                                      Foreground="{Binding $parent[Button].Foreground}"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button
-                            Command="{Binding DeleteWorkflowCommand}"
-                            CornerRadius="8"
-                            VerticalAlignment="Stretch">
-                        <PathIcon Width="15"
-                                  Height="15"
-                                  Data="{DynamicResource DeleteRegular}"
-                                  Foreground="{Binding $parent[Button].Foreground}"/>
-                    </Button>
-                </StackPanel>-->
             </Grid>
         </Border>
 
         <!-- WORKFLOW LIST -->
         <Border Grid.Row="1"
-                Background="{DynamicResource AppBackground}"
-                CornerRadius="0, 0, 12, 12"
-                Padding="8">
+                Background="{DynamicResource Color.Background}"
+                CornerRadius="{DynamicResource Border.Radius.Sm.Bottom}"
+                Padding="{DynamicResource Spacing.All.Xs}">
 
             <ScrollViewer>
                 <ListBox
@@ -100,9 +63,8 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="models:Workflow">
                             <Border
-                                CornerRadius="8"
-                                Padding="12"
-                                Margin="0,0,0,0">
+                                CornerRadius="{DynamicResource Border.Radius.Sm}"
+                                Padding="{DynamicResource Spacing.All.Sm}">
                                 <Grid ColumnDefinitions="*,Auto">
                                     <TextBlock Text="{Binding Title}" FontSize="18"/>
                                     <TextBlock Grid.Column="1" Text="{Binding LastStartup}" Opacity="0.7"/>
@@ -113,17 +75,17 @@
 
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem:pointerover">
-                            <Setter Property="Background" Value="{DynamicResource CardBackground}" />
+                            <Setter Property="Background" Value="{DynamicResource Color.Card}" />
                         </Style>
 
                         <Style Selector="ListBoxItem:selected">
-                            <Setter Property="Background" Value="{DynamicResource AccentColor}" />
-                            <Setter Property="Foreground" Value="White" />
-                            <Setter Property="Padding" Value="2"/>
+                            <Setter Property="Background" Value="{DynamicResource Color.Primary}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Color.Text.OnAccent}" />
+                            <Setter Property="Padding" Value="{DynamicResource Spacing.All.Xs}"/>
                         </Style>
 
                         <Style Selector="ListBoxItem:selected:pointerover">
-                            <Setter Property="Background" Value="{DynamicResource AccentColor}" />
+                            <Setter Property="Background" Value="{DynamicResource Color.Primary}" />
                         </Style>
                     </ListBox.Styles>
                 </ListBox>
