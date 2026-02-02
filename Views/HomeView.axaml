@@ -28,10 +28,9 @@
 
 
                 <!-- Create workflow action -->
-                <Button Grid.Column="1" Command="{Binding GoCreateWorkflowCommand}"
+                <Button Grid.Column="1" Classes="ActionButton"
+                        Command="{Binding GoCreateWorkflowCommand}"
                         CornerRadius="{DynamicResource Border.Radius.Sm}"
-                        Background="{DynamicResource Color.Primary}"
-                        Foreground="{DynamicResource Color.Text.OnAccent}"
                         Padding="{DynamicResource Spacing.Combo.Lg.Sm}">
                     <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Md}">
                         <Viewbox Width="15" Height="15" VerticalAlignment="Center">
@@ -62,12 +61,58 @@
     
                     <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="models:Workflow">
-                            <Border
-                                CornerRadius="{DynamicResource Border.Radius.Sm}"
-                                Padding="{DynamicResource Spacing.All.Sm}">
+                            <Border CornerRadius="{DynamicResource Border.Radius.Sm}"
+                                    Padding="{DynamicResource Spacing.All.Sm}">
                                 <Grid ColumnDefinitions="*,Auto">
-                                    <TextBlock Text="{Binding Title}" FontSize="18"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding LastStartup}" Opacity="0.7"/>
+                                    <StackPanel VerticalAlignment="Center" Spacing="{DynamicResource Spacing.Xs}">
+                                        <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding LastStartup}" Opacity="0.7" FontSize="12"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" 
+                                                Orientation="Horizontal" 
+                                                Spacing="{DynamicResource Spacing.Xs}" 
+                                                VerticalAlignment="Center">
+                                        
+                                        <Button x:CompileBindings="False"
+                                                Command="{Binding DataContext.StartWorkflowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="{DynamicResource Border.Radius.Md}">
+                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
+                                                <TextBlock Text="Start"/>
+                                                <PathIcon Width="15" Height="15"
+                                                          Data="{DynamicResource PlayRegular}"
+                                                          Foreground="{DynamicResource Color.Success}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:CompileBindings="False"
+                                                Command="{Binding DataContext.EditWorkflowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="{DynamicResource Border.Radius.Md}">
+                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
+                                                <TextBlock Text="Edit"/>
+                                                <PathIcon Width="15" Height="15"
+                                                          Data="{DynamicResource DocumentEditRegular}"
+                                                          Foreground="{Binding $parent[Button].Foreground}"/>
+                                            </StackPanel>
+                                        </Button>
+
+                                        <Button x:CompileBindings="False"
+                                                Command="{Binding DataContext.DeleteWorkflowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding .}"
+                                                CornerRadius="{DynamicResource Border.Radius.Md}"
+                                                Background="Transparent"
+                                                BorderBrush="{DynamicResource Color.Error}"
+                                                BorderThickness="1">
+                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
+                                                <TextBlock Text="Delete" Foreground="{DynamicResource Color.Error}"/>
+                                                <PathIcon Width="15" Height="15"
+                                                          Data="{DynamicResource DeleteRegular}"
+                                                          Foreground="{DynamicResource Color.Error}"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
                                 </Grid>
                             </Border>
                         </DataTemplate>

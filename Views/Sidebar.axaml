@@ -9,16 +9,46 @@
     <UserControl.Styles>
         <Style Selector="Button.SidebarItem">
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="{DynamicResource Color.Text.Primary}" />
+            <Setter Property="Foreground" Value="{DynamicResource Color.Text.Secondary}" />
             <Setter Property="CornerRadius" Value="{DynamicResource Border.Radius.Md}"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Padding" Value="{DynamicResource Spacing.All.Lg}"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
         </Style>
 
-        <Style Selector="Button.SidebarItem:pointerover">
+        <Style Selector="Button.SidebarItem:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource Color.Background.Subtle}" />
+            <Setter Property="Foreground" Value="{DynamicResource Color.Text.Primary}" />
+        </Style>
+
+        <Style Selector="Button.SidebarItem.SelectedSidebarItem /template/ ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource Color.Background.Subtle}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Color.Primary}"/>
+        </Style>
+
+        <Style Selector="Button.SidebarItem.SelectedSidebarItem:pointerover /template/ ContentPresenter">
+            <Setter Property="Foreground" Value="{DynamicResource Color.Primary}" />
             <Setter Property="Background" Value="{DynamicResource Color.Background.Subtle}" />
         </Style>
-    </UserControl.Styles>    
+
+        <Style Selector="Path.SidebarItemIcon">
+            <Setter Property="Margin" Value="0, 0, 3, 3"/> 
+            <Setter Property="StrokeThickness" Value="1.5"/> 
+            <Setter Property="Stroke" Value="{DynamicResource Color.Text.Secondary}"/> 
+            <Setter Property="Fill" Value="Transparent" />
+            <Setter Property="StrokeJoin" Value="Round"/>
+            <Setter Property="StrokeLineCap" Value="Round"/>
+        </Style>
+        
+        <Style Selector="Button.SidebarItem:not(.SelectedSidebarItem):pointerover Path.SidebarItemIcon">
+            <Setter Property="Stroke" Value="{DynamicResource Color.Text.Primary}"/> 
+        </Style>
+        
+        <Style Selector="Path.SelectedSidebarItemIcon">
+            <Setter Property="Stroke" Value="{DynamicResource Color.Primary}"/> 
+        </Style>
+    </UserControl.Styles>
     
     <Border
         Background="{DynamicResource Color.Card}"
@@ -65,40 +95,43 @@
             <StackPanel Grid.Row="1"
                         Spacing="{DynamicResource Spacing.Xs}">
 
-                <!-- Selected item -->
                 <Button Classes="SidebarItem"
-                        Background="{DynamicResource Color.Background}"
-                        HorizontalAlignment="Stretch"> 
-                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Lg}">
-                        <PathIcon Data="{DynamicResource HomeRegular}"
-                                  Width="18"
-                                  Height="18"
-                                  Foreground="{DynamicResource Color.Primary}"/>
+                        Classes.SelectedSidebarItem="{Binding IsHomeSelected}"
+                        HorizontalAlignment="Stretch"
+                        Command="{Binding GoHomeCommand}"> 
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xl}">
+                        <Viewbox Width="22" Height="22" VerticalAlignment="Center" Stretch="Uniform">
+                            <Path Classes="SidebarItemIcon" 
+                                  Classes.SelectedSidebarItemIcon="{Binding IsHomeSelected}"
+                                  Data="{DynamicResource HomeRegular}"/>
+                        </Viewbox>
+                        
                         <TextBlock Text="Home"
-                                   Foreground="{DynamicResource Color.Primary}"
                                    FontWeight="Bold"/>
                     </StackPanel>
                 </Button>
 
                 <!-- Normal items -->
                 <Button Classes="SidebarItem"
-                        Command="{Binding GoHomeCommand}"
                         HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Lg}">
-                        <PathIcon Data="{DynamicResource GridRegular}"
-                                  Width="18"
-                                  Height="18"/>
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xl}">
+                        <Viewbox Width="22" Height="22" VerticalAlignment="Center" Stretch="Uniform">
+                            <Path Classes="SidebarItemIcon" 
+                                  Data="{DynamicResource GridRegular}"/>
+                        </Viewbox>
+                        
                         <TextBlock Text="Library"/>
                     </StackPanel>
                 </Button>
 
                 <Button Classes="SidebarItem"
-                        Command="{Binding GoHomeCommand}"
                         HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Lg}">
-                        <PathIcon Data="{DynamicResource HistoryRegular}"
-                                  Width="18"
-                                  Height="18"/>
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xl}">
+                        <Viewbox Width="22" Height="22" VerticalAlignment="Center" Stretch="Uniform">
+                            <Path Classes="SidebarItemIcon" 
+                                  Data="{DynamicResource HistoryRegular}"/>
+                        </Viewbox>
+                        
                         <TextBlock Text="History"/>
                     </StackPanel>
                 </Button>
@@ -106,12 +139,16 @@
                 <Separator Margin="{DynamicResource Spacing.Bottom.Sm}" Foreground="{DynamicResource Color.Border}" Opacity="0.3"/>
 
                 <Button Classes="SidebarItem"
-                        Command="{Binding GoHomeCommand}"
-                        HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Lg}">
-                        <PathIcon Data="{DynamicResource SettingsRegular}"
-                                  Width="18"
-                                  Height="18"/>
+                        Classes.SelectedSidebarItem="{Binding IsSettingsSelected}"
+                        HorizontalAlignment="Stretch"
+                        Command="{Binding GoSettingsCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xl}">
+                        <Viewbox Width="22" Height="22" VerticalAlignment="Center" Stretch="Uniform">
+                            <Path Classes="SidebarItemIcon" 
+                                  Classes.SelectedSidebarItemIcon="{Binding IsSettingsSelected}"
+                                  Data="{DynamicResource SettingsRegular}"/>
+                        </Viewbox>
+                        
                         <TextBlock Text="Settings"/>
                     </StackPanel>
                 </Button>

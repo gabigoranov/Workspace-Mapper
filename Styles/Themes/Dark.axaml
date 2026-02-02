@@ -33,5 +33,8 @@
     <!-- Accent -->
     <SolidColorBrush x:Key="Color.Primary"
                      Color="{DynamicResource Color.Brand.500}"/>
+    
+    <SolidColorBrush x:Key="Color.Primary.Subtle"
+                     Color="{DynamicResource Color.Brand.600}"/>
 
 </ResourceDictionary>

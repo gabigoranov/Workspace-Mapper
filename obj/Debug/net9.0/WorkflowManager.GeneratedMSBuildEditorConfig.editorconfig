@@ -40,6 +40,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [D:/Projects/WorkflowManager/Styles/Controls.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[D:/Projects/WorkflowManager/Styles/FluentOverrides.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [D:/Projects/WorkflowManager/Styles/Themes/Dark.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

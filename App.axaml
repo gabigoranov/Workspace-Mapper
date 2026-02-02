@@ -13,8 +13,9 @@
 
                 <!-- Non-theme tokens -->
                 <ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Border.axaml"/>
+                <ResourceInclude Source="avares://WorkflowManager/Styles/FluentOverrides.axaml"/>
                 <ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Spacing.axaml"/>
-
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

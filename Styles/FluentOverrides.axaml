@@ -1,0 +1,11 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StaticResource x:Key="ButtonBackground" ResourceKey="Color.Card" />
+    <StaticResource x:Key="ButtonBackgroundPointerOver" ResourceKey="Color.Background" />
+    <StaticResource x:Key="ButtonForegroundPointerOver" ResourceKey="Color.Text.Primary" />
+    <StaticResource x:Key="ButtonBackgroundPressed" ResourceKey="Color.Background.Subtle" />
+    <StaticResource x:Key="ButtonForegroundPressed" ResourceKey="Color.Text.Primary" />
+
+</ResourceDictionary>
