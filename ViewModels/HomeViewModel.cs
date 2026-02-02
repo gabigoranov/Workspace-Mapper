@@ -23,6 +23,8 @@ public partial class HomeViewModel(IWorkflowService workflowService, INavigation
 
     [ObservableProperty] [NotifyCanExecuteChangedFor(nameof(StartWorkflowCommand))]
     private bool _isExecutingWorkflow;
+
+    [ObservableProperty] private string _searchText = string.Empty;
     
     // This partial method runs every time SelectedWorkflow changes
     partial void OnSelectedWorkflowChanged(Workflow? value)

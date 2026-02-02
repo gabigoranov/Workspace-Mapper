@@ -9,20 +9,33 @@
 
         <!-- ACTION BANNER -->
         <Border Grid.Row="0"
-                Background="{DynamicResource CardBackground}"
-                CornerRadius="12, 12, 0, 0"
-                Padding="12"
+                Background="{DynamicResource Color.Card}"
+                Padding="20, 12"
                 Margin="0,0,0, 0">
 
             <Grid ColumnDefinitions="*,Auto">
                 
-                <!-- Left side (optional title / info) -->
-                <TextBlock Text="Workflows"
-                           FontSize="22"
-                           VerticalAlignment="Center"/>
+                <!-- Search bar -->
+                <TextBox Text="{Binding SearchText}" Watermark="Search workflows..." />
 
-                <!-- Right side (actions) -->
-                <StackPanel Grid.Column="1"
+
+                <!-- Create workflow action -->
+                <Button Grid.Column="1" Command="{Binding GoCreateWorkflowCommand}"
+                        CornerRadius="8"
+                        Background="{DynamicResource Color.Primary}"
+                        Foreground="{DynamicResource Color.Text.OnAccent}"
+                        Padding="12, 8">
+                    <StackPanel Orientation="Horizontal" Spacing="14">
+                        <PathIcon Width="15"
+                                  Height="15"
+                                  Data="{DynamicResource AddRegular}"
+                                  Foreground="{DynamicResource Color.Text.OnAccent}"/>
+                        
+                        <TextBlock Text="New Workflow" FontWeight="Bold" FontSize="18"/>
+                    </StackPanel>
+                </Button>
+                
+                <!--<StackPanel Grid.Column="1"
                             Orientation="Horizontal"
                             Spacing="10">
                     
@@ -67,7 +80,7 @@
                                   Data="{DynamicResource DeleteRegular}"
                                   Foreground="{Binding $parent[Button].Foreground}"/>
                     </Button>
-                </StackPanel>
+                </StackPanel>-->
             </Grid>
         </Border>
 

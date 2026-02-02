@@ -1,0 +1,22 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Slate / Neutral -->
+    <Color x:Key="Color.Slate.50">#F8FAFC</Color>
+    <Color x:Key="Color.Slate.100">#F1F5F9</Color>
+    <Color x:Key="Color.Slate.200">#E2E8F0</Color>
+    <Color x:Key="Color.Slate.400">#94A3B8</Color>
+    <Color x:Key="Color.Slate.900">#0F172A</Color>
+
+    <!-- White -->
+    <Color x:Key="Color.White">#FFFFFF</Color>
+
+    <!-- Blue (Accent) -->
+    <Color x:Key="Color.Brand.500">#3B82F6</Color>
+    <Color x:Key="Color.Brand.600">#2563EB</Color>
+
+    <!-- Dark surfaces -->
+    <Color x:Key="Color.Dark.800">#1E293B</Color>
+
+</ResourceDictionary>

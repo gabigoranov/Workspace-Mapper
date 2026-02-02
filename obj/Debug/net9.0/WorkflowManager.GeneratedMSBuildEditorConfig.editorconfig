@@ -37,6 +37,30 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [D:/Projects/WorkflowManager/Icons.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[D:/Projects/WorkflowManager/Styles/Controls.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Projects/WorkflowManager/Styles/Themes/Dark.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Projects/WorkflowManager/Styles/Themes/Light.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Projects/WorkflowManager/Styles/Tokens/Colors.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Projects/WorkflowManager/Styles/Tokens/Elevation.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Projects/WorkflowManager/Styles/Tokens/Radius.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Projects/WorkflowManager/Styles/Tokens/Spacing.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/Projects/WorkflowManager/Styles/Tokens/Typography.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [D:/Projects/WorkflowManager/Views/CreateWorkflowView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

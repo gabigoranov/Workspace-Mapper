@@ -1,0 +1,37 @@
+﻿<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="../Tokens/Colors.axaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Backgrounds -->
+    <SolidColorBrush x:Key="Color.Background"
+                     Color="{DynamicResource Color.Slate.900}"/>
+
+    <SolidColorBrush x:Key="Color.Background.Subtle"
+                     Color="{DynamicResource Color.Dark.800}"/>
+
+    <SolidColorBrush x:Key="Color.Card"
+                     Color="{DynamicResource Color.Dark.800}"/>
+
+    <!-- Text -->
+    <SolidColorBrush x:Key="Color.Text.Primary"
+                     Color="{DynamicResource Color.Slate.100}"/>
+
+    <SolidColorBrush x:Key="Color.Text.Secondary"
+                     Color="{DynamicResource Color.Slate.400}"/>
+
+    <SolidColorBrush x:Key="Color.Text.OnAccent"
+                     Color="{DynamicResource Color.White}"/>
+
+    <!-- Border -->
+    <SolidColorBrush x:Key="Color.Border"
+                     Color="{DynamicResource Color.Slate.200}"/>
+
+    <!-- Accent -->
+    <SolidColorBrush x:Key="Color.Primary"
+                     Color="{DynamicResource Color.Brand.600}"/>
+
+</ResourceDictionary>

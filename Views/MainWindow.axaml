@@ -7,16 +7,13 @@
         mc:Ignorable="d"
         x:Class="WorkflowManager.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        Title="FlowState"
         Width="1280"
         Height="800"
         Background="{DynamicResource AppBackground}"
         Foreground="{DynamicResource PrimaryText}"
         FontSize="16"
-        CanResize="False"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaChromeHints="NoChrome"
-        ExtendClientAreaTitleBarHeightHint="0"
-        SystemDecorations="None"
+        CanResize="False"   
         RequestedThemeVariant="Light"
         xmlns:views="using:WorkflowManager.Views">
 
@@ -29,43 +26,12 @@
             IsStartupApp="{Binding IsStartupApp}"/>
 
         <!-- PAGE CONTENT -->   
-        <Grid Grid.Column="1" RowDefinitions="100, *">
-            <Border Background="{DynamicResource AccentColor}"
-                    PointerPressed="DragWindow">
+        <Border Grid.Column="1"
+                Background="{DynamicResource Color.Background}"
+                CornerRadius="12"
+                Padding="6, 0, 0, 0">
 
-                <Grid ColumnDefinitions="*,Auto,Auto">
-                    <TextBlock Text="Workflow Manager"
-                               FontSize="22"
-                               VerticalAlignment="Center"
-                               Foreground="{DynamicResource AppBackground}"/>
-
-                    <Button Grid.Column="1"
-                            Margin="6,0"
-                            Click="MinimizeWindow"
-                    >
-                        <PathIcon Width="25"
-                                  Height="25"
-                                  Foreground="{DynamicResource AppBackground}"
-                                  Data="{DynamicResource ArrowMinimizeRegular}"/>
-                    </Button>
-
-                    <Button Grid.Column="2"
-                            Click="CloseWindow">
-                        <PathIcon Width="25"
-                                  Height="25"
-                                  Foreground="{DynamicResource AppBackground}"
-                                  Data="{DynamicResource DismissRegular}"/>
-                    </Button>
-                </Grid>
-            </Border>
-            
-            <Border Grid.Row="1"
-                    Background="{DynamicResource AppBackground}"
-                    CornerRadius="12"
-                    Padding="6, 0, 0, 0">
-
-                <ContentControl Content="{Binding CurrentViewModel}" />
-            </Border>
-        </Grid>
+            <ContentControl Content="{Binding CurrentViewModel}" />
+        </Border>
     </Grid>
 </Window>

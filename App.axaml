@@ -3,36 +3,23 @@
              x:Class="WorkflowManager.App"
              xmlns:local="using:WorkflowManager"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
+    
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-    
-                <ResourceDictionary x:Key="Dark">
-                    <SolidColorBrush x:Key="AppBackground" Color="#0f172a"/>
-                    <SolidColorBrush x:Key="AccentColorLight" Color="#f1f5f9"/>
-                    <SolidColorBrush x:Key="CardBackground" Color="#1e293b"/>
-                    <SolidColorBrush x:Key="PrimaryText" Color="#e6ebef"/>
-                    <SolidColorBrush x:Key="SecondaryText" Color="#94a3b8"/>
-                    <SolidColorBrush x:Key="Border" Color="#e2e8f0"/>
-                    <SolidColorBrush x:Key="AccentColor" Color="#3b82f6"/>
-                </ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
 
-                <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="AppBackground" Color="#fbfcfd"/>
-                    <SolidColorBrush x:Key="AppBackgroundLight" Color="#f8fafc"/>
-                    <SolidColorBrush x:Key="CardBackground" Color="#ffffff"/>
-                    <SolidColorBrush x:Key="PrimaryText" Color="#0f172a"/>
-                    <SolidColorBrush x:Key="SecondaryText" Color="#94a3bf"/>
-                    <SolidColorBrush x:Key="Border" Color="#e2e8f0"/>
-                    <SolidColorBrush x:Key="AccentColor" Color="#2563eb"/>
-                    <SolidColorBrush x:Key="AccentColorLight" Color="#f1f5f9"/>
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
+                <!-- Active theme -->
+                <ResourceInclude Source="avares://WorkflowManager/Styles/Themes/Light.axaml"/>
+
+                <!-- Non-theme tokens -->
+                <!--<ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Spacing.axaml"/>
+                <ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Typography.axaml"/>
+                <ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Radius.axaml"/>-->
+
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
-             
+    
     <TrayIcon.Icons>
         <TrayIcons>
             <TrayIcon Icon="/Assets/app-icon.png" 
