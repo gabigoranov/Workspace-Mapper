@@ -8,22 +8,22 @@
     <x:Double x:Key="Border.Thick">4</x:Double>
     
     <!-- Asymmetric borders -->
-    <Thickness x:Key="Border.Thin.Left">1,0,0,1</Thickness>
-    <Thickness x:Key="Border.Thin.Right">0,1,1,0</Thickness>
-    <Thickness x:Key="Border.Thin.Top">1,1,0,0</Thickness>
-    <Thickness x:Key="Border.Thin.Bottom">0,0,1,1</Thickness>
+    <Thickness x:Key="Border.Thin.Left">1,0,0,0</Thickness>
+    <Thickness x:Key="Border.Thin.Top">0,1,0,0</Thickness>
+    <Thickness x:Key="Border.Thin.Right">0,0,1,0</Thickness>
+    <Thickness x:Key="Border.Thin.Bottom">0,0,0,1</Thickness>
     <Thickness x:Key="Border.Thin.All">1,1,1,1</Thickness>
 
-    <Thickness x:Key="Border.Medium.Left">2,0,0,2</Thickness>
-    <Thickness x:Key="Border.Medium.Right">0,2,2,0</Thickness>
-    <Thickness x:Key="Border.Medium.Top">2,2,0,0</Thickness>
-    <Thickness x:Key="Border.Medium.Bottom">0,0,2,2</Thickness>
+    <Thickness x:Key="Border.Medium.Left">2,0,0,0</Thickness>
+    <Thickness x:Key="Border.Medium.Top">0,2,0,0</Thickness>
+    <Thickness x:Key="Border.Medium.Right">0,0,2,0</Thickness>
+    <Thickness x:Key="Border.Medium.Bottom">0,0,0,2</Thickness>
     <Thickness x:Key="Border.Medium.All">2,2,2,2</Thickness>
 
-    <Thickness x:Key="Border.Thick.Left">4,0,0,4</Thickness>
-    <Thickness x:Key="Border.Thick.Right">0,4,4,0</Thickness>
-    <Thickness x:Key="Border.Thick.Top">4,4,0,0</Thickness>
-    <Thickness x:Key="Border.Thick.Bottom">0,0,4,4</Thickness>
+    <Thickness x:Key="Border.Thick.Left">4,0,0,0</Thickness>
+    <Thickness x:Key="Border.Thick.Top">0,4,0,0</Thickness>
+    <Thickness x:Key="Border.Thick.Right">0,0,4,0</Thickness>
+    <Thickness x:Key="Border.Thick.Bottom">0,0,0,4</Thickness>
     <Thickness x:Key="Border.Thick.All">4,4,4,4</Thickness>
 
     <!-- Rounded corners -->

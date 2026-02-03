@@ -9,7 +9,7 @@
             <ResourceDictionary.MergedDictionaries>
 
                 <!-- Active theme -->
-                <ResourceInclude Source="avares://WorkflowManager/Styles/Themes/Light.axaml"/>
+                <ResourceInclude Source="avares://WorkflowManager/Styles/Themes/Dark.axaml"/>
 
                 <!-- Non-theme tokens -->
                 <ResourceInclude Source="avares://WorkflowManager/Styles/Tokens/Border.axaml"/>

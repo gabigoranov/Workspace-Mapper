@@ -6,6 +6,7 @@
         <entry key="App.axaml" value="WorkflowManager.csproj" />
         <entry key="Icons.axaml" value="WorkflowManager.csproj" />
         <entry key="Styles/Controls.axaml" value="WorkflowManager.csproj" />
+        <entry key="Styles/FluentOverrides.axaml" value="WorkflowManager.csproj" />
         <entry key="Styles/Themes/Dark.axaml" value="WorkflowManager.csproj" />
         <entry key="Styles/Themes/Light.axaml" value="WorkflowManager.csproj" />
         <entry key="Styles/Tokens/Border.axaml" value="WorkflowManager.csproj" />

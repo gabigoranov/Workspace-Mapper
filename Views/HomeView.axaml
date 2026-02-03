@@ -5,18 +5,17 @@
              x:Class="WorkflowManager.Views.HomeView"
              x:DataType="viewModels:HomeViewModel">
     <Grid RowDefinitions="Auto,*">
-
         <!-- ACTION BANNER -->
         <Border Grid.Row="0"
+                UseLayoutRounding="False"
                 Background="{DynamicResource Color.Card}"
                 BorderThickness="{DynamicResource Border.Thin.Bottom}"
                 BorderBrush="{DynamicResource Color.Border}"
                 Padding="{DynamicResource Spacing.Combo.Xl.Sm}">
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="36">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="{DynamicResource Spacing.3Xl}">
                 <!-- Search bar -->
-                <Grid ColumnDefinitions="*, Auto" HorizontalAlignment="Stretch" ColumnSpacing="12">
-                    <TextBox Background="{DynamicResource Color.Background.Subtle}"
-                             HorizontalAlignment="Stretch" Text="{Binding SearchText}" Watermark="Search Workflows..."  />
+                <Grid ColumnDefinitions="*, Auto" HorizontalAlignment="Stretch" ColumnSpacing="{DynamicResource Spacing.Sm}">
+                    <TextBox HorizontalAlignment="Stretch" Text="{Binding SearchText}" Watermark="Search Workflows..."  />
                     
                     <Viewbox Grid.Column="1" Width="20" Height="20" VerticalAlignment="Center">
                         <Path StrokeThickness="{DynamicResource Border.Medium}"
@@ -49,7 +48,6 @@
         <!-- WORKFLOW LIST -->
         <Border Grid.Row="1"
                 Background="{DynamicResource Color.Background}"
-                CornerRadius="{DynamicResource Border.Radius.Sm.Bottom}"
                 Padding="{DynamicResource Spacing.All.Xs}">
 
             <ScrollViewer>

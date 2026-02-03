@@ -18,5 +18,6 @@
 
     <!-- Dark surfaces -->
     <Color x:Key="Color.Dark.800">#1E293B</Color>
+    <Color x:Key="Color.Dark.700">#334155</Color>
 
 </ResourceDictionary>

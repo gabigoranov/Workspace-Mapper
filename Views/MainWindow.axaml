@@ -27,8 +27,7 @@
 
         <!-- PAGE CONTENT -->   
         <Border Grid.Column="1"
-                Background="{DynamicResource Color.Background}"
-                CornerRadius="{DynamicResource Border.Radius.Sm}">
+                Background="{DynamicResource Color.Background}">
 
             <ContentControl Content="{Binding CurrentViewModel}" />
         </Border>
