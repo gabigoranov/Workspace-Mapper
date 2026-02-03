@@ -1,139 +1,78 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:WorkflowManager.ViewModels"
-             xmlns:models="clr-namespace:WorkflowManager.Models"
+             xmlns:partial="clr-namespace:WorkflowManager.Views.Partial"
              x:Class="WorkflowManager.Views.HomeView"
              x:DataType="viewModels:HomeViewModel">
-    <Grid RowDefinitions="Auto,*">
-        <!-- ACTION BANNER -->
-        <Border Grid.Row="0"
-                UseLayoutRounding="False"
-                Background="{DynamicResource Color.Card}"
-                BorderThickness="{DynamicResource Border.Thin.Bottom}"
-                BorderBrush="{DynamicResource Color.Border}"
-                Padding="{DynamicResource Spacing.Combo.Xl.Sm}">
+
+    <UserControl.Styles>
+        <Style Selector="Border.ActionBanner">
+            <Setter Property="UseLayoutRounding" Value="False"/>
+            <Setter Property="Background" Value="{DynamicResource Color.Card}"/>
+            <Setter Property="BorderThickness" Value="{DynamicResource Border.Thin.Bottom}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource Color.Border}"/>
+            <Setter Property="Padding" Value="{DynamicResource Spacing.Combo.Xl.Sm}"/>
+        </Style>
+
+        <Style Selector="Path.SearchIcon">
+            <Setter Property="StrokeThickness" Value="{DynamicResource Border.Medium}"/>
+            <Setter Property="Stroke" Value="{DynamicResource Color.Text.Secondary}"/>
+            <Setter Property="Fill" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="Button.CreateButton">
+            <Setter Property="CornerRadius" Value="{DynamicResource Border.Radius.Sm}"/>
+            <Setter Property="Padding" Value="{DynamicResource Spacing.Combo.Lg.Sm}"/>
+        </Style>
+
+        <Style Selector="Path.AddIcon">
+            <Setter Property="StrokeThickness" Value="{DynamicResource Border.Medium}"/>
+            <Setter Property="Stroke" Value="{DynamicResource Color.Text.OnAccent}"/>
+            <Setter Property="Fill" Value="Transparent"/>
+        </Style>
+
+        <Style Selector="Border.MainContentWrapper">
+            <Setter Property="Padding" Value="{DynamicResource Spacing.Horizontal.2Xl}"/>
+        </Style>
+    </UserControl.Styles>
+
+    <Grid RowDefinitions="Auto, *" RowSpacing="{DynamicResource Spacing.2Xl}">
+        
+        <Border Grid.Row="0" Classes="ActionBanner">
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="{DynamicResource Spacing.3Xl}">
-                <!-- Search bar -->
+                
                 <Grid ColumnDefinitions="*, Auto" HorizontalAlignment="Stretch" ColumnSpacing="{DynamicResource Spacing.Sm}">
-                    <TextBox HorizontalAlignment="Stretch" Text="{Binding SearchText}" Watermark="Search Workflows..."  />
+                    <TextBox HorizontalAlignment="Stretch" 
+                             Text="{Binding SearchText}" 
+                             Watermark="Search Workflows..."  />
                     
                     <Viewbox Grid.Column="1" Width="20" Height="20" VerticalAlignment="Center">
-                        <Path StrokeThickness="{DynamicResource Border.Medium}"
-                              Data="{DynamicResource SearchRegular}"
-                              Stroke="{DynamicResource Color.Text.Secondary}"
-                              Fill="Transparent"/>
+                        <Path Classes="SearchIcon" Data="{DynamicResource SearchRegular}"/>
                     </Viewbox>
                 </Grid>
 
-
-                <!-- Create workflow action -->
-                <Button Grid.Column="1" Classes="ActionButton"
-                        Command="{Binding GoCreateWorkflowCommand}"
-                        CornerRadius="{DynamicResource Border.Radius.Sm}"
-                        Padding="{DynamicResource Spacing.Combo.Lg.Sm}">
+                <Button Grid.Column="1" 
+                        Classes="ActionButton CreateButton"
+                        Command="{Binding GoCreateWorkflowCommand}">
                     <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Md}">
                         <Viewbox Width="15" Height="15" VerticalAlignment="Center">
-                            <Path StrokeThickness="{DynamicResource Border.Medium}"
-                                  Data="{DynamicResource AddRegular}"
-                                  Stroke="{DynamicResource Color.Text.OnAccent}"
-                                  Fill="Transparent"/>
+                            <Path Classes="AddIcon" Data="{DynamicResource AddRegular}"/>
                         </Viewbox>
-                        
                         <TextBlock Text="New Workflow" FontWeight="Bold" FontSize="18"/>
                     </StackPanel>
                 </Button>
             </Grid>
         </Border>
-
-        <!-- WORKFLOW LIST -->
-        <Border Grid.Row="1"
-                Background="{DynamicResource Color.Background}"
-                Padding="{DynamicResource Spacing.All.Xs}">
-
-            <ScrollViewer>
-                <ListBox
-                    Background="Transparent"
-                         ItemsSource="{Binding Workflows}"
-                         SelectedItem="{Binding SelectedWorkflow}"
-                         SelectionMode="Single">
-    
-                    <ListBox.ItemTemplate>
-                        <DataTemplate x:DataType="models:Workflow">
-                            <Border CornerRadius="{DynamicResource Border.Radius.Sm}"
-                                    Padding="{DynamicResource Spacing.All.Sm}">
-                                <Grid ColumnDefinitions="*,Auto">
-                                    <StackPanel VerticalAlignment="Center" Spacing="{DynamicResource Spacing.Xs}">
-                                        <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="SemiBold"/>
-                                        <TextBlock Text="{Binding LastStartup}" Opacity="0.7" FontSize="12"/>
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Column="1" 
-                                                Orientation="Horizontal" 
-                                                Spacing="{DynamicResource Spacing.Xs}" 
-                                                VerticalAlignment="Center">
-                                        
-                                        <Button x:CompileBindings="False"
-                                                Command="{Binding DataContext.StartWorkflowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding .}"
-                                                CornerRadius="{DynamicResource Border.Radius.Md}">
-                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
-                                                <TextBlock Text="Start"/>
-                                                <PathIcon Width="15" Height="15"
-                                                          Data="{DynamicResource PlayRegular}"
-                                                          Foreground="{DynamicResource Color.Success}"/>
-                                            </StackPanel>
-                                        </Button>
-
-                                        <Button x:CompileBindings="False"
-                                                Command="{Binding DataContext.EditWorkflowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding .}"
-                                                CornerRadius="{DynamicResource Border.Radius.Md}">
-                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
-                                                <TextBlock Text="Edit"/>
-                                                <PathIcon Width="15" Height="15"
-                                                          Data="{DynamicResource DocumentEditRegular}"
-                                                          Foreground="{Binding $parent[Button].Foreground}"/>
-                                            </StackPanel>
-                                        </Button>
-
-                                        <Button x:CompileBindings="False"
-                                                Command="{Binding DataContext.DeleteWorkflowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding .}"
-                                                CornerRadius="{DynamicResource Border.Radius.Md}"
-                                                Background="Transparent"
-                                                BorderBrush="{DynamicResource Color.Error}"
-                                                BorderThickness="1">
-                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
-                                                <TextBlock Text="Delete" Foreground="{DynamicResource Color.Error}"/>
-                                                <PathIcon Width="15" Height="15"
-                                                          Data="{DynamicResource DeleteRegular}"
-                                                          Foreground="{DynamicResource Color.Error}"/>
-                                            </StackPanel>
-                                        </Button>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-
-                    <ListBox.Styles>
-                        <Style Selector="ListBoxItem:pointerover">
-                            <Setter Property="Background" Value="{DynamicResource Color.Card}" />
-                        </Style>
-
-                        <Style Selector="ListBoxItem:selected">
-                            <Setter Property="Background" Value="{DynamicResource Color.Primary}" />
-                            <Setter Property="Foreground" Value="{DynamicResource Color.Text.OnAccent}" />
-                            <Setter Property="Padding" Value="{DynamicResource Spacing.All.Xs}"/>
-                        </Style>
-
-                        <Style Selector="ListBoxItem:selected:pointerover">
-                            <Setter Property="Background" Value="{DynamicResource Color.Primary}" />
-                        </Style>
-                    </ListBox.Styles>
-                </ListBox>
-            </ScrollViewer>
+        
+        <Border Grid.Row="1" Classes="MainContentWrapper">
+            <Grid RowDefinitions="Auto, *" RowSpacing="{DynamicResource Spacing.Lg}">
+                <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="{DynamicResource Spacing.Sm}">
+                    <TextBlock Classes="PrimaryText HeaderLg">Active Workflows</TextBlock>
+                    <TextBlock Classes="SecondaryText ParagraphMd">Manage and automate yout local environment</TextBlock>
+                </StackPanel>
+        
+                <partial:WorkflowList Grid.Row="1" DataContext="{Binding WorkflowList}" />
+            </Grid>
         </Border>
-
     </Grid>
 </UserControl>

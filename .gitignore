@@ -1,0 +1,10 @@
+﻿# Database files
+WorkflowManager.db*
+
+# User-specific settings
+*.DotSettings.user
+
+# IDE and Build folders
+.idea/
+obj/
+bin/

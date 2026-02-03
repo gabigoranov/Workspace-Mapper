@@ -18,5 +18,7 @@
     <StaticResource x:Key="TextControlPlaceholderForegroundPointerOver" ResourceKey="Color.Text.Primary" />
 
     <StaticResource x:Key="TextControlBackgroundPressed" ResourceKey="Color.Background" />
+    
+    <StaticResource x:Key="TextBlockForeground" ResourceKey="Color.Text.Primary" />
 
 </ResourceDictionary>

@@ -12,6 +12,7 @@ using WorkflowManager.Services.Process;
 using WorkflowManager.Services.Startup;
 using WorkflowManager.Services.WorkflowState;
 using WorkflowManager.ViewModels;
+using WorkflowManager.ViewModels.Partial;
 
 namespace WorkflowManager.Services.Common;
 
@@ -56,6 +57,7 @@ public static class ServiceCollectionExtensions
         
         collection.AddTransient<HomeViewModel>();
         collection.AddTransient<CreateWorkflowViewModel>();
+        collection.AddTransient<WorkflowListViewModel>();
         collection.AddTransient<UpdateWorkflowViewModel>();
         
         collection.AddScoped<IProcessService, ProcessService>();

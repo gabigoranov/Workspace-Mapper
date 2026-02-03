@@ -7,6 +7,7 @@
     <Color x:Key="Color.Slate.100">#F1F5F9</Color>
     <Color x:Key="Color.Slate.200">#E2E8F0</Color>
     <Color x:Key="Color.Slate.400">#94A3B8</Color>
+    <Color x:Key="Color.Slate.600">#334155</Color>
     <Color x:Key="Color.Slate.900">#0F172A</Color>
 
     <!-- White -->
