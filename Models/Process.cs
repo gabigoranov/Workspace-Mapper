@@ -28,4 +28,5 @@ public partial class Process : ObservableValidator
     [StringLength(255)]
     [ObservableProperty]
     private string _command = string.Empty;
+    
 }

@@ -2,100 +2,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:WorkflowManager.Models"
              xmlns:p="clr-namespace:Avalonia.Controls.Primitives;assembly=Avalonia.Controls"
              xmlns:viewModels="clr-namespace:WorkflowManager.ViewModels.Partial"
+             xmlns:partial="clr-namespace:WorkflowManager.Views.Partial"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="WorkflowManager.Views.Partial.WorkflowList"
              x:DataType="viewModels:WorkflowListViewModel">
     <UserControl.Styles>
-        <Style Selector="Border.WorkflowCard">
-            <Setter Property="CornerRadius" Value="{DynamicResource Border.Radius.Sm}" />
-            <Setter Property="Padding" Value="{DynamicResource Spacing.All.Xl}" />
-            <Setter Property="BorderThickness" Value="{DynamicResource Border.Thin.All}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource Color.Border}" />
-            <Setter Property="Background" Value="{DynamicResource Color.Card}" />
+        <Style Selector="ItemsControl.WorkflowItemsControl">
+            <Setter Property="Background" Value="Transparent" />
         </Style>
-    </UserControl.Styles>
-    
-    <Border Background="{DynamicResource Color.Background}">
-            <ScrollViewer>
-                <ItemsControl
-                    Background="Transparent"
-                    ItemsSource="{Binding Workflows}">
-                    
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
+
+        <Style Selector="UniformGrid.ItemsPanelTemplateUniformGrid">
+            <Setter Property="Columns" Value="3" />
+            <Setter Property="ColumnSpacing" Value="{DynamicResource Spacing.Lg}" />
+            <Setter Property="RowSpacing" Value="{DynamicResource Spacing.Lg}" />
+        </Style>
+
         
-                            <p:UniformGrid Columns="3" ColumnSpacing="{DynamicResource Spacing.Lg}" RowSpacing="{DynamicResource Spacing.Lg}"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    
-                    <!-- Template for workflow -->
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="models:Workflow">
-                             <Border Classes="WorkflowCard" Height="270">
-                                 <TextBlock Classes="PrimaryText" Text="{Binding Title}"/>
-                             </Border>
-                            
-                            
-                            <!--<Border CornerRadius="{DynamicResource Border.Radius.Sm}"
-                                    Padding="{DynamicResource Spacing.All.Sm}">
-                                <Grid ColumnDefinitions="*,Auto">
-                                    <StackPanel VerticalAlignment="Center" Spacing="{DynamicResource Spacing.Xs}">
-                                        <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="SemiBold"/>
-                                        <TextBlock Text="{Binding LastStartup}" Opacity="0.7" FontSize="12"/>
-                                    </StackPanel>
+    </UserControl.Styles>
 
-                                    <StackPanel Grid.Column="1" 
-                                                Orientation="Horizontal" 
-                                                Spacing="{DynamicResource Spacing.Xs}" 
-                                                VerticalAlignment="Center">
-                                        
-                                        <Button x:CompileBindings="False"
-                                                Command="{Binding DataContext.StartWorkflowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding .}"
-                                                CornerRadius="{DynamicResource Border.Radius.Md}">
-                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
-                                                <TextBlock Text="Start"/>
-                                                <PathIcon Width="15" Height="15"
-                                                          Data="{DynamicResource PlayRegular}"
-                                                          Foreground="{DynamicResource Color.Success}"/>
-                                            </StackPanel>
-                                        </Button>
+    <Border Background="{DynamicResource Color.Background}">
+        <ScrollViewer>
+            <ItemsControl
+                Classes="WorkflowItemsControl"
+                ItemsSource="{Binding WorkflowCards}">
 
-                                        <Button x:CompileBindings="False"
-                                                Command="{Binding DataContext.EditWorkflowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding .}"
-                                                CornerRadius="{DynamicResource Border.Radius.Md}">
-                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
-                                                <TextBlock Text="Edit"/>
-                                                <PathIcon Width="15" Height="15"
-                                                          Data="{DynamicResource DocumentEditRegular}"
-                                                          Foreground="{Binding $parent[Button].Foreground}"/>
-                                            </StackPanel>
-                                        </Button>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <p:UniformGrid Classes="ItemsPanelTemplateUniformGrid"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
 
-                                        <Button x:CompileBindings="False"
-                                                Command="{Binding DataContext.DeleteWorkflowCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding .}"
-                                                CornerRadius="{DynamicResource Border.Radius.Md}"
-                                                Background="Transparent"
-                                                BorderBrush="{DynamicResource Color.Error}"
-                                                BorderThickness="1">
-                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
-                                                <TextBlock Text="Delete" Foreground="{DynamicResource Color.Error}"/>
-                                                <PathIcon Width="15" Height="15"
-                                                          Data="{DynamicResource DeleteRegular}"
-                                                          Foreground="{DynamicResource Color.Error}"/>
-                                            </StackPanel>
-                                        </Button>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>-->
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Border>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:WorkflowCardViewModel">
+                        <partial:WorkflowCard />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Border>
 </UserControl>

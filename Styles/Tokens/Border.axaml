@@ -30,6 +30,7 @@
     <CornerRadius x:Key="Border.Radius.Sm">14</CornerRadius>
     <CornerRadius x:Key="Border.Radius.Md">16</CornerRadius>
     <CornerRadius x:Key="Border.Radius.Lg">18</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Xl">22</CornerRadius>
     
     <!-- Asymmetric corners for Sm -->
     <CornerRadius x:Key="Border.Radius.Sm.TopLeft">14,0,0,0</CornerRadius>
@@ -60,4 +61,14 @@
     <CornerRadius x:Key="Border.Radius.Lg.Right">0,18,18,0</CornerRadius>
     <CornerRadius x:Key="Border.Radius.Lg.Bottom">0,0,18,18</CornerRadius>
     <CornerRadius x:Key="Border.Radius.Lg.Left">18,0,0,18</CornerRadius>
+    
+    <!-- Asymmetric corners for Lg -->
+    <CornerRadius x:Key="Border.Radius.Xl.TopLeft">22,0,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Xl.TopRight">0,22,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Xl.BottomRight">0,0,22,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Xl.BottomLeft">0,0,0,22</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Xl.Top">22,22,0,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Xl.Right">0,22,22,0</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Xl.Bottom">0,0,22,22</CornerRadius>
+    <CornerRadius x:Key="Border.Radius.Xl.Left">22,0,0,22</CornerRadius>
 </ResourceDictionary>

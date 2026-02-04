@@ -37,10 +37,10 @@
     </UserControl.Styles>
 
     <Grid RowDefinitions="Auto, *" RowSpacing="{DynamicResource Spacing.2Xl}">
-        
+        <!-- Header -->
         <Border Grid.Row="0" Classes="ActionBanner">
             <Grid ColumnDefinitions="*,Auto" ColumnSpacing="{DynamicResource Spacing.3Xl}">
-                
+                <!-- Search -->
                 <Grid ColumnDefinitions="*, Auto" HorizontalAlignment="Stretch" ColumnSpacing="{DynamicResource Spacing.Sm}">
                     <TextBox HorizontalAlignment="Stretch" 
                              Text="{Binding SearchText}" 
@@ -51,6 +51,7 @@
                     </Viewbox>
                 </Grid>
 
+                <!-- New workflow button -->
                 <Button Grid.Column="1" 
                         Classes="ActionButton CreateButton"
                         Command="{Binding GoCreateWorkflowCommand}">
@@ -66,9 +67,10 @@
         
         <Border Grid.Row="1" Classes="MainContentWrapper">
             <Grid RowDefinitions="Auto, *" RowSpacing="{DynamicResource Spacing.Lg}">
-                <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="{DynamicResource Spacing.Sm}">
+                <!-- Info text -->
+                <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="{DynamicResource Spacing.Xs}">
                     <TextBlock Classes="PrimaryText HeaderLg">Active Workflows</TextBlock>
-                    <TextBlock Classes="SecondaryText ParagraphMd">Manage and automate yout local environment</TextBlock>
+                    <TextBlock Classes="SecondaryText ParagraphMd">Manage and automate your local environment</TextBlock>
                 </StackPanel>
         
                 <partial:WorkflowList Grid.Row="1" DataContext="{Binding WorkflowList}" />

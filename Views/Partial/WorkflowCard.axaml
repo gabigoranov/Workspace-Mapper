@@ -1,0 +1,122 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:WorkflowManager.ViewModels.Partial"
+             x:Class="WorkflowManager.Views.Partial.WorkflowCard"
+             x:DataType="viewModels:WorkflowCardViewModel">
+    <UserControl.Styles>
+        <Style Selector="Border.WorkflowCard">
+            <Setter Property="Height" Value="270" />
+            <Setter Property="CornerRadius" Value="{DynamicResource Border.Radius.Sm}" />
+            <Setter Property="Padding" Value="{DynamicResource Spacing.All.Xl}" />
+            <Setter Property="BorderThickness" Value="{DynamicResource Border.Thin.All}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource Color.Border}" />
+            <Setter Property="Background" Value="{DynamicResource Color.Card}" />
+        </Style>
+
+        <Style Selector="Border.WorkflowCardMainIconBorder">
+            <Setter Property="Background" Value="{DynamicResource Color.Background}"/>
+            <Setter Property="Padding" Value="{DynamicResource Spacing.All.Lg}"/>
+            <Setter Property="CornerRadius" Value="{DynamicResource Border.Radius.Xl}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style Selector="StackPanel.WorkflowCardTextPanel">
+            <Setter Property="Orientation" Value="Vertical" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style Selector="Button.WorkflowCardOptionsButton">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="{DynamicResource Spacing.All.Md}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource Border.Radius.Lg}" />
+        </Style>
+
+        <Style Selector="PathIcon.WorkflowCardMainIcon">
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Foreground" Value="{DynamicResource Color.Primary}"/>
+        </Style>
+
+        <Style Selector="PathIcon.WorkflowCardOptionsButtonIcon">
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{DynamicResource Color.Text.Secondary}"/>
+        </Style>
+
+        <Style Selector="Border.WorkflowActionsContainer">
+            <Setter Property="Background" Value="{DynamicResource Color.Background.Subtle}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource Border.Radius.Xl}" />
+            <Setter Property="Padding" Value="{DynamicResource Spacing.Horizontal.Lg}" />
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style Selector="StackPanel.WorkflowActionsStack">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="Spacing" Value="{DynamicResource Spacing.Md}" />
+        </Style>
+
+        <Style Selector="PathIcon.WorkflowSubActionIcon">
+            <Setter Property="Width" Value="18" />
+            <Setter Property="Height" Value="18" />
+            <Setter Property="Foreground" Value="{DynamicResource Color.Text.Secondary}"/>
+        </Style>
+
+        <Style Selector="Button.WorkflowStartButton">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Padding" Value="{DynamicResource Spacing.All.Lg}" />
+            <Setter Property="CornerRadius" Value="100" />
+        </Style>
+
+        <Style Selector="PathIcon.WorkflowStartIcon">
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{DynamicResource Color.Text.OnAccent}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <Border Classes="WorkflowCard">
+        <Grid RowDefinitions="Auto, *, Auto">
+            <!-- Header row -->
+            <Grid ColumnDefinitions="Auto, *">
+                <Border Classes="WorkflowCardMainIconBorder">
+                    <PathIcon Classes="WorkflowCardMainIcon" Data="{DynamicResource DeleteRegular}"/>
+                </Border>
+
+                <Button Grid.Column="1" Classes="WorkflowCardOptionsButton">
+                    <PathIcon Classes="WorkflowCardOptionsButtonIcon" Data="{DynamicResource MoreRegular}"/>
+                </Button>
+            </Grid>
+
+            <!-- Main info row -->
+            <StackPanel Grid.Row="1" Classes="WorkflowCardTextPanel">
+                <TextBlock Classes="PrimaryText HeaderMd" Text="{Binding Workflow.Title}"/>
+                <TextBlock Classes="SecondaryText" Text="{Binding Workflow.JoinedTitles}"/>
+            </StackPanel>
+
+            <!-- Action row -->
+            <Grid Grid.Row="2" ColumnDefinitions="Auto, *" VerticalAlignment="Bottom">
+                <!-- Decorative icons -->
+                <Border Classes="WorkflowActionsContainer">
+                    <StackPanel Classes="WorkflowActionsStack">
+                        <PathIcon Classes="WorkflowSubActionIcon" Data="{DynamicResource AddRegular}"/>
+                        <PathIcon Classes="WorkflowSubActionIcon" Data="{DynamicResource DeleteRegular}"/>
+                        <PathIcon Classes="WorkflowSubActionIcon" Data="{DynamicResource HomeRegular}"/>
+                    </StackPanel>
+                </Border>
+    
+                <!-- Start workflow-->
+                <Button Grid.Column="1" 
+                        Classes="ActionButton WorkflowStartButton"
+                        Command="{Binding StartWorkflowCommand}"
+                        CommandParameter="{Binding .}">
+                    <PathIcon Classes="WorkflowStartIcon" Data="{DynamicResource AddRegular}"/>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
