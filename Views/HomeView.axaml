@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:WorkflowManager.ViewModels"
              xmlns:partial="clr-namespace:WorkflowManager.Views.Partial"
+             xmlns:la="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
              x:Class="WorkflowManager.Views.HomeView"
              x:DataType="viewModels:HomeViewModel">
 
@@ -14,10 +15,8 @@
             <Setter Property="Padding" Value="{DynamicResource Spacing.Combo.Xl.Sm}"/>
         </Style>
 
-        <Style Selector="Path.SearchIcon">
-            <Setter Property="StrokeThickness" Value="{DynamicResource Border.Medium}"/>
-            <Setter Property="Stroke" Value="{DynamicResource Color.Text.Secondary}"/>
-            <Setter Property="Fill" Value="Transparent"/>
+        <Style Selector="la|Lucide.SearchIcon">
+            <Setter Property="StrokeBrush" Value="{DynamicResource Color.Text.Secondary}"/>
         </Style>
 
         <Style Selector="Button.CreateButton">
@@ -25,10 +24,8 @@
             <Setter Property="Padding" Value="{DynamicResource Spacing.Combo.Lg.Sm}"/>
         </Style>
 
-        <Style Selector="Path.AddIcon">
-            <Setter Property="StrokeThickness" Value="{DynamicResource Border.Medium}"/>
-            <Setter Property="Stroke" Value="{DynamicResource Color.Text.OnAccent}"/>
-            <Setter Property="Fill" Value="Transparent"/>
+        <Style Selector="la|Lucide.AddIcon">
+            <Setter Property="StrokeBrush" Value="{DynamicResource Color.Text.OnAccent}"/>
         </Style>
 
         <Style Selector="Border.MainContentWrapper">
@@ -45,10 +42,7 @@
                     <TextBox HorizontalAlignment="Stretch" 
                              Text="{Binding SearchText}" 
                              Watermark="Search Workflows..."  />
-                    
-                    <Viewbox Grid.Column="1" Width="20" Height="20" VerticalAlignment="Center">
-                        <Path Classes="SearchIcon" Data="{DynamicResource SearchRegular}"/>
-                    </Viewbox>
+                    <la:Lucide Grid.Column="1" Icon="Search" Classes="SearchIcon" />
                 </Grid>
 
                 <!-- New workflow button -->
@@ -56,9 +50,8 @@
                         Classes="ActionButton CreateButton"
                         Command="{Binding GoCreateWorkflowCommand}">
                     <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Md}">
-                        <Viewbox Width="15" Height="15" VerticalAlignment="Center">
-                            <Path Classes="AddIcon" Data="{DynamicResource AddRegular}"/>
-                        </Viewbox>
+                        <la:Lucide Icon="Plus" Classes="AddIcon" />
+
                         <TextBlock Text="New Workflow" FontWeight="Bold" FontSize="18"/>
                     </StackPanel>
                 </Button>

@@ -5,7 +5,8 @@
              xmlns:vm="using:WorkflowManager.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="WorkflowManager.Views.Sidebar"
-             x:DataType="vm:SidebarViewModel">
+             x:DataType="vm:SidebarViewModel"
+             xmlns:la="clr-namespace:LucideAvalonia;assembly=LucideAvalonia">
     <UserControl.Styles>
         <Style Selector="Button.SidebarItem">
             <Setter Property="Background" Value="Transparent" />
@@ -32,21 +33,27 @@
             <Setter Property="Background" Value="{DynamicResource Color.Background.Subtle}" />
         </Style>
 
-        <Style Selector="Path.SidebarItemIcon">
+        <Style Selector="la|Lucide.SidebarItemIcon">
             <Setter Property="Margin" Value="0, 0, 3, 3"/> 
-            <Setter Property="StrokeThickness" Value="1.5"/> 
-            <Setter Property="Stroke" Value="{DynamicResource Color.Text.Secondary}"/> 
-            <Setter Property="Fill" Value="Transparent" />
-            <Setter Property="StrokeJoin" Value="Round"/>
-            <Setter Property="StrokeLineCap" Value="Round"/>
+            <Setter Property="StrokeBrush" Value="{DynamicResource Color.Text.Secondary}"/> 
+            <Setter Property="Width" Value="22"/>
+            <Setter Property="Height" Value="22"/>
         </Style>
-        
+    
+        <Style Selector="Button.SidebarItem:not(.SelectedSidebarItem):pointerover la|Lucide.SidebarItemIcon">
+            <Setter Property="StrokeBrush" Value="{DynamicResource Color.Text.Primary}"/> 
+        </Style>
+
         <Style Selector="Button.SidebarItem:not(.SelectedSidebarItem):pointerover Path.SidebarItemIcon">
             <Setter Property="Stroke" Value="{DynamicResource Color.Text.Primary}"/> 
         </Style>
-        
+    
         <Style Selector="Path.SelectedSidebarItemIcon">
             <Setter Property="Stroke" Value="{DynamicResource Color.Primary}"/> 
+        </Style>
+
+        <Style Selector="Button.SidebarItem.SelectedSidebarItem la|Lucide.SidebarItemIcon">
+            <Setter Property="StrokeBrush" Value="{DynamicResource Color.Primary}"/> 
         </Style>
     </UserControl.Styles>
     
@@ -100,11 +107,7 @@
                         HorizontalAlignment="Stretch"
                         Command="{Binding GoHomeCommand}"> 
                     <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xl}">
-                        <Viewbox Width="22" Height="22" VerticalAlignment="Center" Stretch="Uniform">
-                            <Path Classes="SidebarItemIcon" 
-                                  Classes.SelectedSidebarItemIcon="{Binding IsHomeSelected}"
-                                  Data="{DynamicResource HomeRegular}"/>
-                        </Viewbox>
+                        <la:Lucide Icon="House" Classes="SidebarItemIcon" />
                         
                         <TextBlock Text="Home"
                                    FontWeight="Bold"/>
@@ -115,10 +118,7 @@
                 <Button Classes="SidebarItem"
                         HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xl}">
-                        <Viewbox Width="22" Height="22" VerticalAlignment="Center" Stretch="Uniform">
-                            <Path Classes="SidebarItemIcon" 
-                                  Data="{DynamicResource GridRegular}"/>
-                        </Viewbox>
+                        <la:Lucide Icon="Grid2X2" Classes="SidebarItemIcon" />
                         
                         <TextBlock Text="Library"/>
                     </StackPanel>
@@ -127,10 +127,7 @@
                 <Button Classes="SidebarItem"
                         HorizontalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xl}">
-                        <Viewbox Width="22" Height="22" VerticalAlignment="Center" Stretch="Uniform">
-                            <Path Classes="SidebarItemIcon" 
-                                  Data="{DynamicResource HistoryRegular}"/>
-                        </Viewbox>
+                        <la:Lucide Icon="History" Classes="SidebarItemIcon" />
                         
                         <TextBlock Text="History"/>
                     </StackPanel>
@@ -143,11 +140,8 @@
                         HorizontalAlignment="Stretch"
                         Command="{Binding GoSettingsCommand}">
                     <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xl}">
-                        <Viewbox Width="22" Height="22" VerticalAlignment="Center" Stretch="Uniform">
-                            <Path Classes="SidebarItemIcon" 
-                                  Classes.SelectedSidebarItemIcon="{Binding IsSettingsSelected}"
-                                  Data="{DynamicResource SettingsRegular}"/>
-                        </Viewbox>
+                        <la:Lucide Icon="Settings" Classes="SidebarItemIcon" />
+
                         
                         <TextBlock Text="Settings"/>
                     </StackPanel>

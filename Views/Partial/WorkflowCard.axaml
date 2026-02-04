@@ -1,6 +1,7 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+﻿    <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:WorkflowManager.ViewModels.Partial"
+             xmlns:la="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
              x:Class="WorkflowManager.Views.Partial.WorkflowCard"
              x:DataType="viewModels:WorkflowCardViewModel">
     <UserControl.Styles>
@@ -33,17 +34,20 @@
             <Setter Property="CornerRadius" Value="{DynamicResource Border.Radius.Lg}" />
         </Style>
 
-        <Style Selector="PathIcon.WorkflowCardMainIcon">
+        <Style Selector="la|Lucide.WorkflowCardMainIcon">
             <Setter Property="Width" Value="32"/>
             <Setter Property="Height" Value="32"/>
-            <Setter Property="Foreground" Value="{DynamicResource Color.Primary}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="StrokeBrush" Value="{DynamicResource Color.Primary}"/>
         </Style>
 
-        <Style Selector="PathIcon.WorkflowCardOptionsButtonIcon">
+        <Style Selector="la|Lucide.WorkflowCardOptionsButtonIcon">
             <Setter Property="Width" Value="20" />
             <Setter Property="Height" Value="20" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Foreground" Value="{DynamicResource Color.Text.Secondary}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="StrokeBrush" Value="{DynamicResource Color.Text.Secondary}"/>
         </Style>
 
         <Style Selector="Border.WorkflowActionsContainer">
@@ -58,10 +62,13 @@
             <Setter Property="Spacing" Value="{DynamicResource Spacing.Md}" />
         </Style>
 
-        <Style Selector="PathIcon.WorkflowSubActionIcon">
+        <Style Selector="la|Lucide.WorkflowSubActionIcon">
+            <Setter Property="FontSize" Value="18" />
             <Setter Property="Width" Value="18" />
             <Setter Property="Height" Value="18" />
-            <Setter Property="Foreground" Value="{DynamicResource Color.Text.Secondary}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="StrokeBrush" Value="{DynamicResource Color.Text.Secondary}"/>
         </Style>
 
         <Style Selector="Button.WorkflowStartButton">
@@ -70,12 +77,12 @@
             <Setter Property="CornerRadius" Value="100" />
         </Style>
 
-        <Style Selector="PathIcon.WorkflowStartIcon">
+        <Style Selector="la|Lucide.WorkflowStartIcon">
             <Setter Property="Width" Value="20" />
             <Setter Property="Height" Value="20" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Foreground" Value="{DynamicResource Color.Text.OnAccent}"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="StrokeBrush" Value="{DynamicResource Color.Text.OnAccent}"/>
         </Style>
     </UserControl.Styles>
     
@@ -84,11 +91,11 @@
             <!-- Header row -->
             <Grid ColumnDefinitions="Auto, *">
                 <Border Classes="WorkflowCardMainIconBorder">
-                    <PathIcon Classes="WorkflowCardMainIcon" Data="{DynamicResource DeleteRegular}"/>
+                    <la:Lucide Icon="Trash" Width="32" Height="32" Classes="WorkflowCardMainIcon" />
                 </Border>
 
                 <Button Grid.Column="1" Classes="WorkflowCardOptionsButton">
-                    <PathIcon Classes="WorkflowCardOptionsButtonIcon" Data="{DynamicResource MoreRegular}"/>
+                    <la:Lucide Icon="Ellipsis" Width="18" Height="18" Classes="WorkflowCardOptionsButtonIcon" />
                 </Button>
             </Grid>
 
@@ -103,9 +110,9 @@
                 <!-- Decorative icons -->
                 <Border Classes="WorkflowActionsContainer">
                     <StackPanel Classes="WorkflowActionsStack">
-                        <PathIcon Classes="WorkflowSubActionIcon" Data="{DynamicResource AddRegular}"/>
-                        <PathIcon Classes="WorkflowSubActionIcon" Data="{DynamicResource DeleteRegular}"/>
-                        <PathIcon Classes="WorkflowSubActionIcon" Data="{DynamicResource HomeRegular}"/>
+                        <la:Lucide Icon="Clock" Width="18" Height="18" Classes="WorkflowSubActionIcon" />
+                        <la:Lucide Icon="Plane" Width="18" Height="18" Classes="WorkflowSubActionIcon" />
+                        <la:Lucide Icon="Pen" Width="18" Height="18" Classes="WorkflowSubActionIcon" />
                     </StackPanel>
                 </Border>
     
@@ -114,7 +121,7 @@
                         Classes="ActionButton WorkflowStartButton"
                         Command="{Binding StartWorkflowCommand}"
                         CommandParameter="{Binding .}">
-                    <PathIcon Classes="WorkflowStartIcon" Data="{DynamicResource AddRegular}"/>
+                    <la:Lucide Icon="Power" Width="22" Height="22" Classes="WorkflowStartIcon" />
                 </Button>
             </Grid>
         </Grid>
