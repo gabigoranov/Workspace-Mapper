@@ -20,5 +20,10 @@
     <StaticResource x:Key="TextControlBackgroundPressed" ResourceKey="Color.Background" />
     
     <StaticResource x:Key="TextBlockForeground" ResourceKey="Color.Text.Primary" />
+    
+    <StaticResource x:Key="FlyoutPresenterBackground" ResourceKey="Color.Card" />
+    <StaticResource x:Key="MenuFlyoutPresenterBackground" ResourceKey="Color.Card" />
+    <StaticResource x:Key="FlyoutPresenterBorderBrush" ResourceKey="Color.Border" />
+    <StaticResource x:Key="MenuFlyoutPresenterBorderBrush" ResourceKey="Color.Border" />
 
 </ResourceDictionary>

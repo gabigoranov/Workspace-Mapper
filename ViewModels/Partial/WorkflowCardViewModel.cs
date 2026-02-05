@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,38 +10,23 @@ using WorkflowManager.Services.WorkflowState;
 
 namespace WorkflowManager.ViewModels.Partial;
 
-public partial class WorkflowCardViewModel : ObservableObject
+public partial class WorkflowCardViewModel(
+    Workflow workflow,
+    IWorkflowService workflowService,
+    IWorkflowStateService workflowState,
+    IProcessService processService,
+    INavigationService navigation,
+    Action<WorkflowCardViewModel> onDeleteRequested)
+    : ObservableObject
 {
-    private readonly IWorkflowService _workflowService;
-    private readonly IWorkflowStateService _workflowState;
-    private readonly IProcessService _processService;
-    private readonly INavigationService _navigation;
-    private readonly Action<WorkflowCardViewModel> _onDeleteRequested;
-
-    [ObservableProperty] private Workflow _workflow;
+    [ObservableProperty] private Workflow _workflow = workflow;
     [ObservableProperty] private bool _isExecutingWorkflow;
-
-    public WorkflowCardViewModel(
-        Workflow workflow,
-        IWorkflowService workflowService,
-        IWorkflowStateService workflowState,
-        IProcessService processService,
-        INavigationService navigation,
-        Action<WorkflowCardViewModel> onDeleteRequested)
-    {
-        _workflow = workflow;
-        _workflowService = workflowService;
-        _workflowState = workflowState;
-        _processService = processService;
-        _navigation = navigation;
-        _onDeleteRequested = onDeleteRequested;
-    }
 
     [RelayCommand]
     private void EditWorkflow()
     {
-        _workflowState.SelectedWorkflow = Workflow;
-        _navigation.Navigate<UpdateWorkflowViewModel>();
+        workflowState.SelectedWorkflow = Workflow;
+        navigation.Navigate<UpdateWorkflowViewModel>();
     }
 
     [RelayCommand]
@@ -51,8 +35,8 @@ public partial class WorkflowCardViewModel : ObservableObject
         try
         {
             IsExecutingWorkflow = true;
-            await _workflowService.DeleteWorkflowAsync(Workflow.Id);
-            _onDeleteRequested?.Invoke(this);
+            await workflowService.DeleteWorkflowAsync(Workflow.Id);
+            onDeleteRequested?.Invoke(this);
         }
         finally
         {
@@ -71,10 +55,10 @@ public partial class WorkflowCardViewModel : ObservableObject
 
             foreach (var step in Workflow.Processes)
             {
-                await _processService.ExecuteProcessAsync(step);
+                await processService.ExecuteProcessAsync(step);
             }
 
-            Workflow = await _workflowService.UpdateWorkflowLastStartupAsync(Workflow.Id);
+            Workflow = await workflowService.UpdateWorkflowLastStartupAsync(Workflow.Id);
         }
         finally
         {

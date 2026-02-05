@@ -94,8 +94,14 @@
                     <la:Lucide Icon="Trash" Width="32" Height="32" Classes="WorkflowCardMainIcon" />
                 </Border>
 
-                <Button Grid.Column="1" Classes="WorkflowCardOptionsButton">
+                <Button Grid.Column="1" HorizontalAlignment="Right">
                     <la:Lucide Icon="Ellipsis" Width="18" Height="18" Classes="WorkflowCardOptionsButtonIcon" />
+                    <Button.Flyout>
+                        <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                            <MenuItem Header="Edit" Command="{Binding EditWorkflowCommand}" />
+                            <MenuItem Header="Delete" Command="{Binding DeleteWorkflowCommand}" />
+                        </MenuFlyout>
+                    </Button.Flyout>
                 </Button>
             </Grid>
 

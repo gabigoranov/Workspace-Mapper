@@ -59,7 +59,7 @@
         </Border>
         
         <Border Grid.Row="1" Classes="MainContentWrapper">
-            <Grid RowDefinitions="Auto, *" RowSpacing="{DynamicResource Spacing.Lg}">
+            <Grid RowDefinitions="Auto, Auto" RowSpacing="{DynamicResource Spacing.Lg}">
                 <!-- Info text -->
                 <StackPanel Grid.Row="0" Orientation="Vertical" Spacing="{DynamicResource Spacing.Xs}">
                     <TextBlock Classes="PrimaryText HeaderLg">Active Workflows</TextBlock>
