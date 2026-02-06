@@ -1,14 +1,11 @@
 using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
-using Avalonia.Data.Core.Plugins;
-using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
-using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using WorkflowManager.Services.AutoMapper;
 using WorkflowManager.Services.Common;
 using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.ViewModels;
@@ -16,15 +13,17 @@ using WorkflowManager.Views;
 
 namespace WorkflowManager;
 
-public partial class App : Application
+public class App : Application
 {
-    public static IServiceProvider Services { get; private set; } = null!;
+    private static IServiceProvider Services { get; set; } = null!;
     
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
 
         var services = new ServiceCollection();
+        services.AddLogging();
+        services.AddAutoMapper(cfg => { }, typeof(MappingProfile));
         services.AddCommonServices();
 
         Services = services.BuildServiceProvider();
@@ -46,19 +45,6 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
-    }
-
-    private void DisableAvaloniaDataAnnotationValidation()
-    {
-        // Get an array of plugins to remove
-        var dataValidationPluginsToRemove =
-            BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
-
-        // remove each entry found
-        foreach (var plugin in dataValidationPluginsToRemove)
-        {
-            BindingPlugins.DataValidators.Remove(plugin);
-        }
     }
 
     private void ExitApplication(object? sender, EventArgs eventArgs)

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WorkflowManager.Models;
@@ -12,7 +13,8 @@ using WorkflowManager.Services.Common.Workflow;
 using WorkflowManager.Services.Dialog;
 using WorkflowManager.Services.Process;
 using WorkflowManager.Services.WorkflowState;
-using Process = WorkflowManager.Models.Process;
+using WorkflowManager.ViewModels.Binding;
+using Process = WorkflowManager.Models.Common.Process;
 
 namespace WorkflowManager.ViewModels;
 
@@ -21,7 +23,8 @@ public partial class UpdateWorkflowViewModel(
     IProcessService processService,
     INavigationService navigation,
     IWorkflowStateService workflowStateService,
-    IDialogService dialogService) : ViewModelBase
+    IDialogService dialogService,
+    IMapper mapper) : ViewModelBase
 {
     private readonly int _workflowId = workflowStateService.SelectedWorkflow?.Id ?? throw new InvalidOperationException("No workflow selected for editing.");
 
@@ -48,8 +51,8 @@ public partial class UpdateWorkflowViewModel(
     private async Task ChooseProcessDirectory()
     {
         var result = await dialogService.SelectFolderAsync();
-        if (!string.IsNullOrEmpty(result))
-            CurrentProcessVm.Directory = result;
+        /*if (!string.IsNullOrEmpty(result))
+            CurrentProcessVm.Directory = result;*/
     }
     
     [RelayCommand]
@@ -85,23 +88,23 @@ public partial class UpdateWorkflowViewModel(
         EditingProcess = process;
         CurrentProcessVm.IsEditing = true;
 
-        CurrentProcessVm = new ProcessViewModel(process);
+        CurrentProcessVm = new ProcessViewModel(mapper.Map<ProcessBindingModel>(process));
     }
 
     [RelayCommand]
     private void AddOrEditProcess()
     {
-        if (!CurrentProcessVm.Validate()) return;
+        if (!CurrentProcessVm.BindingModel.Validate()) return;
 
         if (CurrentProcessVm.IsEditing && EditingProcess != null)
         {
-            CurrentProcessVm.ApplyToProcess(EditingProcess);
+            mapper.Map(EditingProcess, CurrentProcessVm.BindingModel);
             EditingProcess = null;
             CurrentProcessVm.IsEditing = false;
         }
         else
         {
-            WorkflowProcesses.Add(CurrentProcessVm.ToProcess());
+            WorkflowProcesses.Add(mapper.Map<Process>(CurrentProcessVm.BindingModel));
         }
 
         CurrentProcessVm = new ProcessViewModel();

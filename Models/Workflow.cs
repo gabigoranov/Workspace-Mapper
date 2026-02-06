@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
+using WorkflowManager.Models.Common;
 
 namespace WorkflowManager.Models;
 
@@ -19,7 +20,7 @@ public class Workflow()
 
     public DateTime LastStartup { get; set; } = DateTime.Now;
 
-    public List<Process> Processes { get; set; } =  new List<Process>();
+    public List<Common.Process> Processes { get; set; } =  new List<Common.Process>();
 
     [NotMapped]
     public string JoinedTitles => string.Join(" • ", Processes.Select(x => x.Title)).ToUpper();

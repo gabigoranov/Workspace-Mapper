@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using StudyPlatform.Data.Common;
 using WorkflowManager.Data;
+using WorkflowManager.Services.AutoMapper;
 using WorkflowManager.Services.Common.Navigation;
 using WorkflowManager.Services.Common.Workflow;
 using WorkflowManager.Services.Dialog;

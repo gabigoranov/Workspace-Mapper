@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WorkflowManager.Models;
+using Process = WorkflowManager.Models.Common.Process;
 
 namespace WorkflowManager.Data;
 

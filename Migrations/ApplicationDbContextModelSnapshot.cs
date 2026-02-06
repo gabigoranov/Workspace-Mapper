@@ -17,20 +17,29 @@ namespace WorkflowManager.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
-            modelBuilder.Entity("WorkflowManager.Models.Process", b =>
+            modelBuilder.Entity("WorkflowManager.Models.Common.Process", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Command")
+                    b.Property<string>("Icon")
                         .IsRequired()
-                        .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Directory")
+                    b.Property<bool>("IsFullscreen")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Monitor")
                         .IsRequired()
-                        .HasMaxLength(255)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Size")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -67,7 +76,7 @@ namespace WorkflowManager.Migrations
                     b.ToTable("Workflows");
                 });
 
-            modelBuilder.Entity("WorkflowManager.Models.Process", b =>
+            modelBuilder.Entity("WorkflowManager.Models.Common.Process", b =>
                 {
                     b.HasOne("WorkflowManager.Models.Workflow", "Workflow")
                         .WithMany("Processes")

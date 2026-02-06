@@ -5,34 +5,32 @@
              x:DataType="viewModels:UpdateWorkflowViewModel">
 
     <ScrollViewer Background="{DynamicResource Color.Background}">
-        <StackPanel Margin="{DynamicResource Spacing.All.Xl}" Spacing="{DynamicResource Spacing.Xl}" MaxWidth="600">
-            <TextBlock Text="Update Workflow"
-                       FontSize="24"
-                       FontWeight="SemiBold"
-                       Foreground="{DynamicResource Color.Text.Primary}"/>
+        <StackPanel Margin="{DynamicResource Spacing.All.Xl}" 
+                    Spacing="{DynamicResource Spacing.Xl}" 
+                    MaxWidth="650">
+            
+            <TextBlock Text="Update Workflow" 
+                       Classes="HeaderLg PrimaryText"/>
 
             <StackPanel Spacing="{DynamicResource Spacing.Xs}">
-                <TextBlock Text="Workflow Information"
-                           FontWeight="Bold"
+                <TextBlock Text="Workflow Information" 
+                           Classes="ParagraphMd" 
                            Foreground="{DynamicResource Color.Primary}"/>
-                <Border Padding="{DynamicResource Spacing.All.Lg}"
-                        BorderBrush="{DynamicResource Color.Text.Secondary}"
-                        BorderThickness="{DynamicResource Border.Thin.All}"
+                <Border Padding="{DynamicResource Spacing.All.Lg}" 
+                        BorderBrush="{DynamicResource Color.Border}" 
+                        BorderThickness="{DynamicResource Border.Thin.All}" 
                         CornerRadius="{DynamicResource Border.Radius.Sm}"
                         Background="{DynamicResource Color.Card}">
                     <StackPanel Spacing="{DynamicResource Spacing.Sm}">
-                        <TextBlock Text="Workflow Title"
-                                   FontSize="12"
-                                   Foreground="{DynamicResource Color.Text.Secondary}"/>
-                        <TextBox Text="{Binding WorkflowTitle}"
-                                 Watermark="e.g. Daily Data Backup"/>
+                        <TextBlock Text="Workflow Title" Classes="SecondaryText" FontSize="12"/>
+                        <TextBox Text="{Binding WorkflowTitle}" Watermark="e.g. Daily Data Backup" />
                     </StackPanel>
                 </Border>
             </StackPanel>
 
             <StackPanel Spacing="{DynamicResource Spacing.Xs}">
-                <TextBlock Text="Add New Process" 
-                           FontWeight="Bold" 
+                <TextBlock Text="Modify Process" 
+                           Classes="ParagraphMd" 
                            Foreground="{DynamicResource Color.Primary}"/>
                 <Border Padding="{DynamicResource Spacing.All.Lg}" 
                         BorderBrush="{DynamicResource Color.Primary}" 
@@ -40,91 +38,92 @@
                         CornerRadius="{DynamicResource Border.Radius.Sm}"
                         Background="{DynamicResource Color.Card}">
                     <StackPanel Spacing="{DynamicResource Spacing.Sm}">
-                        <TextBox Text="{Binding CurrentProcessVm.Title}" Watermark="Process Name (e.g. Sync Files)" />
-                        <TextBox Text="{Binding CurrentProcessVm.Directory}" Watermark="Directory Path" />
-                        <Button Content="Choose Folder"
-                                Command="{Binding ChooseProcessDirectoryCommand}"
-                                CommandParameter="{Binding .}" />
                         
-                        <Button Content="Choose File"
-                                Command="{Binding ChooseProcessDirectoryCommand}"
-                                CommandParameter="{Binding .}" />
-                        
-                        <Button Content="Choose Website"
-                                Command="{Binding ChooseProcessDirectoryCommand}"
-                                CommandParameter="{Binding .}" />
+                        <Grid ColumnDefinitions="*, Auto">
+                            <TextBox Text="{Binding CurrentProcessVm.BindingModel.Title}" Watermark="Process Name (e.g. Sync Files)" />
+                            <TextBox Grid.Column="1" Width="100" 
+                                     Margin="{DynamicResource Spacing.Left.Sm}" 
+                                     Text="{Binding CurrentProcessVm.BindingModel.Icon}" Watermark="Icon" />
+                        </Grid>
 
-                        <TextBox Text="{Binding CurrentProcessVm.Command}" Watermark="Command / Script" />
+                        <UniformGrid Columns="3" ColumnSpacing="{DynamicResource Spacing.Xs}">
+                            <Button Content="Choose Folder" Classes="ActionButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Binding ChooseProcessDirectoryCommand}" />
+                            <Button Content="Choose File" Classes="ActionButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Binding ChooseProcessDirectoryCommand}" />
+                            <Button Content="Choose Website" Classes="ActionButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Binding ChooseProcessDirectoryCommand}" />
+                        </UniformGrid>
+
+                        <TextBlock Text="Display Settings" Classes="SecondaryText" FontWeight="Bold" Margin="{DynamicResource Spacing.Top.Xs}"/>
+                        
+                        <Grid ColumnDefinitions="*, *, *" RowDefinitions="Auto, Auto" Margin="{DynamicResource Spacing.Vertical.Xs}">
+                            <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding CurrentProcessVm.BindingModel.IsFullscreen}" Content="Fullscreen" />
+                            
+                            <StackPanel Grid.Row="0" Grid.Column="1" Margin="{DynamicResource Spacing.Horizontal.Sm}">
+                                <TextBlock Text="Monitor" FontSize="10" Classes="SecondaryText"/>
+                                <TextBox Text="{Binding CurrentProcessVm.BindingModel.Monitor}" Watermark="ID" FontSize="14" Padding="10,5"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="0" Grid.Column="2">
+                                <TextBlock Text="Size" FontSize="10" Classes="SecondaryText"/>
+                                <TextBox Text="{Binding CurrentProcessVm.BindingModel.Size}" Watermark="WxH" FontSize="14" Padding="10,5"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="{DynamicResource Spacing.Top.Sm}">
+                                <TextBlock Text="Window Position" FontSize="10" Classes="SecondaryText"/>
+                                <TextBox Text="{Binding CurrentProcessVm.BindingModel.Position}" Watermark="e.g. 100,100" FontSize="14" Padding="10,5"/>
+                            </StackPanel>
+                        </Grid>
                         
                         <Button IsVisible="{Binding !CurrentProcessVm.IsEditing}" 
-                                Content="Add Process"
+                                Content="Add Process" 
+                                Classes="ActionButton"
                                 Command="{Binding AddOrEditProcessCommand}"
-                                HorizontalAlignment="Right"
-                                HotKey="Enter"/>
+                                HorizontalAlignment="Right" HotKey="Enter"/>
                         
                         <Button IsVisible="{Binding CurrentProcessVm.IsEditing}" 
-                                Content="Edit Process"
+                                Content="Save Changes" 
+                                Classes="ActionButton"
                                 Command="{Binding AddOrEditProcessCommand}"
-                                HorizontalAlignment="Right"
-                                HotKey="Enter"/>
+                                HorizontalAlignment="Right" HotKey="Enter"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
 
             <StackPanel Spacing="{DynamicResource Spacing.Xs}">
-                <TextBlock Text="Current Processes Queue"
-                           FontWeight="Bold"
-                           Foreground="{DynamicResource Color.Text.Primary}"/>
+                <TextBlock Text="Current Processes Queue" Classes="HeaderMd PrimaryText"/>
                 <ItemsControl ItemsSource="{Binding WorkflowProcesses}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="{DynamicResource Color.Card}"
-                                    Margin="{DynamicResource Spacing.Bottom.Xs}"
-                                    Padding="{DynamicResource Spacing.Bottom.Sm}"
-                                    CornerRadius="{DynamicResource Border.Radius.Sm}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" /> <!-- Text takes remaining space -->
-                                        <ColumnDefinition Width="Auto" /> <!-- Buttons take their own width -->
-                                    </Grid.ColumnDefinitions>
-
-                                    <!-- Texts -->
-                                    <StackPanel Grid.Column="0" Orientation="Vertical" Spacing="{DynamicResource Spacing.Xs}">
-                                        <TextBlock Text="{Binding Title}"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="{DynamicResource Color.Text.Primary}"/>
-                                        <TextBlock Text="{Binding Command}"
-                                                   FontSize="11"
-                                                   Foreground="{DynamicResource Color.Text.Secondary}"/>
+                            <Border Background="{DynamicResource Color.Card}" 
+                                    Margin="{DynamicResource Spacing.Bottom.Xs}" 
+                                    Padding="{DynamicResource Spacing.All.Md}" 
+                                    CornerRadius="{DynamicResource Border.Radius.Sm}"
+                                    BorderBrush="{DynamicResource Color.Border}"
+                                    BorderThickness="{DynamicResource Border.Thin.All}">
+                                <Grid ColumnDefinitions="Auto, *, Auto">
+                                    <PathIcon Width="20" Height="20" 
+                                              Margin="{DynamicResource Spacing.Right.Md}" 
+                                              Data="{Binding Icon}" 
+                                              IsVisible="{Binding Icon, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+                                    
+                                    <StackPanel Grid.Column="1" Spacing="2">
+                                        <TextBlock Text="{Binding Title}" Classes="PrimaryText" FontWeight="SemiBold"/>
+                                        <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Md}">
+                                            <TextBlock Text="{Binding Monitor, StringFormat='Mon: {0}'}" Classes="SecondaryText" FontSize="11"/>
+                                            <TextBlock Text="Fullscreen" Classes="OnAccentText" Background="{DynamicResource Color.Primary}" Padding="4,0" FontSize="10" IsVisible="{Binding IsFullscreen}"/>
+                                            <TextBlock Text="{Binding Size}" Classes="SecondaryText" FontSize="11"/>
+                                        </StackPanel>
                                     </StackPanel>
 
-                                    <!-- Buttons -->
-                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}" VerticalAlignment="Center">
-                                        <!-- Edit Button -->
-                                        <Button x:CompileBindings="False"
-                                                Command="{Binding DataContext.StartEditProcessCommand,
-                          RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding .}"
-                                                CornerRadius="{DynamicResource Border.Radius.Md}">
-                                            <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}">
-                                                <TextBlock Text="Edit"/>
-                                                <PathIcon Width="15"
-                                                          Height="15"
-                                                          Data="{DynamicResource DocumentEditRegular}"
-                                                          Foreground="{Binding $parent[Button].Foreground}"/>
-                                            </StackPanel>
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}" VerticalAlignment="Center">
+                                        <Button x:CompileBindings="False" 
+                                                Command="{Binding DataContext.StartEditProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                CommandParameter="{Binding .}">
+                                            <PathIcon Width="14" Height="14" Data="{DynamicResource DocumentEditRegular}"/>
                                         </Button>
-
-                                        <!-- Delete Button -->
-                                        <Button x:CompileBindings="False"
-                                                Command="{Binding DataContext.DeleteProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                CommandParameter="{Binding .}"
-                                                CornerRadius="{DynamicResource Border.Radius.Md}"
-                                                VerticalAlignment="Stretch">
-                                            <PathIcon Width="15"
-                                                      Height="15"
-                                                      Data="{DynamicResource DeleteRegular}"
-                                                      Foreground="{Binding $parent[Button].Foreground}"/>
+                                        <Button x:CompileBindings="False" 
+                                                Command="{Binding DataContext.DeleteProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                CommandParameter="{Binding .}">
+                                            <PathIcon Width="14" Height="14" Data="{DynamicResource DeleteRegular}"/>
                                         </Button>
                                     </StackPanel>
                                 </Grid>
@@ -134,18 +133,14 @@
                 </ItemsControl>
             </StackPanel>
 
-            <Separator Margin="{DynamicResource Spacing.Vertical.Sm}"
-                       Background="{DynamicResource Color.Text.Secondary}"
-                       Opacity="0.3"/>
+            <Separator Margin="{DynamicResource Spacing.Vertical.Sm}" Background="{DynamicResource Color.Border}" />
 
-            <Button Content="Save Changes"
-                    Command="{Binding UpdateWorkflowCommand}"
-                    Background="{DynamicResource Color.Primary}"
-                    Height="45"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Foreground="{DynamicResource Color.Text.OnAccent}"/>
+            <Button Content="Save All Changes" 
+                    Classes="ActionButton"
+                    Command="{Binding UpdateWorkflowCommand}" 
+                    Height="45" 
+                    HorizontalAlignment="Stretch" 
+                    HorizontalContentAlignment="Center"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

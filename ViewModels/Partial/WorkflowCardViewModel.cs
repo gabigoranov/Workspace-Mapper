@@ -55,7 +55,7 @@ public partial class WorkflowCardViewModel(
 
             foreach (var step in Workflow.Processes)
             {
-                await processService.ExecuteProcessAsync(step);
+                await step.Execute();
             }
 
             Workflow = await workflowService.UpdateWorkflowLastStartupAsync(Workflow.Id);
