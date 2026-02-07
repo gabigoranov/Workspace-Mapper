@@ -1,6 +1,8 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:WorkflowManager.ViewModels"
+             xmlns:partial="clr-namespace:WorkflowManager.Views.Partial"
+             xmlns:binding="clr-namespace:WorkflowManager.ViewModels.Binding"
              x:Class="WorkflowManager.Views.CreateWorkflowView"
              x:DataType="viewModels:CreateWorkflowViewModel">
 
@@ -45,12 +47,34 @@
                                      Margin="{DynamicResource Spacing.Left.Sm}" 
                                      Text="{Binding CurrentProcessVm.BindingModel.Icon}" Watermark="Icon" />
                         </Grid>
+                        
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="Process Type" Classes="SecondaryText" FontSize="12"/>
+                            <ComboBox ItemsSource="{Binding ProcessTypes}" 
+                                      SelectedItem="{Binding CurrentProcessVm.BindingModel.Discriminator}"
+                                      HorizontalAlignment="Stretch">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        
+                        <StackPanel Spacing="{DynamicResource Spacing.Sm}">
+                            <Separator Height="{DynamicResource Spacing.Sm}" Background="Transparent"/>
+    
+                            <ContentControl Content="{Binding SelectedProcessTypeVm}">
+                                <ContentControl.DataTemplates>
+                                    <DataTemplate DataType="binding:CommandProcessBindingModel">
+                                        <partial:CommandProcessForm />
+                                    </DataTemplate>
+            
+                                </ContentControl.DataTemplates>
+                            </ContentControl>
 
-                        <UniformGrid Columns="3" ColumnSpacing="{DynamicResource Spacing.Xs}">
-                            <Button Content="Choose Folder" Classes="ActionButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Binding ChooseProcessDirectoryCommand}" />
-                            <Button Content="Choose File" Classes="ActionButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Binding ChooseProcessDirectoryCommand}" />
-                            <Button Content="Choose Website" Classes="ActionButton" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Command="{Binding ChooseProcessDirectoryCommand}" />
-                        </UniformGrid>
+                            <Separator Height="{DynamicResource Spacing.Sm}" Background="Transparent"/>
+                        </StackPanel>
 
                         <TextBlock Text="Display Settings" Classes="SecondaryText" FontWeight="Bold" Margin="{DynamicResource Spacing.Top.Xs}"/>
                         

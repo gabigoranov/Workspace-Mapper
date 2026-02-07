@@ -11,7 +11,7 @@ using WorkflowManager.Data;
 namespace WorkflowManager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260206212533_Init")]
+    [Migration("20260207095301_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -24,6 +24,9 @@ namespace WorkflowManager.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Discriminator")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Icon")
@@ -57,7 +60,11 @@ namespace WorkflowManager.Migrations
 
                     b.HasIndex("WorkflowId");
 
-                    b.ToTable("Processes");
+                    b.ToTable("Processes", (string)null);
+
+                    b.HasDiscriminator();
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("WorkflowManager.Models.Workflow", b =>
@@ -77,6 +84,23 @@ namespace WorkflowManager.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Workflows");
+                });
+
+            modelBuilder.Entity("WorkflowManager.Models.CommandProcess", b =>
+                {
+                    b.HasBaseType("WorkflowManager.Models.Common.Process");
+
+                    b.Property<string>("Command")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Directory")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("TEXT");
+
+                    b.HasDiscriminator().HasValue(1);
                 });
 
             modelBuilder.Entity("WorkflowManager.Models.Common.Process", b =>

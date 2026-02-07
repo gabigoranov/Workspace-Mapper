@@ -1,8 +1,10 @@
-﻿using WorkflowManager.Models;
-
+﻿
 namespace WorkflowManager.Services.WorkflowState;
 
+/// <summary>
+/// A helper singleton for passing the needed workflow between views.
+/// </summary>
 public interface IWorkflowStateService
 {
-    Workflow? SelectedWorkflow  { get; set; }
+    Models.Workflow? SelectedWorkflow  { get; set; }
 }

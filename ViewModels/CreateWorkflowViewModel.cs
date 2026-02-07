@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,9 +8,10 @@ using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WorkflowManager.Models;
-using WorkflowManager.Services.Common.Navigation;
-using WorkflowManager.Services.Common.Workflow;
+using WorkflowManager.Models.Common;
 using WorkflowManager.Services.Dialog;
+using WorkflowManager.Services.Navigation;
+using WorkflowManager.Services.Workflow;
 using WorkflowManager.ViewModels.Binding;
 using Process = WorkflowManager.Models.Common.Process;
 namespace WorkflowManager.ViewModels;
@@ -21,14 +24,26 @@ public partial class CreateWorkflowViewModel(IWorkflowService workflowService, I
     private string _workflowTitle = string.Empty;
     
     [ObservableProperty]
-    private ObservableCollection<Process> _workflowProcesses = [];
+    private ObservableCollection<ProcessBindingModel> _workflowProcesses = [];
     
     [ObservableProperty]
     private ProcessViewModel _currentProcessVm = new();
 
     [ObservableProperty] 
     [NotifyPropertyChangedFor(nameof(WorkflowProcesses))]
-    private Process? _editingProcess;
+    private ProcessBindingModel? _editingProcess;
+    
+    // Expose the Enum values to the UI
+    public IEnumerable<ProcessType> ProcessTypes => Enum.GetValues<ProcessType>();
+
+    private readonly Dictionary<ProcessType, ObservableValidator> _processTypeViewModels = new Dictionary<ProcessType, ObservableValidator>()
+    {
+        {ProcessType.CommandProcess, new CommandProcessBindingModel()}
+    };
+
+    public ObservableValidator SelectedProcessTypeVm =>
+        _processTypeViewModels[CurrentProcessVm.BindingModel.Discriminator];
+    
     
     [RelayCommand]
     private async Task CreateWorkflow()
@@ -36,22 +51,13 @@ public partial class CreateWorkflowViewModel(IWorkflowService workflowService, I
         ValidateAllProperties();
         if (HasErrors) return;
         
-        Workflow workflow = new Workflow{Title = WorkflowTitle, Processes = WorkflowProcesses.ToList()};
+        Workflow workflow = new Workflow{Title = WorkflowTitle, Processes = mapper.Map<List<Process>>(WorkflowProcesses)};
         await workflowService.CreateWorkflowAsync(workflow);
         navigation.Navigate<HomeViewModel>();
     }
 
     [RelayCommand]
-    private async Task ChooseProcessDirectory()
-    {
-        var result = await dialogService.SelectFolderAsync();
-        /*if (!string.IsNullOrEmpty(result))
-            CurrentProcessVm.Directory = result;*/
-    }
-    
-    
-    [RelayCommand]
-    private void StartEditProcess(Process process)
+    private void StartEditProcess(ProcessBindingModel process)
     {
         EditingProcess = process;
         CurrentProcessVm.IsEditing = true;
@@ -72,14 +78,21 @@ public partial class CreateWorkflowViewModel(IWorkflowService workflowService, I
         }
         else
         {
-            WorkflowProcesses.Add(mapper.Map<Process>(CurrentProcessVm.BindingModel));
+            switch (CurrentProcessVm.BindingModel.Discriminator)
+            {
+                case ProcessType.CommandProcess:
+                    CommandProcessBindingModel model = (CommandProcessBindingModel)SelectedProcessTypeVm;
+                    mapper.Map(CurrentProcessVm.BindingModel, model);
+                    WorkflowProcesses.Add(model);
+                    break;
+            }
         }
 
         CurrentProcessVm = new ProcessViewModel();
     }
 
     [RelayCommand]
-    private void DeleteProcess(Process process)
+    private void DeleteProcess(ProcessBindingModel process)
     {
         if (EditingProcess?.Id == process.Id)
         {

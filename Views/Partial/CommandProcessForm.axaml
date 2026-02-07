@@ -1,0 +1,24 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:WorkflowManager.ViewModels.Binding"
+             x:Class="WorkflowManager.Views.Partial.CommandProcessForm"
+             x:DataType="vm:CommandProcessBindingModel">
+    <StackPanel Spacing="{DynamicResource Spacing.Sm}">
+        <TextBlock Text="Command Configuration" Classes="SecondaryText" FontWeight="Bold"/>
+        
+        <StackPanel Spacing="2">
+            <TextBlock Text="Working Directory" FontSize="12" Classes="SecondaryText"/>
+            <Grid ColumnDefinitions="*, Auto">
+                <TextBox Text="{Binding Directory}" Watermark="C:\Path\To\Execute" />
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Spacing="2">
+            <TextBlock Text="Command / Arguments" FontSize="12" Classes="SecondaryText"/>
+            <TextBox Text="{Binding Command}" 
+                     Watermark="e.g. dotnet run --project MyProj.csproj" 
+                     AcceptsReturn="True" 
+                     Height="60" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

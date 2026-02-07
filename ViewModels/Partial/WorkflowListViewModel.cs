@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
-using WorkflowManager.Services.Common.Navigation;
-using WorkflowManager.Services.Common.Workflow;
+using WorkflowManager.Services.Navigation;
 using WorkflowManager.Services.Process;
+using WorkflowManager.Services.Workflow;
 using WorkflowManager.Services.WorkflowState;
 
 namespace WorkflowManager.ViewModels.Partial;

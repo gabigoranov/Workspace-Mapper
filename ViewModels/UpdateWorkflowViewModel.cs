@@ -8,10 +8,10 @@ using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WorkflowManager.Models;
-using WorkflowManager.Services.Common.Navigation;
-using WorkflowManager.Services.Common.Workflow;
 using WorkflowManager.Services.Dialog;
+using WorkflowManager.Services.Navigation;
 using WorkflowManager.Services.Process;
+using WorkflowManager.Services.Workflow;
 using WorkflowManager.Services.WorkflowState;
 using WorkflowManager.ViewModels.Binding;
 using Process = WorkflowManager.Models.Common.Process;
@@ -34,18 +34,18 @@ public partial class UpdateWorkflowViewModel(
     private string _workflowTitle = workflowStateService.SelectedWorkflow.Title;
 
     [ObservableProperty]
-    private ObservableCollection<Process> _workflowProcesses =
-        new(workflowStateService.SelectedWorkflow!.Processes);
+    private ObservableCollection<ProcessBindingModel> _workflowProcesses =
+        new(mapper.Map<ObservableCollection<ProcessBindingModel>>(workflowStateService.SelectedWorkflow!.Processes));
 
     [ObservableProperty]
     private ProcessViewModel _currentProcessVm = new();
 
     [ObservableProperty] 
     [NotifyPropertyChangedFor(nameof(WorkflowProcesses))]
-    private Process? _editingProcess;
+    private ProcessBindingModel? _editingProcess;
     
     
-    private readonly List<Process> _deletedProcesses = new();
+    private readonly List<ProcessBindingModel> _deletedProcesses = new();
 
     [RelayCommand]
     private async Task ChooseProcessDirectory()
@@ -73,7 +73,7 @@ public partial class UpdateWorkflowViewModel(
         {
             Id = _workflowId,
             Title = WorkflowTitle,
-            Processes = WorkflowProcesses.ToList()
+            Processes = mapper.Map<List<Process>>(WorkflowProcesses)
         };
 
         await workflowService.UpdateWorkflowAsync(_workflowId, updatedWorkflow);
@@ -83,7 +83,7 @@ public partial class UpdateWorkflowViewModel(
 
 
     [RelayCommand]
-    private void StartEditProcess(Process process)
+    private void StartEditProcess(ProcessBindingModel process)
     {
         EditingProcess = process;
         CurrentProcessVm.IsEditing = true;
@@ -104,14 +104,14 @@ public partial class UpdateWorkflowViewModel(
         }
         else
         {
-            WorkflowProcesses.Add(mapper.Map<Process>(CurrentProcessVm.BindingModel));
+            WorkflowProcesses.Add(CurrentProcessVm.BindingModel);
         }
 
         CurrentProcessVm = new ProcessViewModel();
     }
 
     [RelayCommand]
-    private void DeleteProcess(Process process)
+    private void DeleteProcess(ProcessBindingModel process)
     {
         if (EditingProcess?.Id == process.Id)
         {

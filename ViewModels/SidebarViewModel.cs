@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using WorkflowManager.Services.Common.Navigation;
+using WorkflowManager.Services.Navigation;
 using WorkflowManager.Services.Startup;
 
 namespace WorkflowManager.ViewModels;

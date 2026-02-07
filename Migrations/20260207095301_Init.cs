@@ -37,7 +37,10 @@ namespace WorkflowManager.Migrations
                     IsFullscreen = table.Column<bool>(type: "INTEGER", nullable: false),
                     Monitor = table.Column<string>(type: "TEXT", nullable: false),
                     Position = table.Column<string>(type: "TEXT", nullable: false),
-                    Size = table.Column<string>(type: "TEXT", nullable: false)
+                    Size = table.Column<string>(type: "TEXT", nullable: false),
+                    Discriminator = table.Column<int>(type: "INTEGER", nullable: false),
+                    Directory = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
+                    Command = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {

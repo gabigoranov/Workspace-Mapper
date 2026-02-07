@@ -7,7 +7,7 @@ using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using WorkflowManager.Services.AutoMapper;
 using WorkflowManager.Services.Common;
-using WorkflowManager.Services.Common.Navigation;
+using WorkflowManager.Services.Navigation;
 using WorkflowManager.ViewModels;
 using WorkflowManager.Views;
 

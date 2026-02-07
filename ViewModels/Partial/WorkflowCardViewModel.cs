@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WorkflowManager.Models;
-using WorkflowManager.Services.Common.Navigation;
-using WorkflowManager.Services.Common.Workflow;
+using WorkflowManager.Services.Navigation;
 using WorkflowManager.Services.Process;
+using WorkflowManager.Services.Workflow;
 using WorkflowManager.Services.WorkflowState;
 
 namespace WorkflowManager.ViewModels.Partial;

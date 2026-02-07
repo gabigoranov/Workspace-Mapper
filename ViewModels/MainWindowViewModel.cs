@@ -5,8 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ReactiveUI;
 using WorkflowManager.Models;
-using WorkflowManager.Services.Common.Navigation;
-using WorkflowManager.Services.Common.Workflow;
+using WorkflowManager.Services.Navigation;
 using WorkflowManager.Services.Startup;
 
 namespace WorkflowManager.ViewModels;

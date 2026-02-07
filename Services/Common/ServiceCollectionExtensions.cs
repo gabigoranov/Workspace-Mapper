@@ -6,11 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 using StudyPlatform.Data.Common;
 using WorkflowManager.Data;
 using WorkflowManager.Services.AutoMapper;
-using WorkflowManager.Services.Common.Navigation;
-using WorkflowManager.Services.Common.Workflow;
 using WorkflowManager.Services.Dialog;
+using WorkflowManager.Services.Navigation;
 using WorkflowManager.Services.Process;
 using WorkflowManager.Services.Startup;
+using WorkflowManager.Services.Workflow;
 using WorkflowManager.Services.WorkflowState;
 using WorkflowManager.ViewModels;
 using WorkflowManager.ViewModels.Partial;
@@ -19,7 +19,8 @@ namespace WorkflowManager.Services.Common;
 
 public static class ServiceCollectionExtensions
 {
-    public static IStartupService GetOsDependentStartupService()
+    
+    private static IStartupService GetOsDependentStartupService()
     {
         if (OperatingSystem.IsWindows())
         {
@@ -49,30 +50,31 @@ public static class ServiceCollectionExtensions
             options.UseSqlite($"Data Source=D:\\Projects\\WorkflowManager\\WorkflowManager.db");
         }, ServiceLifetime.Singleton);
         
+        collection.AddSingleton<INavigationService, NavigationService>();
         collection.AddSingleton<IRepository, Repository>();
         collection.AddSingleton<MainWindowViewModel>();
         collection.AddSingleton<SidebarViewModel>();
         collection.AddSingleton<IWorkflowStateService, WorkflowStateService>();
         collection.AddSingleton<IStartupService>(sp =>
             GetOsDependentStartupService());
-        
-        collection.AddTransient<HomeViewModel>();
-        collection.AddTransient<CreateWorkflowViewModel>();
-        collection.AddTransient<WorkflowListViewModel>();
-        collection.AddTransient<UpdateWorkflowViewModel>();
-        
-        collection.AddScoped<IProcessService, ProcessService>();
-        collection.AddScoped<IWorkflowService, WorkflowService>();
-        collection.AddScoped<IDialogService>(sp =>
+        collection.AddSingleton<IDialogService>(sp =>
         {
             // 'MainWindow' must exist at this point; otherwise use a factory method
             return new DialogService(() => App.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop
                 ? desktop.MainWindow
                 : throw new InvalidOperationException("No main window found"));
         });
+        
+        collection.AddTransient<HomeViewModel>();
+        collection.AddTransient<CreateWorkflowViewModel>();
+        collection.AddTransient<WorkflowListViewModel>();
+        collection.AddTransient<UpdateWorkflowViewModel>();
+        
+        collection.AddTransient<IProcessService, ProcessService>();
+        collection.AddTransient<IWorkflowService, WorkflowService>();
+        
 
         
-        collection.AddSingleton<INavigationService, NavigationService>();
         
     }
 }

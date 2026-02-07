@@ -8,7 +8,7 @@ using WorkflowManager.Models.Common;
 
 namespace WorkflowManager.Models;
 
-public class Workflow()
+public class Workflow
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,6 +22,10 @@ public class Workflow()
 
     public List<Common.Process> Processes { get; set; } =  new List<Common.Process>();
 
+    /// <summary>
+    ///  A utility method for displaying info about each WorkflowCard
+    /// </summary>
     [NotMapped]
-    public string JoinedTitles => string.Join(" • ", Processes.Select(x => x.Title)).ToUpper();
+    public string JoinedTitles => 
+        string.Join(" • ", Processes.Select(x => x.Title)).ToUpper(); 
 }

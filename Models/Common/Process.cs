@@ -5,7 +5,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace WorkflowManager.Models.Common;
 
-public partial class Process
+/// <summary>
+/// A base class for processes containing information needed for every single type.
+/// Configured to use TPH inheritance.
+/// </summary>
+public abstract class Process
 {
     [Key] 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -21,20 +25,19 @@ public partial class Process
 
     public Workflow Workflow { get; set; }
 
-    public string Icon { get; set; }
+    public string Icon { get; set; } = "Power";
 
-    public bool IsFullscreen { get; set; }
+    public bool IsFullscreen { get; set; } = false;
 
-    public string Monitor { get; set; }
+    public string Monitor { get; set; } = "1";
 
-    public string Position { get; set; }
+    public string Position { get; set; } = "100,100";
 
-    public string Size { get; set; }
+    public string Size { get; set; } = "800x450";
 
-    public virtual Task Execute()
-    {
-        return Task.CompletedTask;
-    }
+    public ProcessType Discriminator { get; set; }
+
+    public abstract Task Execute();
 
 
 

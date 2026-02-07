@@ -2,22 +2,16 @@
 using Microsoft.Extensions.DependencyInjection;
 using WorkflowManager.ViewModels;
 
-namespace WorkflowManager.Services.Common.Navigation;
+namespace WorkflowManager.Services.Navigation;
 
-public class NavigationService : INavigationService
+public class NavigationService(IServiceProvider services) : INavigationService
 {
-    private readonly IServiceProvider _services;
-
     public event Action<ViewModelBase>? Navigated;
-
-    public NavigationService(IServiceProvider services)
-    {
-        _services = services;
-    }
 
     public void Navigate<T>() where T : ViewModelBase
     {
-        var vm = _services.GetRequiredService<T>();
+        // Load the required services for the view model and DI them before navigating.
+        var vm = services.GetRequiredService<T>();
         Navigated?.Invoke(vm);
     }
 }

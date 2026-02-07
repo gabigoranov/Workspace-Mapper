@@ -5,7 +5,8 @@ namespace WorkflowManager.ViewModels;
 
 public partial class ProcessViewModel : ObservableValidator
 {
-    [ObservableProperty] private ProcessBindingModel _bindingModel =  new ProcessBindingModel();
+    [ObservableProperty] 
+    private ProcessBindingModel _bindingModel =  new ProcessBindingModel();
 
     // --- STATE ---
     [ObservableProperty] 

@@ -4,5 +4,5 @@ namespace WorkflowManager.Services.WorkflowState;
 
 public class WorkflowStateService : IWorkflowStateService
 {
-    public Workflow? SelectedWorkflow { get; set; }
+    public Models.Workflow? SelectedWorkflow { get; set; }
 }

@@ -2,12 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
 using Process = WorkflowManager.Models.Common.Process;
 
 namespace WorkflowManager.Models;
 
-public class CommandProcess 
+/// <summary>
+/// A subtype of the process class with specific properties for executing commands
+/// </summary>
+public class CommandProcess : Process
 {
     [Required]
     [StringLength(255)]
@@ -17,7 +19,10 @@ public class CommandProcess
     [StringLength(255)]
     public string Command { get; set; }
 
-    /*public override async Task Execute()
+    /// <summary>
+    /// Executes the command in the specified directory
+    /// </summary>
+    public override async Task Execute()
     {
         await Task.Run(() =>
         {
@@ -58,5 +63,5 @@ public class CommandProcess
                 Debug.WriteLine($"Failed to run PowerShell: {ex.Message}");
             }
         });;
-    }*/
+    }
 }
