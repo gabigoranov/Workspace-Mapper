@@ -122,6 +122,10 @@ public partial class WorkflowEditorViewModel : ViewModelBase
     /// </summary>
     private async Task SaveWorkflow()
     {
+        // Only validate the Workflow-level fields (like Workflow Title)
+        this.ValidateAllProperties();
+        if (HasErrors) return;
+        
         Workflow model = new Workflow()
         {
             Title = this.Title,

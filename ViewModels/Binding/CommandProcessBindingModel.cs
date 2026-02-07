@@ -11,11 +11,11 @@ namespace WorkflowManager.ViewModels.Binding;
 /// </summary>
 public partial class CommandProcessBindingModel : ProcessBindingModel
 {
-    [ObservableProperty] 
+    [ObservableProperty]
     [Required(ErrorMessage = "A directory is required")]
-    private string _directory;
+    private string _directory = string.Empty;
 
-    [ObservableProperty] 
+    [ObservableProperty]
     [Required(ErrorMessage = "A command is required")]
-    private string _command;
+    private string _command = string.Empty;
 }

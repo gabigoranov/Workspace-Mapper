@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using WorkflowManager.Models.Common;
+using WorkflowManager.ViewModels.Common;
 
 namespace WorkflowManager.ViewModels.Binding;
 
@@ -10,8 +12,6 @@ namespace WorkflowManager.ViewModels.Binding;
 /// </summary>
 public partial class ProcessBindingModel : ObservableValidator
 {
-    public int Id { get; set; }
-
     [ObservableProperty]
     [Required(ErrorMessage = "A title is required")]
     [MaxLength(30, ErrorMessage = "Title cannot exceed 30 characters")]

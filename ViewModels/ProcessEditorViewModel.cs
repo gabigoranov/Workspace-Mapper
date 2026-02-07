@@ -75,18 +75,21 @@ public partial class ProcessEditorViewModel : ObservableValidator
     [RelayCommand]
     private void AddOrEditProcess()
     {
-        if (!BindingModel.Validate()) return;
+        BindingModel.Validate(); 
+
+        if (BindingModel.HasErrors) 
+        {
+            // The UI will now display the red errors because Validate() was called
+            return; 
+        }
         
         if (IsEditing && _editingIndex.HasValue)
         {
             // Use the indexer [] to replace the item in the collection
             AddedProcesses[_editingIndex.Value] = BindingModel;
     
-            IsEditing = false;
-            _editingIndex = null; // Clear the index for safety
-    
             // Also reset the form after editing is done
-            BindingModel = new ProcessBindingModel(); 
+            Reset();
         }
         else
         {
@@ -94,7 +97,7 @@ public partial class ProcessEditorViewModel : ObservableValidator
             var processToAdd = (ProcessBindingModel)_mapper.Map(BindingModel, BindingModel.GetType(), BindingModel.GetType());
             AddedProcesses.Add(processToAdd);
     
-            BindingModel = new ProcessBindingModel(); 
+            Reset();
         }
     }
 
@@ -105,6 +108,8 @@ public partial class ProcessEditorViewModel : ObservableValidator
     [RelayCommand]
     private void DeleteProcess(ProcessBindingModel toDelete)
     {
+        if (AddedProcesses.IndexOf(toDelete) == _editingIndex)
+            Reset();
         AddedProcesses.Remove(toDelete);
     }
 
@@ -127,8 +132,10 @@ public partial class ProcessEditorViewModel : ObservableValidator
     
     public void Reset()
     {
-        AddedProcesses.Clear();
-        BindingModel = new ProcessBindingModel(); 
+        // Don't create a base model; create the concrete default directly
+        BindingModel = new CommandProcessBindingModel(); 
+    
         IsEditing = false;
+        _editingIndex = null;
     }
 }

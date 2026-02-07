@@ -66,8 +66,9 @@ public static class ServiceCollectionExtensions
         });
         
         collection.AddTransient<HomeViewModel>();
-        collection.AddTransient<WorkflowEditorViewModel>();
         collection.AddTransient<WorkflowListViewModel>();
+        
+        collection.AddTransient<WorkflowEditorViewModel>();
         collection.AddTransient<ProcessEditorViewModel>();
         
         collection.AddTransient<IProcessService, ProcessService>();

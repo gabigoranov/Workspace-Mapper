@@ -20,5 +20,8 @@ public class MappingProfile : Profile
 
         // 3. UI Utility: Used in the "Assemble" step to copy base data to the subclass
         CreateMap<ProcessBindingModel, CommandProcessBindingModel>();
+        
+        // 4. For cloning
+        CreateMap<CommandProcessBindingModel, CommandProcessBindingModel>();
     }
 }

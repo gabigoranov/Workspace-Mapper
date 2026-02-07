@@ -12,7 +12,7 @@ using WorkflowManager.ViewModels.Partial;
 
 namespace WorkflowManager.ViewModels;
 
-public partial class HomeViewModel(INavigationService navigation, WorkflowListViewModel workflowList)
+public partial class HomeViewModel(INavigationService navigation, WorkflowListViewModel workflowList, IWorkflowStateService workflowStateService)
     : ViewModelBase
 {
     // Expose it to the View
@@ -23,6 +23,8 @@ public partial class HomeViewModel(INavigationService navigation, WorkflowListVi
     [RelayCommand]
     private void GoCreateWorkflow()
     {
+        // clear selected workflow to not enter in edit mode
+        workflowStateService.SelectedWorkflow = null;
         navigation.Navigate<WorkflowEditorViewModel>();
     }
 }

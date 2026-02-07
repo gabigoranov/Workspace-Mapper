@@ -29,7 +29,7 @@
                         Background="{DynamicResource Color.Card}">
                     <StackPanel Spacing="{DynamicResource Spacing.Sm}">
                         <TextBlock Text="Workflow Title" Classes="SecondaryText" FontSize="12"/>
-                        <TextBox Text="{Binding Title}" Watermark="e.g. Daily Data Backup" />
+                        <TextBox Text="{Binding Title, UpdateSourceTrigger=LostFocus}" Watermark="e.g. Daily Data Backup" />
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -39,17 +39,19 @@
                            Classes="ParagraphMd" 
                            Foreground="{DynamicResource Color.Primary}"/>
                 <Border Padding="{DynamicResource Spacing.All.Lg}" 
-                        BorderBrush="{DynamicResource Color.Primary}" 
+                        BorderBrush="{DynamicResource Color.Border}" 
                         BorderThickness="{DynamicResource Border.Thin.All}" 
                         CornerRadius="{DynamicResource Border.Radius.Sm}"
                         Background="{DynamicResource Color.Card}">
                     <StackPanel Spacing="{DynamicResource Spacing.Sm}">
                         
                         <Grid ColumnDefinitions="*, Auto">
-                            <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Title}" Watermark="Process Name (e.g. Sync Files)" />
+                            <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Title, UpdateSourceTrigger=LostFocus}" 
+                                     Watermark="Process Name (e.g. Sync Files)" />
                             <TextBox Grid.Column="1" Width="100" 
                                      Margin="{DynamicResource Spacing.Left.Sm}" 
-                                     Text="{Binding ProcessEditorViewModel.BindingModel.Icon}" Watermark="Icon" />
+                                     Text="{Binding ProcessEditorViewModel.BindingModel.Icon, UpdateSourceTrigger=LostFocus}" 
+                                     Watermark="Icon" />
                         </Grid>
 
                         <StackPanel Spacing="2">
@@ -71,7 +73,7 @@
                                     <DataTemplate DataType="binding:CommandProcessBindingModel">
                                         <partial:CommandProcessForm />
                                     </DataTemplate>
-                                    </ContentControl.DataTemplates>
+                                </ContentControl.DataTemplates>
                             </ContentControl>
                         </StackPanel>
 
@@ -82,17 +84,20 @@
                             
                             <StackPanel Grid.Row="0" Grid.Column="1" Margin="{DynamicResource Spacing.Horizontal.Sm}">
                                 <TextBlock Text="Monitor" FontSize="10" Classes="SecondaryText"/>
-                                <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Monitor}" Watermark="ID" FontSize="14" Padding="10,5"/>
+                                <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Monitor, UpdateSourceTrigger=LostFocus}" 
+                                         Watermark="ID" FontSize="14" Padding="10,5"/>
                             </StackPanel>
 
                             <StackPanel Grid.Row="0" Grid.Column="2">
                                 <TextBlock Text="Size" FontSize="10" Classes="SecondaryText"/>
-                                <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Size}" Watermark="WxH" FontSize="14" Padding="10,5"/>
+                                <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Size, UpdateSourceTrigger=LostFocus}" 
+                                         Watermark="WxH" FontSize="14" Padding="10,5"/>
                             </StackPanel>
 
                             <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="{DynamicResource Spacing.Top.Sm}">
                                 <TextBlock Text="Window Position" FontSize="10" Classes="SecondaryText"/>
-                                <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Position}" Watermark="e.g. 100,100" FontSize="14" Padding="10,5"/>
+                                <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Position, UpdateSourceTrigger=LostFocus}" 
+                                         Watermark="e.g. 100,100" FontSize="14" Padding="10,5"/>
                             </StackPanel>
                         </Grid>
                         
@@ -156,7 +161,8 @@
                     Command="{Binding SaveOrEditWorkflowCommand}" 
                     Height="45" 
                     HorizontalAlignment="Stretch" 
-                    HorizontalContentAlignment="Center"/>
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"/>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

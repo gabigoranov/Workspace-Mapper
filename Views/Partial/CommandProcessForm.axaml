@@ -9,13 +9,13 @@
         <StackPanel Spacing="2">
             <TextBlock Text="Working Directory" FontSize="12" Classes="SecondaryText"/>
             <Grid ColumnDefinitions="*, Auto">
-                <TextBox Text="{Binding Directory}" Watermark="C:\Path\To\Execute" />
+                <TextBox Text="{Binding Directory, UpdateSourceTrigger=LostFocus}" Watermark="C:\Path\To\Execute" />
             </Grid>
         </StackPanel>
 
         <StackPanel Spacing="2">
             <TextBlock Text="Command / Arguments" FontSize="12" Classes="SecondaryText"/>
-            <TextBox Text="{Binding Command}" 
+            <TextBox Text="{Binding Command, UpdateSourceTrigger=LostFocus}" 
                      Watermark="e.g. dotnet run --project MyProj.csproj" 
                      AcceptsReturn="True" />
         </StackPanel>
