@@ -83,6 +83,10 @@ public partial class WorkflowEditorViewModel : ViewModelBase
     [RelayCommand]
     private async Task SaveOrEditWorkflow()
     {
+        // Only validate the Workflow-level fields (like Workflow Title)
+        this.ValidateAllProperties();
+        if (HasErrors) return;
+        
         if (IsEditingMode)
         {
             // Update the workflow by taking advantage of the workflowStateService.SelectedWorkflow which was set when first entering in edit mode and should not be null
@@ -122,10 +126,6 @@ public partial class WorkflowEditorViewModel : ViewModelBase
     /// </summary>
     private async Task SaveWorkflow()
     {
-        // Only validate the Workflow-level fields (like Workflow Title)
-        this.ValidateAllProperties();
-        if (HasErrors) return;
-        
         Workflow model = new Workflow()
         {
             Title = this.Title,

@@ -1,9 +1,12 @@
 using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using System.Threading.Tasks;
+using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
+using DynamicData;
 using Microsoft.Extensions.DependencyInjection;
 using WorkflowManager.Services.AutoMapper;
 using WorkflowManager.Services.Common;
@@ -16,6 +19,20 @@ namespace WorkflowManager;
 public class App : Application
 {
     private static IServiceProvider Services { get; set; } = null!;
+
+    public App()
+    {
+        // Disables data annotations for avalonia because it causes a conflict that pre-validates textblocks
+        
+        var dataAnnotationsValidator =
+            BindingPlugins.DataValidators
+                .FirstOrDefault(v => v is DataAnnotationsValidationPlugin);
+
+        if (dataAnnotationsValidator != null)
+        {
+            BindingPlugins.DataValidators.Remove(dataAnnotationsValidator);
+        }
+    }
     
     public override void Initialize()
     {
