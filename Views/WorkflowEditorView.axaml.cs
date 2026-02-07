@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace WorkflowManager.Views;
 
-public partial class CreateWorkflowView : UserControl
+public partial class WorkflowEditorView : UserControl
 {
-    public CreateWorkflowView()
+    public WorkflowEditorView()
     {
         InitializeComponent();
     }

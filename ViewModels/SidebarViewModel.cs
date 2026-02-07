@@ -5,24 +5,14 @@ using WorkflowManager.Services.Startup;
 
 namespace WorkflowManager.ViewModels;
 
-public partial class SidebarViewModel(INavigationService navigation, IStartupService startup) : ViewModelBase
+public partial class SidebarViewModel(INavigationService navigation) : ViewModelBase
 {
-    [ObservableProperty]
-    private bool _isStartupApp = startup.IsEnabled();
-
     [ObservableProperty] 
     [NotifyPropertyChangedFor(nameof(IsHomeSelected))]
     [NotifyPropertyChangedFor(nameof(IsSettingsSelected))]
     private string _selectedNavItem = "Home";
     
-    partial void OnIsStartupAppChanged(bool value)
-    {
-        if (value)
-            startup.Enable();
-        else
-            startup.Disable();
-    }
-
+    // Methods to navigate between pages while updating the sidebar selected item
     [RelayCommand]
     private void GoHome()
     {
@@ -32,7 +22,7 @@ public partial class SidebarViewModel(INavigationService navigation, IStartupSer
 
     [RelayCommand]
     private void GoCreateWorkflow()
-        => navigation.Navigate<CreateWorkflowViewModel>();
+        => navigation.Navigate<WorkflowEditorViewModel>();
 
     [RelayCommand]
     private void GoSettings()

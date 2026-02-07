@@ -23,6 +23,6 @@ public partial class HomeViewModel(INavigationService navigation, WorkflowListVi
     [RelayCommand]
     private void GoCreateWorkflow()
     {
-        navigation.Navigate<CreateWorkflowViewModel>();
+        navigation.Navigate<WorkflowEditorViewModel>();
     }
 }

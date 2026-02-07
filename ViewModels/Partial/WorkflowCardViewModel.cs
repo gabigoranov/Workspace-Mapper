@@ -4,7 +4,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WorkflowManager.Models;
 using WorkflowManager.Services.Navigation;
-using WorkflowManager.Services.Process;
 using WorkflowManager.Services.Workflow;
 using WorkflowManager.Services.WorkflowState;
 
@@ -14,7 +13,6 @@ public partial class WorkflowCardViewModel(
     Workflow workflow,
     IWorkflowService workflowService,
     IWorkflowStateService workflowState,
-    IProcessService processService,
     INavigationService navigation,
     Action<WorkflowCardViewModel> onDeleteRequested)
     : ObservableObject
@@ -22,28 +20,26 @@ public partial class WorkflowCardViewModel(
     [ObservableProperty] private Workflow _workflow = workflow;
     [ObservableProperty] private bool _isExecutingWorkflow;
 
+    /// <summary>
+    /// Navigates to edit workflow view
+    /// </summary>
     [RelayCommand]
     private void EditWorkflow()
     {
         workflowState.SelectedWorkflow = Workflow;
-        navigation.Navigate<UpdateWorkflowViewModel>();
+        navigation.Navigate<WorkflowEditorViewModel>();
     }
 
     [RelayCommand]
     private async Task DeleteWorkflow()
     {
-        try
-        {
-            IsExecutingWorkflow = true;
-            await workflowService.DeleteWorkflowAsync(Workflow.Id);
-            onDeleteRequested?.Invoke(this);
-        }
-        finally
-        {
-            IsExecutingWorkflow = false;
-        }
+        await workflowService.DeleteWorkflowAsync(Workflow.Id);
+        onDeleteRequested.Invoke(this);
     }
 
+    /// <summary>
+    /// Executes each process in the workflow
+    /// </summary>
     [RelayCommand]
     private async Task StartWorkflow()
     {

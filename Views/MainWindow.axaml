@@ -22,8 +22,7 @@
 
         <!-- SIDEBAR -->
         <views:Sidebar
-            DataContext="{Binding Sidebar}"
-            IsStartupApp="{Binding IsStartupApp}"/>
+            DataContext="{Binding Sidebar}"/>
 
         <!-- PAGE CONTENT -->   
         <Border Grid.Column="1"

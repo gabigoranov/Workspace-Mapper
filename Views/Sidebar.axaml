@@ -142,7 +142,6 @@
                     <StackPanel Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xl}">
                         <la:Lucide Icon="Settings" Classes="SidebarItemIcon" />
 
-                        
                         <TextBlock Text="Settings"/>
                     </StackPanel>
                 </Button>

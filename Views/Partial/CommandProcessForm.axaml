@@ -17,8 +17,7 @@
             <TextBlock Text="Command / Arguments" FontSize="12" Classes="SecondaryText"/>
             <TextBox Text="{Binding Command}" 
                      Watermark="e.g. dotnet run --project MyProj.csproj" 
-                     AcceptsReturn="True" 
-                     Height="60" />
+                     AcceptsReturn="True" />
         </StackPanel>
     </StackPanel>
 </UserControl>

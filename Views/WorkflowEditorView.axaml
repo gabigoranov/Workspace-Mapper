@@ -3,15 +3,19 @@
              xmlns:viewModels="clr-namespace:WorkflowManager.ViewModels"
              xmlns:partial="clr-namespace:WorkflowManager.Views.Partial"
              xmlns:binding="clr-namespace:WorkflowManager.ViewModels.Binding"
-             x:Class="WorkflowManager.Views.CreateWorkflowView"
-             x:DataType="viewModels:CreateWorkflowViewModel">
+             xmlns:converters="clr-namespace:WorkflowManager.Converters"
+             x:Class="WorkflowManager.Views.WorkflowEditorView"
+             x:DataType="viewModels:WorkflowEditorViewModel">
+    <UserControl.Resources>
+        <converters:StringSelectConverter x:Key="StringSelectConverter" />
+    </UserControl.Resources>
 
     <ScrollViewer Background="{DynamicResource Color.Background}">
         <StackPanel Margin="{DynamicResource Spacing.All.Xl}" 
                     Spacing="{DynamicResource Spacing.Xl}" 
                     MaxWidth="650">
             
-            <TextBlock Text="Create New Workflow" 
+            <TextBlock Text="{Binding HeaderText}" 
                        Classes="HeaderLg PrimaryText"/>
 
             <StackPanel Spacing="{DynamicResource Spacing.Xs}">
@@ -25,13 +29,13 @@
                         Background="{DynamicResource Color.Card}">
                     <StackPanel Spacing="{DynamicResource Spacing.Sm}">
                         <TextBlock Text="Workflow Title" Classes="SecondaryText" FontSize="12"/>
-                        <TextBox Text="{Binding WorkflowTitle}" Watermark="e.g. Daily Data Backup" />
+                        <TextBox Text="{Binding Title}" Watermark="e.g. Daily Data Backup" />
                     </StackPanel>
                 </Border>
             </StackPanel>
 
             <StackPanel Spacing="{DynamicResource Spacing.Xs}">
-                <TextBlock Text="Add New Process" 
+                <TextBlock Text="{Binding ProcessEditorViewModel.IsEditing, Converter={StaticResource StringSelectConverter}, ConverterParameter='Modify Process|Add New Process'}" 
                            Classes="ParagraphMd" 
                            Foreground="{DynamicResource Color.Primary}"/>
                 <Border Padding="{DynamicResource Spacing.All.Lg}" 
@@ -42,16 +46,16 @@
                     <StackPanel Spacing="{DynamicResource Spacing.Sm}">
                         
                         <Grid ColumnDefinitions="*, Auto">
-                            <TextBox Text="{Binding CurrentProcessVm.BindingModel.Title}" Watermark="Process Name (e.g. Sync Files)" />
+                            <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Title}" Watermark="Process Name (e.g. Sync Files)" />
                             <TextBox Grid.Column="1" Width="100" 
                                      Margin="{DynamicResource Spacing.Left.Sm}" 
-                                     Text="{Binding CurrentProcessVm.BindingModel.Icon}" Watermark="Icon" />
+                                     Text="{Binding ProcessEditorViewModel.BindingModel.Icon}" Watermark="Icon" />
                         </Grid>
-                        
+
                         <StackPanel Spacing="2">
                             <TextBlock Text="Process Type" Classes="SecondaryText" FontSize="12"/>
-                            <ComboBox ItemsSource="{Binding ProcessTypes}" 
-                                      SelectedItem="{Binding CurrentProcessVm.BindingModel.Discriminator}"
+                            <ComboBox ItemsSource="{Binding ProcessEditorViewModel.ProcessTypes}" 
+                                      SelectedItem="{Binding ProcessEditorViewModel.BindingModel.Discriminator}"
                                       HorizontalAlignment="Stretch">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -60,53 +64,41 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </StackPanel>
-                        
+
                         <StackPanel Spacing="{DynamicResource Spacing.Sm}">
-                            <Separator Height="{DynamicResource Spacing.Sm}" Background="Transparent"/>
-    
-                            <ContentControl Content="{Binding SelectedProcessTypeVm}">
+                            <ContentControl Content="{Binding ProcessEditorViewModel.BindingModel}">
                                 <ContentControl.DataTemplates>
                                     <DataTemplate DataType="binding:CommandProcessBindingModel">
                                         <partial:CommandProcessForm />
                                     </DataTemplate>
-            
-                                </ContentControl.DataTemplates>
+                                    </ContentControl.DataTemplates>
                             </ContentControl>
-
-                            <Separator Height="{DynamicResource Spacing.Sm}" Background="Transparent"/>
                         </StackPanel>
 
                         <TextBlock Text="Display Settings" Classes="SecondaryText" FontWeight="Bold" Margin="{DynamicResource Spacing.Top.Xs}"/>
                         
                         <Grid ColumnDefinitions="*, *, *" RowDefinitions="Auto, Auto" Margin="{DynamicResource Spacing.Vertical.Xs}">
-                            <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding CurrentProcessVm.BindingModel.IsFullscreen}" Content="Fullscreen" />
+                            <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding ProcessEditorViewModel.BindingModel.IsFullscreen}" Content="Fullscreen" />
                             
                             <StackPanel Grid.Row="0" Grid.Column="1" Margin="{DynamicResource Spacing.Horizontal.Sm}">
                                 <TextBlock Text="Monitor" FontSize="10" Classes="SecondaryText"/>
-                                <TextBox Text="{Binding CurrentProcessVm.BindingModel.Monitor}" Watermark="ID" FontSize="14" Padding="10,5"/>
+                                <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Monitor}" Watermark="ID" FontSize="14" Padding="10,5"/>
                             </StackPanel>
 
                             <StackPanel Grid.Row="0" Grid.Column="2">
                                 <TextBlock Text="Size" FontSize="10" Classes="SecondaryText"/>
-                                <TextBox Text="{Binding CurrentProcessVm.BindingModel.Size}" Watermark="WxH" FontSize="14" Padding="10,5"/>
+                                <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Size}" Watermark="WxH" FontSize="14" Padding="10,5"/>
                             </StackPanel>
 
                             <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="{DynamicResource Spacing.Top.Sm}">
                                 <TextBlock Text="Window Position" FontSize="10" Classes="SecondaryText"/>
-                                <TextBox Text="{Binding CurrentProcessVm.BindingModel.Position}" Watermark="e.g. 100,100" FontSize="14" Padding="10,5"/>
+                                <TextBox Text="{Binding ProcessEditorViewModel.BindingModel.Position}" Watermark="e.g. 100,100" FontSize="14" Padding="10,5"/>
                             </StackPanel>
                         </Grid>
                         
-                        <Button IsVisible="{Binding !CurrentProcessVm.IsEditing}" 
-                                Content="Add Process" 
+                        <Button Content="{Binding ProcessEditorViewModel.IsEditing, Converter={StaticResource StringSelectConverter}, ConverterParameter='Save Changes|Add Process'}" 
                                 Classes="ActionButton"
-                                Command="{Binding AddOrEditProcessCommand}"
-                                HorizontalAlignment="Right" HotKey="Enter"/>
-                        
-                        <Button IsVisible="{Binding CurrentProcessVm.IsEditing}" 
-                                Content="Save Changes" 
-                                Classes="ActionButton"
-                                Command="{Binding AddOrEditProcessCommand}"
+                                Command="{Binding ProcessEditorViewModel.AddOrEditProcessCommand}"
                                 HorizontalAlignment="Right" HotKey="Enter"/>
                     </StackPanel>
                 </Border>
@@ -114,7 +106,7 @@
 
             <StackPanel Spacing="{DynamicResource Spacing.Xs}">
                 <TextBlock Text="Current Processes Queue" Classes="HeaderMd PrimaryText"/>
-                <ItemsControl ItemsSource="{Binding WorkflowProcesses}">
+                <ItemsControl ItemsSource="{Binding ProcessEditorViewModel.AddedProcesses}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border Background="{DynamicResource Color.Card}" 
@@ -140,12 +132,12 @@
 
                                     <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="{DynamicResource Spacing.Xs}" VerticalAlignment="Center">
                                         <Button x:CompileBindings="False" 
-                                                Command="{Binding DataContext.StartEditProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                Command="{Binding $parent[UserControl].DataContext.ProcessEditorViewModel.StartProcessEditCommand}" 
                                                 CommandParameter="{Binding .}">
                                             <PathIcon Width="14" Height="14" Data="{DynamicResource DocumentEditRegular}"/>
                                         </Button>
                                         <Button x:CompileBindings="False" 
-                                                Command="{Binding DataContext.DeleteProcessCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                Command="{Binding $parent[UserControl].DataContext.ProcessEditorViewModel.DeleteProcessCommand}" 
                                                 CommandParameter="{Binding .}">
                                             <PathIcon Width="14" Height="14" Data="{DynamicResource DeleteRegular}"/>
                                         </Button>
@@ -157,9 +149,11 @@
                 </ItemsControl>
             </StackPanel>
 
-            <Button Content="Finalize Workflow" 
+            <Separator Margin="{DynamicResource Spacing.Vertical.Sm}" Background="{DynamicResource Color.Border}" />
+
+            <Button Content="{Binding SubmitButtonText}" 
                     Classes="ActionButton"
-                    Command="{Binding CreateWorkflowCommand}" 
+                    Command="{Binding SaveOrEditWorkflowCommand}" 
                     Height="45" 
                     HorizontalAlignment="Stretch" 
                     HorizontalContentAlignment="Center"/>

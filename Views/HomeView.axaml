@@ -65,7 +65,8 @@
                     <TextBlock Classes="PrimaryText HeaderLg">Active Workflows</TextBlock>
                     <TextBlock Classes="SecondaryText ParagraphMd">Manage and automate your local environment</TextBlock>
                 </StackPanel>
-        
+                
+                <!-- Workflow list -->
                 <partial:WorkflowList Grid.Row="1" DataContext="{Binding WorkflowList}" />
             </Grid>
         </Border>
